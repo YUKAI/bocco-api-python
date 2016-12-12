@@ -7,34 +7,26 @@ import arrow
 
 
 class UserType(Enum):
-    HUMAN = u'human'
-    BOCCO = u'bocco'
-    SENSOR_DOOR = u'sensor_door'
-    SENSOR_LOCK = u'sensor_lock'
-    UNKNOWN = u''
-
-
-class Seller(Enum):
-    DMM = u'dmm'
-    FOX = u'fox'
-    KICKSTARTER = u'kickstarter'
-    UNKNOWN = u'unknown'
-    UNSET = u''
+    HUMAN = 'human'
+    BOCCO = 'bocco'
+    SENSOR_DOOR = 'sensor_door'
+    SENSOR_LOCK = 'sensor_lock'
+    UNKNOWN = ''
 
 
 class MessageMedia(Enum):
-    TEXT = u'text'
-    AUDIO = u'audio'
-    IMAGE = u'image'
+    TEXT = 'text'
+    AUDIO = 'audio'
+    IMAGE = 'image'
 
 
 class MessageType(Enum):
-    NORMAL = u'normal'
-    SYSTEM_SENSOR_JOINED = u'system.sensor_joined'
-    SYSTEM_HUMAN_JOINED = u'system.human_joined'
+    NORMAL = 'normal'
+    SYSTEM_SENSOR_JOINED = 'system.sensor_joined'
+    SYSTEM_HUMAN_JOINED = 'system.human_joined'
 
 
-URLSchema = And(str, lambda v: v.startswith(u'http://') or v.startswith(u'https://') or v == u'')
+URLSchema = And(str, lambda v: v.startswith('http://') or v.startswith('https://') or v == '')
 
 UUIDSchema = Or(UUID, Use(UUID))
 
@@ -77,30 +69,30 @@ class User(_Model):
     The instance is BOCCO or sensor or human user.
 
     >>> u = User({
-    ...     'uuid': u'7b44ddd8-d1b0-4666-a11d-4dac68068ebd',
-    ...     'user_type': u'bocco',
-    ...     'nickname': u'TEST USER',
-    ...     'seller': u'kickstarter',
-    ...     'address': u'00:11:22:33:44:55',
-    ...     'icon': u'http://example.com/image.png'
+    ...     'uuid': '7b44ddd8-d1b0-4666-a11d-4dac68068ebd',
+    ...     'user_type': 'bocco',
+    ...     'nickname': 'TEST USER',
+    ...     'seller': '',
+    ...     'address': '00:11:22:33:44:55',
+    ...     'icon': 'http://example.com/image.png'
     ... })
     >>> u['uuid']
     UUID('7b44ddd8-d1b0-4666-a11d-4dac68068ebd')
     >>> u['user_type']
-    <UserType.BOCCO: u'bocco'>
+    <UserType.BOCCO: 'bocco'>
     >>> u['nickname']
-    u'TEST USER'
+    'TEST USER'
     >>> u['seller']
-    <Seller.KICKSTARTER: u'kickstarter'>
+    ''
     >>> u['icon']
-    u'http://example.com/image.png'
+    'http://example.com/image.png'
     """
 
     schema = Schema({
         'uuid': UUIDSchema,
         'user_type': Or(UserType, Use(UserType)),
         'nickname': And(str, lambda v: 0 <= len(v) < 120),
-        'seller': Or(Seller, Use(Seller)),
+        'seller': str,
         Optional('address'): str,
         Optional('icon'): URLSchema,
     }, ignore_extra_keys=True)
@@ -113,12 +105,12 @@ class RoomUser(_Model):
     ...     'read_id': 123,
     ...     'joined_at': '2015-01-02',
     ...     'user': {
-    ...         'uuid': u'7b44ddd8-d1b0-4666-a11d-4dac68068ebd',
-    ...         'user_type': u'bocco',
-    ...         'nickname': u'TEST USER',
-    ...         'seller': u'kickstarter',
-    ...         'address': u'00:11:22:33:44:55',
-    ...         'icon': u'http://example.com/image.png'
+    ...         'uuid': '7b44ddd8-d1b0-4666-a11d-4dac68068ebd',
+    ...         'user_type': 'bocco',
+    ...         'nickname': 'TEST USER',
+    ...         'seller': '',
+    ...         'address': '00:11:22:33:44:55',
+    ...         'icon': 'http://example.com/image.png'
     ...     }
     ... })
     >>> u['read_id']
@@ -140,44 +132,44 @@ class Room(_Model):
     """The room is only connected to a BOCCO
 
     >>> r = Room({
-    ...     'uuid': u'3e6aceea-4db1-44a3-b2a9-4ccfccd843e1',
-    ...     'name': u'TEST ROOM',
-    ...     'updated_at': u'2011-02-03',
+    ...     'uuid': '3e6aceea-4db1-44a3-b2a9-4ccfccd843e1',
+    ...     'name': 'TEST ROOM',
+    ...     'updated_at': '2011-02-03',
     ...     'members': [
     ...         {
     ...             'read_id': 123,
-    ...             'joined_at': u'2010-01-02',
+    ...             'joined_at': '2010-01-02',
     ...             'user': {
-    ...                 'uuid': u'7b44ddd8-d1b0-4666-a11d-4dac68068ebd',
-    ...                 'user_type': u'human',
-    ...                 'nickname': u'TEST USER',
-    ...                 'seller': u'',
-    ...                 'address': u'00:11:22:33:44:55',
-    ...                 'icon': u'http://example.com/image.png'
+    ...                 'uuid': '7b44ddd8-d1b0-4666-a11d-4dac68068ebd',
+    ...                 'user_type': 'human',
+    ...                 'nickname': 'TEST USER',
+    ...                 'seller': '',
+    ...                 'address': '00:11:22:33:44:55',
+    ...                 'icon': 'http://example.com/image.png'
     ...             }
     ...         }
     ...     ],
     ...     'sensors': [
     ...         {
-    ...             'uuid': u'0af1c101-3b7d-40a8-9e63-bf03f2dda6c4',
-    ...             'user_type': u'sensor_door',
-    ...             'nickname': u'DOOR SENSOR',
-    ...             'seller': u'kickstarter',
-    ...             'address': u'00:11:22:33:44:55',
-    ...             'icon': u'http://example.com/image.png'
+    ...             'uuid': '0af1c101-3b7d-40a8-9e63-bf03f2dda6c4',
+    ...             'user_type': 'sensor_door',
+    ...             'nickname': 'DOOR SENSOR',
+    ...             'seller': '',
+    ...             'address': '00:11:22:33:44:55',
+    ...             'icon': 'http://example.com/image.png'
     ...         }
     ...     ]
     ... })
     >>> r['uuid']
     UUID('3e6aceea-4db1-44a3-b2a9-4ccfccd843e1')
     >>> r['name']
-    u'TEST ROOM'
+    'TEST ROOM'
     >>> r['updated_at']
     <Arrow [2011-02-03T00:00:00+00:00]>
     >>> r['members'][0]['user']['nickname']
-    u'TEST USER'
+    'TEST USER'
     >>> r['sensors'][0]['user_type']
-    <UserType.SENSOR_DOOR: u'sensor_door'>
+    <UserType.SENSOR_DOOR: 'sensor_door'>
     """
 
     schema = Schema({
@@ -198,11 +190,11 @@ class Session(_Model):
     """Session
 
     >>> s = Session({
-    ...     'access_token': u'Dummy Token',
-    ...     'uuid': u'17023f65-065f-41e4-b648-cdd38076a7c9',
+    ...     'access_token': 'Dummy Token',
+    ...     'uuid': '17023f65-065f-41e4-b648-cdd38076a7c9',
     ... })
     >>> s['access_token']
-    u'Dummy Token'
+    'Dummy Token'
     >>> s['uuid']
     UUID('17023f65-065f-41e4-b648-cdd38076a7c9')
     """
@@ -219,21 +211,21 @@ class Message(_Model):
     >>> m = Message({
     ...     'id': 123,
     ...     'dictated': True,
-    ...     'unique_id': u'a8852948-fc6e-40d4-a384-e4c6a63b705e',
-    ...     'media': u'text',
-    ...     'audio': u'',
-    ...     'message_type': u'normal',
-    ...     'text': u'MESSAGE TEXT',
-    ...     'image': u'',
-    ...     'sender': u'0a0f6b39-ac63-4731-9c94-756ae80dd0b9',
-    ...     'date': u'2016-03-02 11:00:59',
+    ...     'unique_id': 'a8852948-fc6e-40d4-a384-e4c6a63b705e',
+    ...     'media': 'text',
+    ...     'audio': '',
+    ...     'message_type': 'normal',
+    ...     'text': 'MESSAGE TEXT',
+    ...     'image': '',
+    ...     'sender': '0a0f6b39-ac63-4731-9c94-756ae80dd0b9',
+    ...     'date': '2016-03-02 11:00:59',
     ...     'user': {
-    ...         'uuid': u'0a0f6b39-ac63-4731-9c94-756ae80dd0b9',
-    ...         'user_type': u'bocco',
-    ...         'nickname': u'TEST USER',
-    ...         'seller': u'kickstarter',
-    ...         'address': u'00:11:22:33:44:55',
-    ...         'icon': u'http://example.com/image.png'
+    ...         'uuid': '0a0f6b39-ac63-4731-9c94-756ae80dd0b9',
+    ...         'user_type': 'bocco',
+    ...         'nickname': 'TEST USER',
+    ...         'seller': '',
+    ...         'address': '00:11:22:33:44:55',
+    ...         'icon': 'http://example.com/image.png'
     ...     }
     ... })
     >>> m['id']
@@ -264,12 +256,12 @@ class ApiErrorBody(_Model):
 
     >>> e = ApiErrorBody({
     ...     'code': 401,
-    ...     'message': u'ERROR MESSAGE'
+    ...     'message': 'ERROR MESSAGE'
     ... })
     >>> e['code']
     401
     >>> e['message']
-    u'ERROR MESSAGE'
+    'ERROR MESSAGE'
     """
 
     schema = Schema({
