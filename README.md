@@ -2,6 +2,7 @@
 
 http://api-docs.bocco.me/
 
+Python 3 系で動作します。
 
 ## Setup
 
