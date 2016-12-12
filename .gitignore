@@ -1,0 +1,5 @@
+*.pyc
+*.swp
+.virtualenv
+config.json
+.env
