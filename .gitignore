@@ -3,3 +3,4 @@
 .virtualenv
 config.json
 .env
+docs/_build
