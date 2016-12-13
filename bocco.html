@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>bocco package &#8212; bocco  documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to bocco’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="bocco-package">
+<h1>bocco package<a class="headerlink" href="#bocco-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-bocco.api">
+<span id="bocco-api-module"></span><h2>bocco.api module<a class="headerlink" href="#module-bocco.api" title="Permalink to this headline">¶</a></h2>
+<dl class="exception">
+<dt id="bocco.api.ApiError">
+<em class="property">exception </em><code class="descclassname">bocco.api.</code><code class="descname">ApiError</code><span class="sig-paren">(</span><em>body: bocco.models.ApiErrorBody</em><span class="sig-paren">)</span> &rarr; None<a class="reference internal" href="_modules/bocco/api.html#ApiError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.api.ApiError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">OSError</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="bocco.api.Client">
+<em class="property">class </em><code class="descclassname">bocco.api.</code><code class="descname">Client</code><span class="sig-paren">(</span><em>api_key: str</em>, <em>base_url: typing.Union[str</em>, <em>NoneType] = 'https://api.bocco.me/alpha'</em><span class="sig-paren">)</span> &rarr; None<a class="reference internal" href="_modules/bocco/api.html#Client"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.api.Client" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="bocco.api.Client.download">
+<code class="descname">download</code><span class="sig-paren">(</span><em>url: str</em>, <em>dest: str</em><span class="sig-paren">)</span> &rarr; requests.models.Response<a class="reference internal" href="_modules/bocco/api.html#Client.download"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.api.Client.download" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bocco.api.Client.get_messages">
+<code class="descname">get_messages</code><span class="sig-paren">(</span><em>room_uuid: uuid.UUID</em>, <em>newer_than: typing.Union[int</em>, <em>NoneType] = None</em>, <em>older_than: typing.Union[int</em>, <em>NoneType] = None</em>, <em>read: bool = True</em><span class="sig-paren">)</span> &rarr; typing.List[bocco.models.Message]<a class="reference internal" href="_modules/bocco/api.html#Client.get_messages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.api.Client.get_messages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bocco.api.Client.get_rooms">
+<code class="descname">get_rooms</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; typing.List[bocco.models.Room]<a class="reference internal" href="_modules/bocco/api.html#Client.get_rooms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.api.Client.get_rooms" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bocco.api.Client.post_audio_message">
+<code class="descname">post_audio_message</code><span class="sig-paren">(</span><em>room_uuid: uuid.UUID</em>, <em>audio: str</em><span class="sig-paren">)</span> &rarr; bocco.models.Message<a class="reference internal" href="_modules/bocco/api.html#Client.post_audio_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.api.Client.post_audio_message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bocco.api.Client.post_image_message">
+<code class="descname">post_image_message</code><span class="sig-paren">(</span><em>room_uuid: uuid.UUID</em>, <em>image: str</em><span class="sig-paren">)</span> &rarr; bocco.models.Message<a class="reference internal" href="_modules/bocco/api.html#Client.post_image_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.api.Client.post_image_message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bocco.api.Client.post_text_message">
+<code class="descname">post_text_message</code><span class="sig-paren">(</span><em>room_uuid: uuid.UUID</em>, <em>text: str</em><span class="sig-paren">)</span> &rarr; bocco.models.Message<a class="reference internal" href="_modules/bocco/api.html#Client.post_text_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.api.Client.post_text_message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bocco.api.Client.signin">
+<code class="descname">signin</code><span class="sig-paren">(</span><em>email: str</em>, <em>password: str</em><span class="sig-paren">)</span> &rarr; bocco.models.Session<a class="reference internal" href="_modules/bocco/api.html#Client.signin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.api.Client.signin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-bocco.cli">
+<span id="bocco-cli-module"></span><h2>bocco.cli module<a class="headerlink" href="#module-bocco.cli" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="bocco.cli.main">
+<code class="descclassname">bocco.cli.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; click.core.Command<a class="reference internal" href="_modules/bocco/cli.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.cli.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-bocco.models">
+<span id="bocco-models-module"></span><h2>bocco.models module<a class="headerlink" href="#module-bocco.models" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="bocco.models.ApiErrorBody">
+<em class="property">class </em><code class="descclassname">bocco.models.</code><code class="descname">ApiErrorBody</code><span class="sig-paren">(</span><em>data: dict</em><span class="sig-paren">)</span> &rarr; None<a class="reference internal" href="_modules/bocco/models.html#ApiErrorBody"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.models.ApiErrorBody" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">bocco.models._Model</span></code></p>
+<p>Response body for BOCCO API error</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">ApiErrorBody</span><span class="p">({</span>
+<span class="gp">... </span>    <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">401</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;ERROR MESSAGE&#39;</span>
+<span class="gp">... </span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">]</span>
+<span class="go">401</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">]</span>
+<span class="go">&#39;ERROR MESSAGE&#39;</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="bocco.models.ApiErrorBody.schema">
+<code class="descname">schema</code><em class="property"> = Schema({'message': &lt;class 'str'&gt;, 'code': &lt;class 'int'&gt;})</em><a class="headerlink" href="#bocco.models.ApiErrorBody.schema" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bocco.models.Message">
+<em class="property">class </em><code class="descclassname">bocco.models.</code><code class="descname">Message</code><span class="sig-paren">(</span><em>data: dict</em><span class="sig-paren">)</span> &rarr; None<a class="reference internal" href="_modules/bocco/models.html#Message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.models.Message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">bocco.models._Model</span></code></p>
+<p>Message that sent to a room</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Message</span><span class="p">({</span>
+<span class="gp">... </span>    <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;dictated&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;unique_id&#39;</span><span class="p">:</span> <span class="s1">&#39;a8852948-fc6e-40d4-a384-e4c6a63b705e&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;media&#39;</span><span class="p">:</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;audio&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;message_type&#39;</span><span class="p">:</span> <span class="s1">&#39;normal&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="s1">&#39;MESSAGE TEXT&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;sender&#39;</span><span class="p">:</span> <span class="s1">&#39;0a0f6b39-ac63-4731-9c94-756ae80dd0b9&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="s1">&#39;2016-03-02 11:00:59&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>        <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;0a0f6b39-ac63-4731-9c94-756ae80dd0b9&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;user_type&#39;</span><span class="p">:</span> <span class="s1">&#39;bocco&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;nickname&#39;</span><span class="p">:</span> <span class="s1">&#39;TEST USER&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;seller&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="s1">&#39;00:11:22:33:44:55&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;icon&#39;</span><span class="p">:</span> <span class="s1">&#39;http://example.com/image.png&#39;</span>
+<span class="gp">... </span>    <span class="p">}</span>
+<span class="gp">... </span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+<span class="go">123</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;dictated&#39;</span><span class="p">]</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">][</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span>
+<span class="go">UUID(&#39;0a0f6b39-ac63-4731-9c94-756ae80dd0b9&#39;)</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="bocco.models.Message.schema">
+<code class="descname">schema</code><em class="property"> = Schema({'unique_id': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'image': And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;), 'dictated': &lt;class 'bool'&gt;, 'user': Or(&lt;class 'bocco.models.User'&gt;, Use(&lt;class 'bocco.models.User'&gt;)), 'id': &lt;class 'int'&gt;, 'audio': And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;), 'sender': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'message_type': Or(&lt;enum 'MessageType'&gt;, Use(&lt;enum 'MessageType'&gt;)), 'date': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'text': &lt;class 'str'&gt;, 'media': Or(&lt;enum 'MessageMedia'&gt;, Use(&lt;enum 'MessageMedia'&gt;))})</em><a class="headerlink" href="#bocco.models.Message.schema" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bocco.models.MessageMedia">
+<em class="property">class </em><code class="descclassname">bocco.models.</code><code class="descname">MessageMedia</code><a class="reference internal" href="_modules/bocco/models.html#MessageMedia"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.models.MessageMedia" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="bocco.models.MessageMedia.AUDIO">
+<code class="descname">AUDIO</code><em class="property"> = 'audio'</em><a class="headerlink" href="#bocco.models.MessageMedia.AUDIO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="bocco.models.MessageMedia.IMAGE">
+<code class="descname">IMAGE</code><em class="property"> = 'image'</em><a class="headerlink" href="#bocco.models.MessageMedia.IMAGE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="bocco.models.MessageMedia.TEXT">
+<code class="descname">TEXT</code><em class="property"> = 'text'</em><a class="headerlink" href="#bocco.models.MessageMedia.TEXT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bocco.models.MessageType">
+<em class="property">class </em><code class="descclassname">bocco.models.</code><code class="descname">MessageType</code><a class="reference internal" href="_modules/bocco/models.html#MessageType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.models.MessageType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="bocco.models.MessageType.NORMAL">
+<code class="descname">NORMAL</code><em class="property"> = 'normal'</em><a class="headerlink" href="#bocco.models.MessageType.NORMAL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="bocco.models.MessageType.SYSTEM_HUMAN_JOINED">
+<code class="descname">SYSTEM_HUMAN_JOINED</code><em class="property"> = 'system.human_joined'</em><a class="headerlink" href="#bocco.models.MessageType.SYSTEM_HUMAN_JOINED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="bocco.models.MessageType.SYSTEM_SENSOR_JOINED">
+<code class="descname">SYSTEM_SENSOR_JOINED</code><em class="property"> = 'system.sensor_joined'</em><a class="headerlink" href="#bocco.models.MessageType.SYSTEM_SENSOR_JOINED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bocco.models.Room">
+<em class="property">class </em><code class="descclassname">bocco.models.</code><code class="descname">Room</code><span class="sig-paren">(</span><em>data: dict</em><span class="sig-paren">)</span> &rarr; None<a class="reference internal" href="_modules/bocco/models.html#Room"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.models.Room" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">bocco.models._Model</span></code></p>
+<p>The room is only connected to a BOCCO</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">Room</span><span class="p">({</span>
+<span class="gp">... </span>    <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;3e6aceea-4db1-44a3-b2a9-4ccfccd843e1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;TEST ROOM&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;updated_at&#39;</span><span class="p">:</span> <span class="s1">&#39;2011-02-03&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;members&#39;</span><span class="p">:</span> <span class="p">[</span>
+<span class="gp">... </span>        <span class="p">{</span>
+<span class="gp">... </span>            <span class="s1">&#39;read_id&#39;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;joined_at&#39;</span><span class="p">:</span> <span class="s1">&#39;2010-01-02&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>                <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;user_type&#39;</span><span class="p">:</span> <span class="s1">&#39;human&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;nickname&#39;</span><span class="p">:</span> <span class="s1">&#39;TEST USER&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;seller&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="s1">&#39;00:11:22:33:44:55&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;icon&#39;</span><span class="p">:</span> <span class="s1">&#39;http://example.com/image.png&#39;</span>
+<span class="gp">... </span>            <span class="p">}</span>
+<span class="gp">... </span>        <span class="p">}</span>
+<span class="gp">... </span>    <span class="p">],</span>
+<span class="gp">... </span>    <span class="s1">&#39;sensors&#39;</span><span class="p">:</span> <span class="p">[</span>
+<span class="gp">... </span>        <span class="p">{</span>
+<span class="gp">... </span>            <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;0af1c101-3b7d-40a8-9e63-bf03f2dda6c4&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;user_type&#39;</span><span class="p">:</span> <span class="s1">&#39;sensor_door&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;nickname&#39;</span><span class="p">:</span> <span class="s1">&#39;DOOR SENSOR&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;seller&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="s1">&#39;00:11:22:33:44:55&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;icon&#39;</span><span class="p">:</span> <span class="s1">&#39;http://example.com/image.png&#39;</span>
+<span class="gp">... </span>        <span class="p">}</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">... </span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span>
+<span class="go">UUID(&#39;3e6aceea-4db1-44a3-b2a9-4ccfccd843e1&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="go">&#39;TEST ROOM&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;updated_at&#39;</span><span class="p">]</span>
+<span class="go">&lt;Arrow [2011-02-03T00:00:00+00:00]&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;members&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;user&#39;</span><span class="p">][</span><span class="s1">&#39;nickname&#39;</span><span class="p">]</span>
+<span class="go">&#39;TEST USER&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;sensors&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;user_type&#39;</span><span class="p">]</span>
+<span class="go">&lt;UserType.SENSOR_DOOR: &#39;sensor_door&#39;&gt;</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="bocco.models.Room.schema">
+<code class="descname">schema</code><em class="property"> = Schema({'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'members': Or(Use(&lt;function Room.&lt;lambda&gt;&gt;), &lt;function Room.&lt;lambda&gt;&gt;, Use(&lt;function Room.&lt;lambda&gt;&gt;)), 'updated_at': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'name': And(&lt;class 'str'&gt;, &lt;function Room.&lt;lambda&gt;&gt;), 'sensors': Or(&lt;function Room.&lt;lambda&gt;&gt;, Use(&lt;function Room.&lt;lambda&gt;&gt;))})</em><a class="headerlink" href="#bocco.models.Room.schema" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bocco.models.RoomUser">
+<em class="property">class </em><code class="descclassname">bocco.models.</code><code class="descname">RoomUser</code><span class="sig-paren">(</span><em>data: dict</em><span class="sig-paren">)</span> &rarr; None<a class="reference internal" href="_modules/bocco/models.html#RoomUser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.models.RoomUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">bocco.models._Model</span></code></p>
+<p>User on a room</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">RoomUser</span><span class="p">({</span>
+<span class="gp">... </span>    <span class="s1">&#39;read_id&#39;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;joined_at&#39;</span><span class="p">:</span> <span class="s1">&#39;2015-01-02&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>        <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;user_type&#39;</span><span class="p">:</span> <span class="s1">&#39;bocco&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;nickname&#39;</span><span class="p">:</span> <span class="s1">&#39;TEST USER&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;seller&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="s1">&#39;00:11:22:33:44:55&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;icon&#39;</span><span class="p">:</span> <span class="s1">&#39;http://example.com/image.png&#39;</span>
+<span class="gp">... </span>    <span class="p">}</span>
+<span class="gp">... </span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;read_id&#39;</span><span class="p">]</span>
+<span class="go">123</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;joined_at&#39;</span><span class="p">]</span>
+<span class="go">&lt;Arrow [2015-01-02T00:00:00+00:00]&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">][</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span>
+<span class="go">UUID(&#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;)</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="bocco.models.RoomUser.schema">
+<code class="descname">schema</code><em class="property"> = Schema({'read_id': &lt;class 'int'&gt;, 'joined_at': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'user': Or(&lt;class 'bocco.models.User'&gt;, Use(&lt;class 'bocco.models.User'&gt;))})</em><a class="headerlink" href="#bocco.models.RoomUser.schema" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bocco.models.Session">
+<em class="property">class </em><code class="descclassname">bocco.models.</code><code class="descname">Session</code><span class="sig-paren">(</span><em>data: dict</em><span class="sig-paren">)</span> &rarr; None<a class="reference internal" href="_modules/bocco/models.html#Session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.models.Session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">bocco.models._Model</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">Session</span><span class="p">({</span>
+<span class="gp">... </span>    <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;Dummy Token&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;17023f65-065f-41e4-b648-cdd38076a7c9&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;access_token&#39;</span><span class="p">]</span>
+<span class="go">&#39;Dummy Token&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span>
+<span class="go">UUID(&#39;17023f65-065f-41e4-b648-cdd38076a7c9&#39;)</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="bocco.models.Session.schema">
+<code class="descname">schema</code><em class="property"> = Schema({'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'access_token': &lt;class 'str'&gt;})</em><a class="headerlink" href="#bocco.models.Session.schema" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bocco.models.User">
+<em class="property">class </em><code class="descclassname">bocco.models.</code><code class="descname">User</code><span class="sig-paren">(</span><em>data: dict</em><span class="sig-paren">)</span> &rarr; None<a class="reference internal" href="_modules/bocco/models.html#User"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.models.User" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">bocco.models._Model</span></code></p>
+<p>User model</p>
+<p>The instance is BOCCO or sensor or human user.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">User</span><span class="p">({</span>
+<span class="gp">... </span>    <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;user_type&#39;</span><span class="p">:</span> <span class="s1">&#39;bocco&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;nickname&#39;</span><span class="p">:</span> <span class="s1">&#39;TEST USER&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;seller&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="s1">&#39;00:11:22:33:44:55&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;icon&#39;</span><span class="p">:</span> <span class="s1">&#39;http://example.com/image.png&#39;</span>
+<span class="gp">... </span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span>
+<span class="go">UUID(&#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;user_type&#39;</span><span class="p">]</span>
+<span class="go">&lt;UserType.BOCCO: &#39;bocco&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;nickname&#39;</span><span class="p">]</span>
+<span class="go">&#39;TEST USER&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;seller&#39;</span><span class="p">]</span>
+<span class="go">&#39;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;icon&#39;</span><span class="p">]</span>
+<span class="go">&#39;http://example.com/image.png&#39;</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="bocco.models.User.schema">
+<code class="descname">schema</code><em class="property"> = Schema({'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), Optional('icon'): And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;), 'seller': &lt;class 'str'&gt;, 'nickname': And(&lt;class 'str'&gt;, &lt;function User.&lt;lambda&gt;&gt;), 'user_type': Or(&lt;enum 'UserType'&gt;, Use(&lt;enum 'UserType'&gt;)), Optional('address'): &lt;class 'str'&gt;})</em><a class="headerlink" href="#bocco.models.User.schema" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bocco.models.UserType">
+<em class="property">class </em><code class="descclassname">bocco.models.</code><code class="descname">UserType</code><a class="reference internal" href="_modules/bocco/models.html#UserType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.models.UserType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="bocco.models.UserType.BOCCO">
+<code class="descname">BOCCO</code><em class="property"> = 'bocco'</em><a class="headerlink" href="#bocco.models.UserType.BOCCO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="bocco.models.UserType.HUMAN">
+<code class="descname">HUMAN</code><em class="property"> = 'human'</em><a class="headerlink" href="#bocco.models.UserType.HUMAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="bocco.models.UserType.SENSOR_DOOR">
+<code class="descname">SENSOR_DOOR</code><em class="property"> = 'sensor_door'</em><a class="headerlink" href="#bocco.models.UserType.SENSOR_DOOR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="bocco.models.UserType.SENSOR_LOCK">
+<code class="descname">SENSOR_LOCK</code><em class="property"> = 'sensor_lock'</em><a class="headerlink" href="#bocco.models.UserType.SENSOR_LOCK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="bocco.models.UserType.UNKNOWN">
+<code class="descname">UNKNOWN</code><em class="property"> = ''</em><a class="headerlink" href="#bocco.models.UserType.UNKNOWN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-bocco.web">
+<span id="bocco-web-module"></span><h2>bocco.web module<a class="headerlink" href="#module-bocco.web" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="bocco.web.assets">
+<code class="descclassname">bocco.web.</code><code class="descname">assets</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bocco/web.html#assets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.web.assets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="bocco.web.favicon">
+<code class="descclassname">bocco.web.</code><code class="descname">favicon</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bocco/web.html#favicon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.web.favicon" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="bocco.web.index">
+<code class="descclassname">bocco.web.</code><code class="descname">index</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; str<a class="reference internal" href="_modules/bocco/web.html#index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.web.index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="bocco.web.messages">
+<code class="descclassname">bocco.web.</code><code class="descname">messages</code><span class="sig-paren">(</span><em>uuid</em><span class="sig-paren">)</span> &rarr; str<a class="reference internal" href="_modules/bocco/web.html#messages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.web.messages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="bocco.web.room">
+<code class="descclassname">bocco.web.</code><code class="descname">room</code><span class="sig-paren">(</span><em>uuid: str</em><span class="sig-paren">)</span> &rarr; str<a class="reference internal" href="_modules/bocco/web.html#room"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.web.room" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="bocco.web.send">
+<code class="descclassname">bocco.web.</code><code class="descname">send</code><span class="sig-paren">(</span><em>uuid</em><span class="sig-paren">)</span> &rarr; str<a class="reference internal" href="_modules/bocco/web.html#send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.web.send" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-bocco">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-bocco" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">bocco package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-bocco.api">bocco.api module</a></li>
+<li><a class="reference internal" href="#module-bocco.cli">bocco.cli module</a></li>
+<li><a class="reference internal" href="#module-bocco.models">bocco.models module</a></li>
+<li><a class="reference internal" href="#module-bocco.web">bocco.web module</a></li>
+<li><a class="reference internal" href="#module-bocco">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to bocco&#8217;s documentation!</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/bocco.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/bocco.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

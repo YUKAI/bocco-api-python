@@ -1,0 +1,362 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>bocco.models &#8212; bocco  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for bocco.models</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">uuid</span> <span class="k">import</span> <span class="n">UUID</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Any</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="k">import</span> <span class="n">Enum</span>
+<span class="kn">from</span> <span class="nn">schema</span> <span class="k">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">And</span><span class="p">,</span> <span class="n">Or</span><span class="p">,</span> <span class="n">Use</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">import</span> <span class="nn">arrow</span>
+
+
+<div class="viewcode-block" id="UserType"><a class="viewcode-back" href="../../bocco.html#bocco.models.UserType">[docs]</a><span class="k">class</span> <span class="nc">UserType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">HUMAN</span> <span class="o">=</span> <span class="s1">&#39;human&#39;</span>
+    <span class="n">BOCCO</span> <span class="o">=</span> <span class="s1">&#39;bocco&#39;</span>
+    <span class="n">SENSOR_DOOR</span> <span class="o">=</span> <span class="s1">&#39;sensor_door&#39;</span>
+    <span class="n">SENSOR_LOCK</span> <span class="o">=</span> <span class="s1">&#39;sensor_lock&#39;</span>
+    <span class="n">UNKNOWN</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span></div>
+
+
+<div class="viewcode-block" id="MessageMedia"><a class="viewcode-back" href="../../bocco.html#bocco.models.MessageMedia">[docs]</a><span class="k">class</span> <span class="nc">MessageMedia</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">TEXT</span> <span class="o">=</span> <span class="s1">&#39;text&#39;</span>
+    <span class="n">AUDIO</span> <span class="o">=</span> <span class="s1">&#39;audio&#39;</span>
+    <span class="n">IMAGE</span> <span class="o">=</span> <span class="s1">&#39;image&#39;</span></div>
+
+
+<div class="viewcode-block" id="MessageType"><a class="viewcode-back" href="../../bocco.html#bocco.models.MessageType">[docs]</a><span class="k">class</span> <span class="nc">MessageType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">NORMAL</span> <span class="o">=</span> <span class="s1">&#39;normal&#39;</span>
+    <span class="n">SYSTEM_SENSOR_JOINED</span> <span class="o">=</span> <span class="s1">&#39;system.sensor_joined&#39;</span>
+    <span class="n">SYSTEM_HUMAN_JOINED</span> <span class="o">=</span> <span class="s1">&#39;system.human_joined&#39;</span></div>
+
+
+<span class="n">URLSchema</span> <span class="o">=</span> <span class="n">And</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;http://&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">v</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;https://&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">v</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="n">UUIDSchema</span> <span class="o">=</span> <span class="n">Or</span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span> <span class="n">Use</span><span class="p">(</span><span class="n">UUID</span><span class="p">))</span>
+
+<span class="n">DateTimeSchema</span> <span class="o">=</span> <span class="n">Or</span><span class="p">(</span><span class="n">arrow</span><span class="o">.</span><span class="n">Arrow</span><span class="p">,</span> <span class="n">Use</span><span class="p">(</span><span class="n">arrow</span><span class="o">.</span><span class="n">get</span><span class="p">))</span>
+
+
+<span class="k">class</span> <span class="nc">_Model</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">is_list</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">l</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">!=</span> <span class="n">cls</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">cls</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># type: Dict[str, Any]</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;&lt;</span><span class="si">{0}</span><span class="s1"> </span><span class="si">{1}</span><span class="s1">&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="User"><a class="viewcode-back" href="../../bocco.html#bocco.models.User">[docs]</a><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">_Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;User model</span>
+
+<span class="sd">    The instance is BOCCO or sensor or human user.</span>
+
+<span class="sd">    &gt;&gt;&gt; u = User({</span>
+<span class="sd">    ...     &#39;uuid&#39;: &#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;,</span>
+<span class="sd">    ...     &#39;user_type&#39;: &#39;bocco&#39;,</span>
+<span class="sd">    ...     &#39;nickname&#39;: &#39;TEST USER&#39;,</span>
+<span class="sd">    ...     &#39;seller&#39;: &#39;&#39;,</span>
+<span class="sd">    ...     &#39;address&#39;: &#39;00:11:22:33:44:55&#39;,</span>
+<span class="sd">    ...     &#39;icon&#39;: &#39;http://example.com/image.png&#39;</span>
+<span class="sd">    ... })</span>
+<span class="sd">    &gt;&gt;&gt; u[&#39;uuid&#39;]</span>
+<span class="sd">    UUID(&#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; u[&#39;user_type&#39;]</span>
+<span class="sd">    &lt;UserType.BOCCO: &#39;bocco&#39;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; u[&#39;nickname&#39;]</span>
+<span class="sd">    &#39;TEST USER&#39;</span>
+<span class="sd">    &gt;&gt;&gt; u[&#39;seller&#39;]</span>
+<span class="sd">    &#39;&#39;</span>
+<span class="sd">    &gt;&gt;&gt; u[&#39;icon&#39;]</span>
+<span class="sd">    &#39;http://example.com/image.png&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">({</span>
+        <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="n">UUIDSchema</span><span class="p">,</span>
+        <span class="s1">&#39;user_type&#39;</span><span class="p">:</span> <span class="n">Or</span><span class="p">(</span><span class="n">UserType</span><span class="p">,</span> <span class="n">Use</span><span class="p">(</span><span class="n">UserType</span><span class="p">)),</span>
+        <span class="s1">&#39;nickname&#39;</span><span class="p">:</span> <span class="n">And</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">120</span><span class="p">),</span>
+        <span class="s1">&#39;seller&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s1">&#39;address&#39;</span><span class="p">):</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s1">&#39;icon&#39;</span><span class="p">):</span> <span class="n">URLSchema</span><span class="p">,</span>
+    <span class="p">},</span> <span class="n">ignore_extra_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RoomUser"><a class="viewcode-back" href="../../bocco.html#bocco.models.RoomUser">[docs]</a><span class="k">class</span> <span class="nc">RoomUser</span><span class="p">(</span><span class="n">_Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;User on a room</span>
+
+<span class="sd">    &gt;&gt;&gt; u = RoomUser({</span>
+<span class="sd">    ...     &#39;read_id&#39;: 123,</span>
+<span class="sd">    ...     &#39;joined_at&#39;: &#39;2015-01-02&#39;,</span>
+<span class="sd">    ...     &#39;user&#39;: {</span>
+<span class="sd">    ...         &#39;uuid&#39;: &#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;,</span>
+<span class="sd">    ...         &#39;user_type&#39;: &#39;bocco&#39;,</span>
+<span class="sd">    ...         &#39;nickname&#39;: &#39;TEST USER&#39;,</span>
+<span class="sd">    ...         &#39;seller&#39;: &#39;&#39;,</span>
+<span class="sd">    ...         &#39;address&#39;: &#39;00:11:22:33:44:55&#39;,</span>
+<span class="sd">    ...         &#39;icon&#39;: &#39;http://example.com/image.png&#39;</span>
+<span class="sd">    ...     }</span>
+<span class="sd">    ... })</span>
+<span class="sd">    &gt;&gt;&gt; u[&#39;read_id&#39;]</span>
+<span class="sd">    123</span>
+<span class="sd">    &gt;&gt;&gt; u[&#39;joined_at&#39;]</span>
+<span class="sd">    &lt;Arrow [2015-01-02T00:00:00+00:00]&gt;</span>
+<span class="sd">    &gt;&gt;&gt; u[&#39;user&#39;][&#39;uuid&#39;]</span>
+<span class="sd">    UUID(&#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">({</span>
+        <span class="s1">&#39;read_id&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="s1">&#39;joined_at&#39;</span><span class="p">:</span> <span class="n">DateTimeSchema</span><span class="p">,</span>
+        <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="n">Or</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">Use</span><span class="p">(</span><span class="n">User</span><span class="p">)),</span>
+    <span class="p">},</span> <span class="n">ignore_extra_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Room"><a class="viewcode-back" href="../../bocco.html#bocco.models.Room">[docs]</a><span class="k">class</span> <span class="nc">Room</span><span class="p">(</span><span class="n">_Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The room is only connected to a BOCCO</span>
+
+<span class="sd">    &gt;&gt;&gt; r = Room({</span>
+<span class="sd">    ...     &#39;uuid&#39;: &#39;3e6aceea-4db1-44a3-b2a9-4ccfccd843e1&#39;,</span>
+<span class="sd">    ...     &#39;name&#39;: &#39;TEST ROOM&#39;,</span>
+<span class="sd">    ...     &#39;updated_at&#39;: &#39;2011-02-03&#39;,</span>
+<span class="sd">    ...     &#39;members&#39;: [</span>
+<span class="sd">    ...         {</span>
+<span class="sd">    ...             &#39;read_id&#39;: 123,</span>
+<span class="sd">    ...             &#39;joined_at&#39;: &#39;2010-01-02&#39;,</span>
+<span class="sd">    ...             &#39;user&#39;: {</span>
+<span class="sd">    ...                 &#39;uuid&#39;: &#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;,</span>
+<span class="sd">    ...                 &#39;user_type&#39;: &#39;human&#39;,</span>
+<span class="sd">    ...                 &#39;nickname&#39;: &#39;TEST USER&#39;,</span>
+<span class="sd">    ...                 &#39;seller&#39;: &#39;&#39;,</span>
+<span class="sd">    ...                 &#39;address&#39;: &#39;00:11:22:33:44:55&#39;,</span>
+<span class="sd">    ...                 &#39;icon&#39;: &#39;http://example.com/image.png&#39;</span>
+<span class="sd">    ...             }</span>
+<span class="sd">    ...         }</span>
+<span class="sd">    ...     ],</span>
+<span class="sd">    ...     &#39;sensors&#39;: [</span>
+<span class="sd">    ...         {</span>
+<span class="sd">    ...             &#39;uuid&#39;: &#39;0af1c101-3b7d-40a8-9e63-bf03f2dda6c4&#39;,</span>
+<span class="sd">    ...             &#39;user_type&#39;: &#39;sensor_door&#39;,</span>
+<span class="sd">    ...             &#39;nickname&#39;: &#39;DOOR SENSOR&#39;,</span>
+<span class="sd">    ...             &#39;seller&#39;: &#39;&#39;,</span>
+<span class="sd">    ...             &#39;address&#39;: &#39;00:11:22:33:44:55&#39;,</span>
+<span class="sd">    ...             &#39;icon&#39;: &#39;http://example.com/image.png&#39;</span>
+<span class="sd">    ...         }</span>
+<span class="sd">    ...     ]</span>
+<span class="sd">    ... })</span>
+<span class="sd">    &gt;&gt;&gt; r[&#39;uuid&#39;]</span>
+<span class="sd">    UUID(&#39;3e6aceea-4db1-44a3-b2a9-4ccfccd843e1&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; r[&#39;name&#39;]</span>
+<span class="sd">    &#39;TEST ROOM&#39;</span>
+<span class="sd">    &gt;&gt;&gt; r[&#39;updated_at&#39;]</span>
+<span class="sd">    &lt;Arrow [2011-02-03T00:00:00+00:00]&gt;</span>
+<span class="sd">    &gt;&gt;&gt; r[&#39;members&#39;][0][&#39;user&#39;][&#39;nickname&#39;]</span>
+<span class="sd">    &#39;TEST USER&#39;</span>
+<span class="sd">    &gt;&gt;&gt; r[&#39;sensors&#39;][0][&#39;user_type&#39;]</span>
+<span class="sd">    &lt;UserType.SENSOR_DOOR: &#39;sensor_door&#39;&gt;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">({</span>
+        <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="n">UUIDSchema</span><span class="p">,</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">And</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">120</span><span class="p">),</span>
+        <span class="s1">&#39;updated_at&#39;</span><span class="p">:</span> <span class="n">DateTimeSchema</span><span class="p">,</span>
+        <span class="s1">&#39;members&#39;</span><span class="p">:</span> <span class="n">Or</span><span class="p">(</span>
+            <span class="n">Use</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">l</span> <span class="ow">or</span> <span class="p">[]),</span>
+            <span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">RoomUser</span><span class="o">.</span><span class="n">is_list</span><span class="p">(</span><span class="n">l</span><span class="p">),</span>
+            <span class="n">Use</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="p">[</span><span class="n">RoomUser</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">l</span><span class="p">])),</span>
+        <span class="s1">&#39;sensors&#39;</span><span class="p">:</span> <span class="n">Or</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">User</span><span class="o">.</span><span class="n">is_list</span><span class="p">(</span><span class="n">l</span><span class="p">),</span>
+            <span class="n">Use</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="p">[</span><span class="n">User</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">l</span><span class="p">])),</span>
+    <span class="p">},</span> <span class="n">ignore_extra_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Session"><a class="viewcode-back" href="../../bocco.html#bocco.models.Session">[docs]</a><span class="k">class</span> <span class="nc">Session</span><span class="p">(</span><span class="n">_Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Session</span>
+
+<span class="sd">    &gt;&gt;&gt; s = Session({</span>
+<span class="sd">    ...     &#39;access_token&#39;: &#39;Dummy Token&#39;,</span>
+<span class="sd">    ...     &#39;uuid&#39;: &#39;17023f65-065f-41e4-b648-cdd38076a7c9&#39;,</span>
+<span class="sd">    ... })</span>
+<span class="sd">    &gt;&gt;&gt; s[&#39;access_token&#39;]</span>
+<span class="sd">    &#39;Dummy Token&#39;</span>
+<span class="sd">    &gt;&gt;&gt; s[&#39;uuid&#39;]</span>
+<span class="sd">    UUID(&#39;17023f65-065f-41e4-b648-cdd38076a7c9&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">({</span>
+        <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="n">UUIDSchema</span><span class="p">,</span>
+    <span class="p">},</span> <span class="n">ignore_extra_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Message"><a class="viewcode-back" href="../../bocco.html#bocco.models.Message">[docs]</a><span class="k">class</span> <span class="nc">Message</span><span class="p">(</span><span class="n">_Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Message that sent to a room</span>
+
+<span class="sd">    &gt;&gt;&gt; m = Message({</span>
+<span class="sd">    ...     &#39;id&#39;: 123,</span>
+<span class="sd">    ...     &#39;dictated&#39;: True,</span>
+<span class="sd">    ...     &#39;unique_id&#39;: &#39;a8852948-fc6e-40d4-a384-e4c6a63b705e&#39;,</span>
+<span class="sd">    ...     &#39;media&#39;: &#39;text&#39;,</span>
+<span class="sd">    ...     &#39;audio&#39;: &#39;&#39;,</span>
+<span class="sd">    ...     &#39;message_type&#39;: &#39;normal&#39;,</span>
+<span class="sd">    ...     &#39;text&#39;: &#39;MESSAGE TEXT&#39;,</span>
+<span class="sd">    ...     &#39;image&#39;: &#39;&#39;,</span>
+<span class="sd">    ...     &#39;sender&#39;: &#39;0a0f6b39-ac63-4731-9c94-756ae80dd0b9&#39;,</span>
+<span class="sd">    ...     &#39;date&#39;: &#39;2016-03-02 11:00:59&#39;,</span>
+<span class="sd">    ...     &#39;user&#39;: {</span>
+<span class="sd">    ...         &#39;uuid&#39;: &#39;0a0f6b39-ac63-4731-9c94-756ae80dd0b9&#39;,</span>
+<span class="sd">    ...         &#39;user_type&#39;: &#39;bocco&#39;,</span>
+<span class="sd">    ...         &#39;nickname&#39;: &#39;TEST USER&#39;,</span>
+<span class="sd">    ...         &#39;seller&#39;: &#39;&#39;,</span>
+<span class="sd">    ...         &#39;address&#39;: &#39;00:11:22:33:44:55&#39;,</span>
+<span class="sd">    ...         &#39;icon&#39;: &#39;http://example.com/image.png&#39;</span>
+<span class="sd">    ...     }</span>
+<span class="sd">    ... })</span>
+<span class="sd">    &gt;&gt;&gt; m[&#39;id&#39;]</span>
+<span class="sd">    123</span>
+<span class="sd">    &gt;&gt;&gt; m[&#39;dictated&#39;]</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; m[&#39;user&#39;][&#39;uuid&#39;]</span>
+<span class="sd">    UUID(&#39;0a0f6b39-ac63-4731-9c94-756ae80dd0b9&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">({</span>
+        <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="s1">&#39;dictated&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;unique_id&#39;</span><span class="p">:</span> <span class="n">UUIDSchema</span><span class="p">,</span>
+        <span class="s1">&#39;media&#39;</span><span class="p">:</span> <span class="n">Or</span><span class="p">(</span><span class="n">MessageMedia</span><span class="p">,</span> <span class="n">Use</span><span class="p">(</span><span class="n">MessageMedia</span><span class="p">)),</span>
+        <span class="s1">&#39;audio&#39;</span><span class="p">:</span> <span class="n">URLSchema</span><span class="p">,</span>
+        <span class="s1">&#39;message_type&#39;</span><span class="p">:</span> <span class="n">Or</span><span class="p">(</span><span class="n">MessageType</span><span class="p">,</span> <span class="n">Use</span><span class="p">(</span><span class="n">MessageType</span><span class="p">)),</span>
+        <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="n">URLSchema</span><span class="p">,</span>
+        <span class="s1">&#39;sender&#39;</span><span class="p">:</span> <span class="n">UUIDSchema</span><span class="p">,</span>
+        <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">DateTimeSchema</span><span class="p">,</span>
+        <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="n">Or</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">Use</span><span class="p">(</span><span class="n">User</span><span class="p">)),</span>
+    <span class="p">},</span> <span class="n">ignore_extra_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ApiErrorBody"><a class="viewcode-back" href="../../bocco.html#bocco.models.ApiErrorBody">[docs]</a><span class="k">class</span> <span class="nc">ApiErrorBody</span><span class="p">(</span><span class="n">_Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Response body for BOCCO API error</span>
+
+<span class="sd">    &gt;&gt;&gt; e = ApiErrorBody({</span>
+<span class="sd">    ...     &#39;code&#39;: 401,</span>
+<span class="sd">    ...     &#39;message&#39;: &#39;ERROR MESSAGE&#39;</span>
+<span class="sd">    ... })</span>
+<span class="sd">    &gt;&gt;&gt; e[&#39;code&#39;]</span>
+<span class="sd">    401</span>
+<span class="sd">    &gt;&gt;&gt; e[&#39;message&#39;]</span>
+<span class="sd">    &#39;ERROR MESSAGE&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">({</span>
+        <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">},</span> <span class="n">ignore_extra_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
