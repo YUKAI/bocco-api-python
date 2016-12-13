@@ -51,28 +51,30 @@
 
 
 <div class="viewcode-block" id="UserType"><a class="viewcode-back" href="../../bocco.html#bocco.models.UserType">[docs]</a><span class="k">class</span> <span class="nc">UserType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-    <span class="n">HUMAN</span> <span class="o">=</span> <span class="s1">&#39;human&#39;</span>
-    <span class="n">BOCCO</span> <span class="o">=</span> <span class="s1">&#39;bocco&#39;</span>
-    <span class="n">SENSOR_DOOR</span> <span class="o">=</span> <span class="s1">&#39;sensor_door&#39;</span>
-    <span class="n">SENSOR_LOCK</span> <span class="o">=</span> <span class="s1">&#39;sensor_lock&#39;</span>
-    <span class="n">UNKNOWN</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span></div>
+    <span class="n">human</span> <span class="o">=</span> <span class="s1">&#39;human&#39;</span>
+    <span class="n">bocco</span> <span class="o">=</span> <span class="s1">&#39;bocco&#39;</span>
+    <span class="n">sensor_door</span> <span class="o">=</span> <span class="s1">&#39;sensor_door&#39;</span>
+    <span class="n">sensor_lock</span> <span class="o">=</span> <span class="s1">&#39;sensor_lock&#39;</span></div>
 
 
 <div class="viewcode-block" id="MessageMedia"><a class="viewcode-back" href="../../bocco.html#bocco.models.MessageMedia">[docs]</a><span class="k">class</span> <span class="nc">MessageMedia</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-    <span class="n">TEXT</span> <span class="o">=</span> <span class="s1">&#39;text&#39;</span>
-    <span class="n">AUDIO</span> <span class="o">=</span> <span class="s1">&#39;audio&#39;</span>
-    <span class="n">IMAGE</span> <span class="o">=</span> <span class="s1">&#39;image&#39;</span></div>
+    <span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;text&#39;</span>
+    <span class="n">audio</span> <span class="o">=</span> <span class="s1">&#39;audio&#39;</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="s1">&#39;image&#39;</span>
+    <span class="n">stamp</span> <span class="o">=</span> <span class="s1">&#39;stamp&#39;</span></div>
 
 
 <div class="viewcode-block" id="MessageType"><a class="viewcode-back" href="../../bocco.html#bocco.models.MessageType">[docs]</a><span class="k">class</span> <span class="nc">MessageType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-    <span class="n">NORMAL</span> <span class="o">=</span> <span class="s1">&#39;normal&#39;</span>
-    <span class="n">SYSTEM_SENSOR_JOINED</span> <span class="o">=</span> <span class="s1">&#39;system.sensor_joined&#39;</span>
-    <span class="n">SYSTEM_HUMAN_JOINED</span> <span class="o">=</span> <span class="s1">&#39;system.human_joined&#39;</span></div>
+    <span class="n">normal</span> <span class="o">=</span> <span class="s1">&#39;normal&#39;</span>
+    <span class="n">system_sensor_joined</span> <span class="o">=</span> <span class="s1">&#39;system.sensor_joined&#39;</span>
+    <span class="n">system_human_joined</span> <span class="o">=</span> <span class="s1">&#39;system.human_joined&#39;</span></div>
 
 
 <span class="n">URLSchema</span> <span class="o">=</span> <span class="n">And</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;http://&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">v</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;https://&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">v</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 
+
 <span class="n">UUIDSchema</span> <span class="o">=</span> <span class="n">Or</span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span> <span class="n">Use</span><span class="p">(</span><span class="n">UUID</span><span class="p">))</span>
+
 
 <span class="n">DateTimeSchema</span> <span class="o">=</span> <span class="n">Or</span><span class="p">(</span><span class="n">arrow</span><span class="o">.</span><span class="n">Arrow</span><span class="p">,</span> <span class="n">Use</span><span class="p">(</span><span class="n">arrow</span><span class="o">.</span><span class="n">get</span><span class="p">))</span>
 
@@ -123,7 +125,7 @@
 <span class="sd">    &gt;&gt;&gt; u[&#39;uuid&#39;]</span>
 <span class="sd">    UUID(&#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; u[&#39;user_type&#39;]</span>
-<span class="sd">    &lt;UserType.BOCCO: &#39;bocco&#39;&gt;</span>
+<span class="sd">    &lt;UserType.bocco: &#39;bocco&#39;&gt;</span>
 <span class="sd">    &gt;&gt;&gt; u[&#39;nickname&#39;]</span>
 <span class="sd">    &#39;TEST USER&#39;</span>
 <span class="sd">    &gt;&gt;&gt; u[&#39;seller&#39;]</span>
@@ -213,7 +215,7 @@
 <span class="sd">    &gt;&gt;&gt; r[&#39;members&#39;][0][&#39;user&#39;][&#39;nickname&#39;]</span>
 <span class="sd">    &#39;TEST USER&#39;</span>
 <span class="sd">    &gt;&gt;&gt; r[&#39;sensors&#39;][0][&#39;user_type&#39;]</span>
-<span class="sd">    &lt;UserType.SENSOR_DOOR: &#39;sensor_door&#39;&gt;</span>
+<span class="sd">    &lt;UserType.sensor_door: &#39;sensor_door&#39;&gt;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">({</span>

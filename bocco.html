@@ -154,7 +154,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.ApiErrorBody.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'code': &lt;class 'int'&gt;, 'message': &lt;class 'str'&gt;})</em><a class="headerlink" href="#bocco.models.ApiErrorBody.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'message': &lt;class 'str'&gt;, 'code': &lt;class 'int'&gt;})</em><a class="headerlink" href="#bocco.models.ApiErrorBody.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -194,7 +194,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.Message.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'message_type': Or(&lt;enum 'MessageType'&gt;, Use(&lt;enum 'MessageType'&gt;)), 'text': &lt;class 'str'&gt;, 'date': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'sender': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'image': And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;), 'dictated': &lt;class 'bool'&gt;, 'unique_id': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'media': Or(&lt;enum 'MessageMedia'&gt;, Use(&lt;enum 'MessageMedia'&gt;)), 'audio': And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;), 'id': &lt;class 'int'&gt;, 'user': Or(&lt;class 'bocco.models.User'&gt;, Use(&lt;class 'bocco.models.User'&gt;))})</em><a class="headerlink" href="#bocco.models.Message.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'text': &lt;class 'str'&gt;, 'id': &lt;class 'int'&gt;, 'unique_id': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'audio': And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;), 'image': And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;), 'message_type': Or(&lt;enum 'MessageType'&gt;, Use(&lt;enum 'MessageType'&gt;)), 'sender': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'media': Or(&lt;enum 'MessageMedia'&gt;, Use(&lt;enum 'MessageMedia'&gt;)), 'user': Or(&lt;class 'bocco.models.User'&gt;, Use(&lt;class 'bocco.models.User'&gt;)), 'dictated': &lt;class 'bool'&gt;, 'date': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;))})</em><a class="headerlink" href="#bocco.models.Message.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -205,18 +205,23 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.Enum</span></code></p>
 <p>An enumeration.</p>
 <dl class="attribute">
-<dt id="bocco.models.MessageMedia.AUDIO">
-<code class="descname">AUDIO</code><em class="property"> = 'audio'</em><a class="headerlink" href="#bocco.models.MessageMedia.AUDIO" title="Permalink to this definition">¶</a></dt>
+<dt id="bocco.models.MessageMedia.audio">
+<code class="descname">audio</code><em class="property"> = 'audio'</em><a class="headerlink" href="#bocco.models.MessageMedia.audio" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="bocco.models.MessageMedia.IMAGE">
-<code class="descname">IMAGE</code><em class="property"> = 'image'</em><a class="headerlink" href="#bocco.models.MessageMedia.IMAGE" title="Permalink to this definition">¶</a></dt>
+<dt id="bocco.models.MessageMedia.image">
+<code class="descname">image</code><em class="property"> = 'image'</em><a class="headerlink" href="#bocco.models.MessageMedia.image" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="bocco.models.MessageMedia.TEXT">
-<code class="descname">TEXT</code><em class="property"> = 'text'</em><a class="headerlink" href="#bocco.models.MessageMedia.TEXT" title="Permalink to this definition">¶</a></dt>
+<dt id="bocco.models.MessageMedia.stamp">
+<code class="descname">stamp</code><em class="property"> = 'stamp'</em><a class="headerlink" href="#bocco.models.MessageMedia.stamp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="bocco.models.MessageMedia.text">
+<code class="descname">text</code><em class="property"> = 'text'</em><a class="headerlink" href="#bocco.models.MessageMedia.text" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -227,18 +232,18 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.Enum</span></code></p>
 <p>An enumeration.</p>
 <dl class="attribute">
-<dt id="bocco.models.MessageType.NORMAL">
-<code class="descname">NORMAL</code><em class="property"> = 'normal'</em><a class="headerlink" href="#bocco.models.MessageType.NORMAL" title="Permalink to this definition">¶</a></dt>
+<dt id="bocco.models.MessageType.normal">
+<code class="descname">normal</code><em class="property"> = 'normal'</em><a class="headerlink" href="#bocco.models.MessageType.normal" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="bocco.models.MessageType.SYSTEM_HUMAN_JOINED">
-<code class="descname">SYSTEM_HUMAN_JOINED</code><em class="property"> = 'system.human_joined'</em><a class="headerlink" href="#bocco.models.MessageType.SYSTEM_HUMAN_JOINED" title="Permalink to this definition">¶</a></dt>
+<dt id="bocco.models.MessageType.system_human_joined">
+<code class="descname">system_human_joined</code><em class="property"> = 'system.human_joined'</em><a class="headerlink" href="#bocco.models.MessageType.system_human_joined" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="bocco.models.MessageType.SYSTEM_SENSOR_JOINED">
-<code class="descname">SYSTEM_SENSOR_JOINED</code><em class="property"> = 'system.sensor_joined'</em><a class="headerlink" href="#bocco.models.MessageType.SYSTEM_SENSOR_JOINED" title="Permalink to this definition">¶</a></dt>
+<dt id="bocco.models.MessageType.system_sensor_joined">
+<code class="descname">system_sensor_joined</code><em class="property"> = 'system.sensor_joined'</em><a class="headerlink" href="#bocco.models.MessageType.system_sensor_joined" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -286,12 +291,12 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;members&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;user&#39;</span><span class="p">][</span><span class="s1">&#39;nickname&#39;</span><span class="p">]</span>
 <span class="go">&#39;TEST USER&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;sensors&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;user_type&#39;</span><span class="p">]</span>
-<span class="go">&lt;UserType.SENSOR_DOOR: &#39;sensor_door&#39;&gt;</span>
+<span class="go">&lt;UserType.sensor_door: &#39;sensor_door&#39;&gt;</span>
 </pre></div>
 </div>
 <dl class="attribute">
 <dt id="bocco.models.Room.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'updated_at': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'sensors': Or(&lt;function Room.&lt;lambda&gt;&gt;, Use(&lt;function Room.&lt;lambda&gt;&gt;)), 'name': And(&lt;class 'str'&gt;, &lt;function Room.&lt;lambda&gt;&gt;), 'members': Or(Use(&lt;function Room.&lt;lambda&gt;&gt;), &lt;function Room.&lt;lambda&gt;&gt;, Use(&lt;function Room.&lt;lambda&gt;&gt;))})</em><a class="headerlink" href="#bocco.models.Room.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'members': Or(Use(&lt;function Room.&lt;lambda&gt;&gt;), &lt;function Room.&lt;lambda&gt;&gt;, Use(&lt;function Room.&lt;lambda&gt;&gt;)), 'name': And(&lt;class 'str'&gt;, &lt;function Room.&lt;lambda&gt;&gt;), 'sensors': Or(&lt;function Room.&lt;lambda&gt;&gt;, Use(&lt;function Room.&lt;lambda&gt;&gt;)), 'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'updated_at': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;))})</em><a class="headerlink" href="#bocco.models.Room.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -323,7 +328,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.RoomUser.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'user': Or(&lt;class 'bocco.models.User'&gt;, Use(&lt;class 'bocco.models.User'&gt;)), 'joined_at': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'read_id': &lt;class 'int'&gt;})</em><a class="headerlink" href="#bocco.models.RoomUser.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'user': Or(&lt;class 'bocco.models.User'&gt;, Use(&lt;class 'bocco.models.User'&gt;)), 'read_id': &lt;class 'int'&gt;, 'joined_at': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;))})</em><a class="headerlink" href="#bocco.models.RoomUser.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -344,7 +349,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.Session.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'access_token': &lt;class 'str'&gt;})</em><a class="headerlink" href="#bocco.models.Session.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'access_token': &lt;class 'str'&gt;, 'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;))})</em><a class="headerlink" href="#bocco.models.Session.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -366,7 +371,7 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span>
 <span class="go">UUID(&#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;user_type&#39;</span><span class="p">]</span>
-<span class="go">&lt;UserType.BOCCO: &#39;bocco&#39;&gt;</span>
+<span class="go">&lt;UserType.bocco: &#39;bocco&#39;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;nickname&#39;</span><span class="p">]</span>
 <span class="go">&#39;TEST USER&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;seller&#39;</span><span class="p">]</span>
@@ -377,7 +382,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.User.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'seller': &lt;class 'str'&gt;, Optional('address'): &lt;class 'str'&gt;, 'nickname': And(&lt;class 'str'&gt;, &lt;function User.&lt;lambda&gt;&gt;), 'user_type': Or(&lt;enum 'UserType'&gt;, Use(&lt;enum 'UserType'&gt;)), Optional('icon'): And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;)})</em><a class="headerlink" href="#bocco.models.User.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'user_type': Or(&lt;enum 'UserType'&gt;, Use(&lt;enum 'UserType'&gt;)), 'nickname': And(&lt;class 'str'&gt;, &lt;function User.&lt;lambda&gt;&gt;), Optional('address'): &lt;class 'str'&gt;, 'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'seller': &lt;class 'str'&gt;, Optional('icon'): And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;)})</em><a class="headerlink" href="#bocco.models.User.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -388,28 +393,23 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.Enum</span></code></p>
 <p>An enumeration.</p>
 <dl class="attribute">
-<dt id="bocco.models.UserType.BOCCO">
-<code class="descname">BOCCO</code><em class="property"> = 'bocco'</em><a class="headerlink" href="#bocco.models.UserType.BOCCO" title="Permalink to this definition">¶</a></dt>
+<dt id="bocco.models.UserType.bocco">
+<code class="descname">bocco</code><em class="property"> = 'bocco'</em><a class="headerlink" href="#bocco.models.UserType.bocco" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="bocco.models.UserType.HUMAN">
-<code class="descname">HUMAN</code><em class="property"> = 'human'</em><a class="headerlink" href="#bocco.models.UserType.HUMAN" title="Permalink to this definition">¶</a></dt>
+<dt id="bocco.models.UserType.human">
+<code class="descname">human</code><em class="property"> = 'human'</em><a class="headerlink" href="#bocco.models.UserType.human" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="bocco.models.UserType.SENSOR_DOOR">
-<code class="descname">SENSOR_DOOR</code><em class="property"> = 'sensor_door'</em><a class="headerlink" href="#bocco.models.UserType.SENSOR_DOOR" title="Permalink to this definition">¶</a></dt>
+<dt id="bocco.models.UserType.sensor_door">
+<code class="descname">sensor_door</code><em class="property"> = 'sensor_door'</em><a class="headerlink" href="#bocco.models.UserType.sensor_door" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="bocco.models.UserType.SENSOR_LOCK">
-<code class="descname">SENSOR_LOCK</code><em class="property"> = 'sensor_lock'</em><a class="headerlink" href="#bocco.models.UserType.SENSOR_LOCK" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="bocco.models.UserType.UNKNOWN">
-<code class="descname">UNKNOWN</code><em class="property"> = ''</em><a class="headerlink" href="#bocco.models.UserType.UNKNOWN" title="Permalink to this definition">¶</a></dt>
+<dt id="bocco.models.UserType.sensor_lock">
+<code class="descname">sensor_lock</code><em class="property"> = 'sensor_lock'</em><a class="headerlink" href="#bocco.models.UserType.sensor_lock" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
