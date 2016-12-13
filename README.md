@@ -1,12 +1,13 @@
-# BOCCO API python SDK
-
-http://api-docs.bocco.me/
+# bocco-api-python
 
 Python 3 系で動作します。
+
+API ドキュメント: https://yukai.github.io/bocco-api-python/
 
 ## Setup
 
 ```
+$ git clone https://github.com/YUKAI/bocco-api-python.git
 $ cd bocco-api-python
 $ pip install -r requirements.txt
 ```
@@ -15,7 +16,7 @@ $ pip install -r requirements.txt
 ## Example
 
 ```python
-api = bocco.api.Client('token')
+api = bocco.api.Client('API KEY')
 api.signin('test@example.com', 'password')
 # Post a message to all rooms.
 for room in api.get_rooms()
@@ -33,7 +34,7 @@ Usage: boccotools.py [OPTIONS] COMMAND [ARGS]...
 
 Options:
   --config PATH
-  --token TEXT
+  --api-key TEXT
   --email TEXT
   --password TEXT
   --help           Show this message and exit.
@@ -42,8 +43,4 @@ Commands:
   messages  Show messages in the room.
   rooms     Show joined rooms.
   send      Send text message.
-  web       Run API client on web server.
 ```
-## API Document
-
-https://yukai.github.io/bocco-api-python/

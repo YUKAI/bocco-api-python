@@ -6,11 +6,12 @@ from typing import Optional
 from flask import Flask, send_from_directory, url_for, request, redirect
 
 from .models import Room, UUIDSchema
+from . import api
 
 
+#: Flask application
 app = Flask(__name__)
 app.api = None
-app.assets = {}
 
 
 @app.route('/')
@@ -123,7 +124,6 @@ def _get_assets_filename(url):
     if not os.path.isfile(filepath):
         app.logger.debug('Downloading {0}...'.format(url))
         app.api.download(url, filepath)
-        app.assets[url] = filename
     return filename
 
 

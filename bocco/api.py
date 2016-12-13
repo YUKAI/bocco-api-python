@@ -8,6 +8,7 @@ from .models import ApiErrorBody, Session, Room, Message, MessageMedia
 
 
 class Client(object):
+    """BOCCO API Client"""
 
     def __init__(self, api_key: str, base_url: Optional[str] = 'https://api.bocco.me/alpha') -> None:
         self._api_key = api_key  # type: str
@@ -43,6 +44,10 @@ class Client(object):
         raise ApiError(body)
 
     def signin(self, email: str, password: str) -> Session:
+        """Create new session
+
+        Web API: http://api-docs.bocco.me/reference.html#post-sessions
+        """
         data = {'apikey': self._api_key,
                 'email': email,
                 'password': password}
@@ -53,6 +58,10 @@ class Client(object):
         return session
 
     def get_rooms(self) -> List[Room]:
+        """Get joined rooms
+
+        Web API: http://api-docs.bocco.me/reference.html#get-roomsjoined
+        """
         r = self._get('/rooms/joined')
         data = r.json()
         if type(data) != list:
@@ -71,6 +80,10 @@ class Client(object):
                      newer_than: Optional[int] = None,
                      older_than: Optional[int] = None,
                      read: bool = True) -> List[Message]:
+        """Get messages
+
+        Web API: http://api-docs.bocco.me/reference.html#get-roomsroomidmessages
+        """
         assert type(room_uuid) == uuid.UUID
         r = self._get('/rooms/{0}/messages'.format(room_uuid),
                       params={'newer_than': newer_than,
@@ -95,6 +108,10 @@ class Client(object):
         return self._parse(r.json(), Message)
 
     def post_text_message(self, room_uuid: uuid.UUID, text: str) -> Message:
+        """Post text message
+
+        Web API: http://api-docs.bocco.me/reference.html#post-roomsroomidmessages
+        """
         data = {'text': text,
                 'media': MessageMedia.TEXT.value}
         return self._post_message(room_uuid, data)
@@ -108,6 +125,10 @@ class Client(object):
         pass
 
     def download(self, url: str, dest: str) -> requests.Response:
+        """Download assets
+
+        Web API: http://api-docs.bocco.me/reference.html#get-messagesuniqueidextname
+        """
         params = {'access_token': self._access_token}
         r = requests.get(url,
                          params=params,
@@ -121,6 +142,10 @@ class Client(object):
 
 
 class ApiError(IOError):
+    """API error response
+
+    Web API: http://api-docs.bocco.me/reference.html#section-31
+    """
 
     def __init__(self, body: ApiErrorBody) -> None:
         self.body = body  # type: ApiErrorBody

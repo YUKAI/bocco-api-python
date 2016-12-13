@@ -1,10 +1,10 @@
-.. bocco documentation master file, created by
-   sphinx-quickstart on Tue Dec 13 11:03:45 2016.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+================
+bocco-api-python
+================
+:GitHub:    https://github.com/YUKAI/bocco-api-python
 
-Welcome to bocco's documentation!
-=================================
+References
+===========
 
 .. toctree::
    :maxdepth: 4

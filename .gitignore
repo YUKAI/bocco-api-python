@@ -1,6 +1,7 @@
 *.pyc
 *.swp
 .virtualenv
+.virtualenv-sphinx
 config.json
 .env
 docs/_build
