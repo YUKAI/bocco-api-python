@@ -50,11 +50,12 @@
 <span class="kn">from</span> <span class="nn">flask</span> <span class="k">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">send_from_directory</span><span class="p">,</span> <span class="n">url_for</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">redirect</span>
 
 <span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="n">Room</span><span class="p">,</span> <span class="n">UUIDSchema</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">api</span>
 
 
+<span class="c1">#: Flask application</span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 <span class="n">app</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">app</span><span class="o">.</span><span class="n">assets</span> <span class="o">=</span> <span class="p">{}</span>
 
 
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
@@ -167,7 +168,6 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
         <span class="n">app</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Downloading </span><span class="si">{0}</span><span class="s1">...&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
         <span class="n">app</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span>
-        <span class="n">app</span><span class="o">.</span><span class="n">assets</span><span class="p">[</span><span class="n">url</span><span class="p">]</span> <span class="o">=</span> <span class="n">filename</span>
     <span class="k">return</span> <span class="n">filename</span>
 
 

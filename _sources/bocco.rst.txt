@@ -1,6 +1,14 @@
 bocco package
 =============
 
+Module contents
+---------------
+
+.. automodule:: bocco
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 Submodules
 ----------
 
@@ -36,11 +44,3 @@ bocco.web module
     :undoc-members:
     :show-inheritance:
 
-
-Module contents
----------------
-
-.. automodule:: bocco
-    :members:
-    :undoc-members:
-    :show-inheritance:
