@@ -5,7 +5,6 @@ import json
 import click
 
 from .api import Client, ApiError
-from .models import MessageMedia
 from .web import app
 
 

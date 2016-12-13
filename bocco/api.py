@@ -113,7 +113,7 @@ class Client(object):
         Web API: http://api-docs.bocco.me/reference.html#post-roomsroomidmessages
         """
         data = {'text': text,
-                'media': MessageMedia.TEXT.value}
+                'media': MessageMedia.text.value}
         return self._post_message(room_uuid, data)
 
     def post_audio_message(self, room_uuid: uuid.UUID, audio: str) -> Message:

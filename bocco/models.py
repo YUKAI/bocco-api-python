@@ -7,28 +7,30 @@ import arrow
 
 
 class UserType(Enum):
-    HUMAN = 'human'
-    BOCCO = 'bocco'
-    SENSOR_DOOR = 'sensor_door'
-    SENSOR_LOCK = 'sensor_lock'
-    UNKNOWN = ''
+    human = 'human'
+    bocco = 'bocco'
+    sensor_door = 'sensor_door'
+    sensor_lock = 'sensor_lock'
 
 
 class MessageMedia(Enum):
-    TEXT = 'text'
-    AUDIO = 'audio'
-    IMAGE = 'image'
+    text = 'text'
+    audio = 'audio'
+    image = 'image'
+    stamp = 'stamp'
 
 
 class MessageType(Enum):
-    NORMAL = 'normal'
-    SYSTEM_SENSOR_JOINED = 'system.sensor_joined'
-    SYSTEM_HUMAN_JOINED = 'system.human_joined'
+    normal = 'normal'
+    system_sensor_joined = 'system.sensor_joined'
+    system_human_joined = 'system.human_joined'
 
 
 URLSchema = And(str, lambda v: v.startswith('http://') or v.startswith('https://') or v == '')
 
+
 UUIDSchema = Or(UUID, Use(UUID))
+
 
 DateTimeSchema = Or(arrow.Arrow, Use(arrow.get))
 
@@ -79,7 +81,7 @@ class User(_Model):
     >>> u['uuid']
     UUID('7b44ddd8-d1b0-4666-a11d-4dac68068ebd')
     >>> u['user_type']
-    <UserType.BOCCO: 'bocco'>
+    <UserType.bocco: 'bocco'>
     >>> u['nickname']
     'TEST USER'
     >>> u['seller']
@@ -169,7 +171,7 @@ class Room(_Model):
     >>> r['members'][0]['user']['nickname']
     'TEST USER'
     >>> r['sensors'][0]['user_type']
-    <UserType.SENSOR_DOOR: 'sensor_door'>
+    <UserType.sensor_door: 'sensor_door'>
     """
 
     schema = Schema({
