@@ -97,6 +97,28 @@ class Client(object):
             messages.append(Message(message_data))
         return messages
 
+    def subscribe(self,
+                  room_uuid: uuid.UUID,
+                  newer_than: Optional[int] = None,
+                  read: bool = True) -> List[Message]:
+        """Subscribe messages
+
+        Web API: http://api-docs.bocco.me/reference.html#get-roomsroomidsubscribe
+        """
+        assert type(room_uuid) == uuid.UUID
+        r = self._get('/rooms/{0}/subscribe'.format(room_uuid),
+                      params={'newer_than': newer_than,
+                              'read': 1 if read else 0})
+        data = r.json()
+        if type(data) != list:
+            return []
+        messages = []
+        for event in data:
+            if event['event'] == 'message':
+                messages.append(Message(event['body']))
+            # TODO handle event['event'] == 'member'
+        return messages
+
     def _post_message(self, room_uuid: uuid.UUID, data: Dict[str, str]) -> Message:
         data.setdefault('text', '')
         data.setdefault('audio', '')
