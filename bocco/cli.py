@@ -1,4 +1,7 @@
+# encoding: utf-8
+from __future__ import absolute_import
 import os
+import sys
 import uuid
 import json
 
@@ -6,9 +9,11 @@ import click
 
 from .api import Client, ApiError
 from .web import app
+from io import open
 
 
-def main() -> click.Command:
+def main():
+    # type: () -> click.Command
     return cli(obj={})
 
 
@@ -16,7 +21,8 @@ def main() -> click.Command:
 @click.option('--config', type=click.Path(exists=True), default='config.json')
 @click.option('--access-token')
 @click.pass_context
-def cli(ctx: click.Context, config: str, access_token: str) -> None:
+def cli(ctx, config, access_token):
+    # type: (click.Context, str, str) -> None
     """BOCCO API http://api-docs.bocco.me/ ."""
     debug = False
     downloads = None
@@ -27,31 +33,16 @@ def cli(ctx: click.Context, config: str, access_token: str) -> None:
             downloads = config_json['downloads']
             access_token = config_json['access_token']
 
+    ctx.obj['api'] = Client(access_token)
     ctx.obj['debug'] = debug
     ctx.obj['downloads'] = downloads
-
-    api = None
-    if not access_token:
-        click.echo(u'Access token is not defined.')
-        api_key = click.prompt('API Key')
-        email = click.prompt('Email')
-        password = click.prompt('Password')
-        try:
-            api = Client.signin(api_key, email, password)
-            click.echo('[New access token] {0}'.format(api.access_token))
-        except ApiError as e:
-            click.echo(e)
-    else:
-        api = Client(access_token)
-
-    if api:
-        ctx.obj['api'] = api
 
 
 @cli.command()
 @click.option('-v', '--verbose', is_flag=True)
 @click.pass_context
-def rooms(ctx: click.Context, verbose: bool) -> None:
+def rooms(ctx, verbose):
+    # type: (click.Context, bool) -> None
     """Show joined rooms."""
     api = ctx.obj['api']
     template = u'{index}. {r[name]}\n\t{r[uuid]}'
@@ -83,12 +74,13 @@ def rooms(ctx: click.Context, verbose: bool) -> None:
 @click.option('-l', '--limit', default=10, type=int)
 @click.option('-v', '--verbose', is_flag=True)
 @click.pass_context
-def messages(ctx: click.Context,
-             room_uuid: str,
-             newer_than: int,
-             older_than: int,
-             limit: int,
-             verbose: bool) -> None:
+def messages(ctx,
+             room_uuid,
+             newer_than,
+             older_than,
+             limit,
+             verbose):
+    # type: (click.Context, str, int, int, int, bool) -> None
     """Show messages in the room."""
     api = ctx.obj['api']
     messages = api.get_messages(uuid.UUID(room_uuid),
@@ -112,16 +104,18 @@ def messages(ctx: click.Context,
 @click.argument('room_uuid')
 @click.argument('text')
 @click.pass_context
-def send(ctx: click.Context, room_uuid: str, text: str) -> None:
+def send(ctx, room_uuid, text):
+    # type: (click.Context, str, str) -> None
     """Send text message."""
     api = ctx.obj['api']
-    click.echo('Sending text message...')
+    click.echo(u'Sending text message...')
     api.post_text_message(uuid.UUID(room_uuid), text)
 
 
 @cli.command()
 @click.pass_context
-def web(ctx: click.Context) -> None:
+def web(ctx):
+    # type: (click.Context) -> None
     """Run API client on web server."""
     api = ctx.obj['api']
     debug = ctx.obj['debug']

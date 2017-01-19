@@ -1,8 +1,9 @@
+# encoding: utf-8
+from __future__ import absolute_import
 import os
 from uuid import UUID
 import hashlib
 
-from typing import Optional
 from flask import Flask, send_from_directory, url_for, request, redirect
 
 from .models import Room, UUIDSchema
@@ -15,22 +16,23 @@ app.api = None
 
 
 @app.route('/')
-def index() -> str:
+def index():
     out = []
-    app.logger.debug('Getting rooms...')
+    app.logger.debug(u'Getting rooms...')
     rooms = app.api.get_rooms()
-    template = '''<li><a href="/{room[uuid]}">{room[name]}</a></li>'''
-    return CSS + '<h1>ROOMS</h1>' + ''.join([template.format(room=r) for r in rooms])
+    template = u'<li><a href="/{room[uuid]}">{room[name]}</a></li>'
+    return CSS + u'<h1>ROOMS</h1>' + u''.join([template.format(room=r) for r in rooms])
 
 
 @app.route('/favicon.ico')
 def favicon():
-    return ''
+    return u''
+
 
 @app.route('/<uuid>')
-def room(uuid: str) -> str:
+def room(uuid):
     uuid = UUIDSchema.validate(uuid)
-    app.logger.debug('Getting room {0}...'.format(uuid))
+    app.logger.debug(u'Getting room {0}...'.format(uuid))
     rooms = app.api.get_rooms()
     room = None
     for item in rooms:
@@ -38,8 +40,8 @@ def room(uuid: str) -> str:
             room = item
 
     if not room:
-        return 'Room not found'
-    return CSS + '''
+        return u'Room not found'
+    return CSS + u'''
       <a href="/">&lt;= Rooms</a>
       <h1>{room[name]}</h1>
       <form method="post" action="/{room[uuid]}/messages/send" target="messages">
@@ -51,11 +53,11 @@ def room(uuid: str) -> str:
 
 
 @app.route('/<uuid>/messages')
-def messages(uuid) -> str:
+def messages(uuid):
     uuid = UUIDSchema.validate(uuid)
-    app.logger.debug('Getting messages in {0}...'.format(uuid))
+    app.logger.debug(u'Getting messages in {0}...'.format(uuid))
     messages = app.api.get_messages(uuid)
-    template = '''
+    template = u'''
         <tr>
           <th>{user}</th>
           <td>{message[text]}</td>
@@ -67,25 +69,25 @@ def messages(uuid) -> str:
     '''.strip()
     items = []
     for message in messages[-min(len(messages), 10):]:
-        image = audio = ''
+        image = audio = u''
         user = message['user']['nickname']
         if message['user']['icon']:
-            user = '<img src="/assets/{0}" width="32" height="32" alt="{1}" title="{1}" />'.format(
+            user = u'<img src="/assets/{0}" width="32" height="32" alt="{1}" title="{1}" />'.format(
                         _get_assets_filename(message['user']['icon']),
                         message['user']['nickname'])
         if message['image']:
-            image = '<img src="/assets/{0}" />'.format(_get_assets_filename(message['image']))
+            image = u'<img src="/assets/{0}" />'.format(_get_assets_filename(message['image']))
         if message['audio']:
-            audio= '<a href="/assets/{0}">{1}</a>'.format(
-                        _get_assets_filename(message['audio']),
-                        os.path.basename(message['audio']))
+            audio = u'<a href="/assets/{0}">{1}</a>'.format(
+                    _get_assets_filename(message['audio']),
+                    os.path.basename(message['audio']))
         items.append(template.format(message=message,
                                      date=message['date'].humanize(),
                                      user=user,
                                      image=image,
                                      audio=audio))
 
-    return '<head><meta http-equiv="refresh" content="10"></head>' + CSS + '''
+    return u'<head><meta http-equiv="refresh" content="10"></head>' + CSS + u'''
       <table>
         <thead>
           <tr>
@@ -102,9 +104,9 @@ def messages(uuid) -> str:
 
 
 @app.route('/<uuid>/messages/send', methods=['POST'])
-def send(uuid) -> str:
+def send(uuid):
     uuid = UUIDSchema.validate(uuid)
-    app.logger.debug('Posting message to {0}...'.format(uuid))
+    app.logger.debug(u'Posting message to {0}...'.format(uuid))
     app.api.post_text_message(uuid, request.form['text'])
     return redirect(url_for('.messages', uuid=uuid))
 
@@ -122,12 +124,12 @@ def _get_assets_filename(url):
     filename = digest + ext
     filepath = os.path.join(app.config['DOWNLOADS'], filename)
     if not os.path.isfile(filepath):
-        app.logger.debug('Downloading {0}...'.format(url))
+        app.logger.debug(u'Downloading {0}...'.format(url))
         app.api.download(url, filepath)
     return filename
 
 
-CSS = '''
+CSS = u'''
 <style>
 body {
   max-width: 800px;
