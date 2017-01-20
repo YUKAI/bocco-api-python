@@ -58,35 +58,38 @@
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;--config&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">click</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">exists</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;config.json&#39;</span><span class="p">)</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;--api-key&#39;</span><span class="p">)</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;--email&#39;</span><span class="p">)</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;--password&#39;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;--access-token&#39;</span><span class="p">)</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">pass_context</span>
-<span class="k">def</span> <span class="nf">cli</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">click</span><span class="o">.</span><span class="n">Context</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">api_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">cli</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">click</span><span class="o">.</span><span class="n">Context</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">access_token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;BOCCO API http://api-docs.bocco.me/ .&quot;&quot;&quot;</span>
     <span class="n">debug</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">downloads</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="n">config</span><span class="p">:</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">config_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-            <span class="n">api_key</span> <span class="o">=</span> <span class="n">config_json</span><span class="p">[</span><span class="s1">&#39;api_key&#39;</span><span class="p">]</span>
-            <span class="n">email</span> <span class="o">=</span> <span class="n">config_json</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span>
-            <span class="n">password</span> <span class="o">=</span> <span class="n">config_json</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span>
-            <span class="n">downloads</span> <span class="o">=</span> <span class="n">config_json</span><span class="p">[</span><span class="s1">&#39;downloads&#39;</span><span class="p">]</span>
             <span class="n">debug</span> <span class="o">=</span> <span class="n">config_json</span><span class="p">[</span><span class="s1">&#39;debug&#39;</span><span class="p">]</span>
-
-    <span class="k">assert</span> <span class="n">api_key</span><span class="p">,</span> <span class="s1">&#39;api_key must not be null&#39;</span>
-    <span class="k">assert</span> <span class="n">email</span><span class="p">,</span> <span class="s1">&#39;email must not be null&#39;</span>
-    <span class="k">assert</span> <span class="n">password</span><span class="p">,</span> <span class="s1">&#39;password must not be null&#39;</span>
+            <span class="n">downloads</span> <span class="o">=</span> <span class="n">config_json</span><span class="p">[</span><span class="s1">&#39;downloads&#39;</span><span class="p">]</span>
+            <span class="n">access_token</span> <span class="o">=</span> <span class="n">config_json</span><span class="p">[</span><span class="s1">&#39;access_token&#39;</span><span class="p">]</span>
 
     <span class="n">ctx</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;debug&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">debug</span>
-    <span class="n">ctx</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;api&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">api_key</span><span class="p">)</span>
     <span class="n">ctx</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;downloads&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">downloads</span>
-    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s1">u&#39;Signing in...&#39;</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">ctx</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;api&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">signin</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
-    <span class="k">except</span> <span class="n">ApiError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+    <span class="n">api</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">access_token</span><span class="p">:</span>
+        <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s1">u&#39;Access token is not defined.&#39;</span><span class="p">)</span>
+        <span class="n">api_key</span> <span class="o">=</span> <span class="n">click</span><span class="o">.</span><span class="n">prompt</span><span class="p">(</span><span class="s1">&#39;API Key&#39;</span><span class="p">)</span>
+        <span class="n">email</span> <span class="o">=</span> <span class="n">click</span><span class="o">.</span><span class="n">prompt</span><span class="p">(</span><span class="s1">&#39;Email&#39;</span><span class="p">)</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="n">click</span><span class="o">.</span><span class="n">prompt</span><span class="p">(</span><span class="s1">&#39;Password&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">api</span> <span class="o">=</span> <span class="n">Client</span><span class="o">.</span><span class="n">signin</span><span class="p">(</span><span class="n">api_key</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+            <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s1">&#39;[New access token] </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">api</span><span class="o">.</span><span class="n">access_token</span><span class="p">))</span>
+        <span class="k">except</span> <span class="n">ApiError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">api</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">access_token</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">api</span><span class="p">:</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;api&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">api</span>
 
 
 <span class="nd">@cli</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>

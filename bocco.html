@@ -76,7 +76,7 @@
 
 <dl class="class">
 <dt id="bocco.api.Client">
-<em class="property">class </em><code class="descclassname">bocco.api.</code><code class="descname">Client</code><span class="sig-paren">(</span><em>api_key: str</em>, <em>base_url: typing.Union[str</em>, <em>NoneType] = 'https://api.bocco.me/alpha'</em><span class="sig-paren">)</span> &rarr; None<a class="reference internal" href="_modules/bocco/api.html#Client"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.api.Client" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">bocco.api.</code><code class="descname">Client</code><span class="sig-paren">(</span><em>access_token: str</em>, <em>uuid: typing.Union[str</em>, <em>NoneType] = None</em><span class="sig-paren">)</span> &rarr; None<a class="reference internal" href="_modules/bocco/api.html#Client"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.api.Client" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>BOCCO API Client</p>
 <dl class="method">
@@ -117,10 +117,10 @@
 <p>Web API: <a class="reference external" href="http://api-docs.bocco.me/reference.html#post-roomsroomidmessages">http://api-docs.bocco.me/reference.html#post-roomsroomidmessages</a></p>
 </dd></dl>
 
-<dl class="method">
+<dl class="classmethod">
 <dt id="bocco.api.Client.signin">
-<code class="descname">signin</code><span class="sig-paren">(</span><em>email: str</em>, <em>password: str</em><span class="sig-paren">)</span> &rarr; bocco.models.Session<a class="reference internal" href="_modules/bocco/api.html#Client.signin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.api.Client.signin" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create new session</p>
+<em class="property">classmethod </em><code class="descname">signin</code><span class="sig-paren">(</span><em>api_key: str</em>, <em>email: str</em>, <em>password: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bocco/api.html#Client.signin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.api.Client.signin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create client with new session</p>
 <p>Web API: <a class="reference external" href="http://api-docs.bocco.me/reference.html#post-sessions">http://api-docs.bocco.me/reference.html#post-sessions</a></p>
 </dd></dl>
 
@@ -161,7 +161,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.ApiErrorBody.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'message': &lt;class 'str'&gt;, 'code': &lt;class 'int'&gt;})</em><a class="headerlink" href="#bocco.models.ApiErrorBody.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'code': &lt;class 'int'&gt;, 'message': &lt;class 'str'&gt;})</em><a class="headerlink" href="#bocco.models.ApiErrorBody.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -201,7 +201,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.Message.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'sender': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'unique_id': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'image': And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;), 'dictated': &lt;class 'bool'&gt;, 'message_type': Or(&lt;enum 'MessageType'&gt;, Use(&lt;enum 'MessageType'&gt;)), 'user': Or(&lt;class 'bocco.models.User'&gt;, Use(&lt;class 'bocco.models.User'&gt;)), 'id': &lt;class 'int'&gt;, 'media': Or(&lt;enum 'MessageMedia'&gt;, Use(&lt;enum 'MessageMedia'&gt;)), 'audio': And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;), 'text': &lt;class 'str'&gt;, 'date': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;))})</em><a class="headerlink" href="#bocco.models.Message.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'text': &lt;class 'str'&gt;, 'image': And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;), 'date': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'audio': And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;), 'message_type': Or(&lt;enum 'MessageType'&gt;, Use(&lt;enum 'MessageType'&gt;)), 'media': Or(&lt;enum 'MessageMedia'&gt;, Use(&lt;enum 'MessageMedia'&gt;)), 'id': &lt;class 'int'&gt;, 'dictated': &lt;class 'bool'&gt;, 'user': Or(&lt;class 'bocco.models.User'&gt;, Use(&lt;class 'bocco.models.User'&gt;)), 'unique_id': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'sender': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;))})</em><a class="headerlink" href="#bocco.models.Message.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -303,7 +303,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.Room.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'name': And(&lt;class 'str'&gt;, &lt;function Room.&lt;lambda&gt;&gt;), 'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'updated_at': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'members': Or(Use(&lt;function Room.&lt;lambda&gt;&gt;), &lt;function Room.&lt;lambda&gt;&gt;, Use(&lt;function Room.&lt;lambda&gt;&gt;)), 'sensors': Or(&lt;function Room.&lt;lambda&gt;&gt;, Use(&lt;function Room.&lt;lambda&gt;&gt;))})</em><a class="headerlink" href="#bocco.models.Room.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'updated_at': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'sensors': Or(&lt;function Room.&lt;lambda&gt;&gt;, Use(&lt;function Room.&lt;lambda&gt;&gt;)), 'name': And(&lt;class 'str'&gt;, &lt;function Room.&lt;lambda&gt;&gt;), 'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'members': Or(Use(&lt;function Room.&lt;lambda&gt;&gt;), &lt;function Room.&lt;lambda&gt;&gt;, Use(&lt;function Room.&lt;lambda&gt;&gt;))})</em><a class="headerlink" href="#bocco.models.Room.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -335,7 +335,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.RoomUser.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'user': Or(&lt;class 'bocco.models.User'&gt;, Use(&lt;class 'bocco.models.User'&gt;)), 'joined_at': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'read_id': &lt;class 'int'&gt;})</em><a class="headerlink" href="#bocco.models.RoomUser.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'read_id': &lt;class 'int'&gt;, 'user': Or(&lt;class 'bocco.models.User'&gt;, Use(&lt;class 'bocco.models.User'&gt;)), 'joined_at': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;))})</em><a class="headerlink" href="#bocco.models.RoomUser.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -356,7 +356,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.Session.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'access_token': &lt;class 'str'&gt;})</em><a class="headerlink" href="#bocco.models.Session.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'access_token': &lt;class 'str'&gt;, 'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;))})</em><a class="headerlink" href="#bocco.models.Session.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -389,7 +389,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.User.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'user_type': Or(&lt;enum 'UserType'&gt;, Use(&lt;enum 'UserType'&gt;)), Optional('address'): &lt;class 'str'&gt;, 'nickname': And(&lt;class 'str'&gt;, &lt;function User.&lt;lambda&gt;&gt;), 'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'seller': &lt;class 'str'&gt;, Optional('icon'): And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;)})</em><a class="headerlink" href="#bocco.models.User.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({Optional('address'): &lt;class 'str'&gt;, 'user_type': Or(&lt;enum 'UserType'&gt;, Use(&lt;enum 'UserType'&gt;)), 'seller': &lt;class 'str'&gt;, Optional('icon'): And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;), 'nickname': And(&lt;class 'str'&gt;, &lt;function User.&lt;lambda&gt;&gt;), 'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;))})</em><a class="headerlink" href="#bocco.models.User.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
