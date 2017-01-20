@@ -1,7 +1,5 @@
 {
     "debug": true,
     "downloads": "",
-    "api_key": "BOCCO API key",
-    "email": "BOCCO account email",
-    "password": "BOCCO account password"
+    "access_token": "BOCCO API key"
 }
