@@ -14,35 +14,38 @@ def main() -> click.Command:
 
 @click.group()
 @click.option('--config', type=click.Path(exists=True), default='config.json')
-@click.option('--api-key')
-@click.option('--email')
-@click.option('--password')
+@click.option('--access-token')
 @click.pass_context
-def cli(ctx: click.Context, config: str, api_key: str, email: str, password: str) -> None:
+def cli(ctx: click.Context, config: str, access_token: str) -> None:
     """BOCCO API http://api-docs.bocco.me/ ."""
     debug = False
     downloads = None
     if config:
         with open(config, 'r') as f:
             config_json = json.load(f)
-            api_key = config_json['api_key']
-            email = config_json['email']
-            password = config_json['password']
-            downloads = config_json['downloads']
             debug = config_json['debug']
-
-    assert api_key, 'api_key must not be null'
-    assert email, 'email must not be null'
-    assert password, 'password must not be null'
+            downloads = config_json['downloads']
+            access_token = config_json['access_token']
 
     ctx.obj['debug'] = debug
-    ctx.obj['api'] = Client(api_key)
     ctx.obj['downloads'] = downloads
-    click.echo(u'Signing in...')
-    try:
-        ctx.obj['api'].signin(email, password)
-    except ApiError as e:
-        click.echo(e)
+
+    api = None
+    if not access_token:
+        click.echo(u'Access token is not defined.')
+        api_key = click.prompt('API Key')
+        email = click.prompt('Email')
+        password = click.prompt('Password')
+        try:
+            api = Client.signin(api_key, email, password)
+            click.echo('[New access token] {0}'.format(api.access_token))
+        except ApiError as e:
+            click.echo(e)
+    else:
+        api = Client(access_token)
+
+    if api:
+        ctx.obj['api'] = api
 
 
 @cli.command()

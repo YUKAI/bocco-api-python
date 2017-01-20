@@ -6,36 +6,27 @@ from schema import SchemaError
 
 from .models import ApiErrorBody, Session, Room, Message, MessageMedia
 
+BASE_URL = 'https://api.bocco.me/alpha'
+
 
 class Client(object):
     """BOCCO API Client"""
 
-    def __init__(self, api_key: str, base_url: Optional[str] = 'https://api.bocco.me/alpha') -> None:
-        self._api_key = api_key  # type: str
-        self._base_url = base_url  # type: str
-        self._access_token = None  # type: str
-        self._uuid = None  # type: uuid.UUID
-        self.headers = {'Accept-Language': 'ja-JP,ja'}  # type: dict
+    @classmethod
+    def signin(cls, api_key: str, email: str, password: str):
+        """Create client with new session
 
-    def _post(self, path: str, data: Optional[Dict[str, str]]) -> requests.Response:
-        if data is None:
-            data = {}
-        if 'access_token' not in data:
-            data['access_token'] = self._access_token
-        return requests.post(self._base_url + path,
-                             data=data,
-                             headers=self.headers)
+        Web API: http://api-docs.bocco.me/reference.html#post-sessions
+        """
+        data = {'apikey': api_key,
+                'email': email,
+                'password': password}
+        r = requests.post(BASE_URL + '/sessions', data=data)
+        session = cls._parse(r.json(), Session)
+        return Client(session['access_token'], session['uuid'])
 
-    def _get(self, path: str, params: Optional[Dict[Any, Any]] = None) -> requests.Response:
-        if params is None:
-            params = {}
-        if 'access_token' not in params:
-            params['access_token'] = self._access_token
-        return requests.get(self._base_url + path,
-                            params=params,
-                            headers=self.headers)
-
-    def _parse(self, data: Dict[str, Any], klass: Type[Any]) -> Any:
+    @classmethod
+    def _parse(cls, data: Dict[str, Any], klass: Type[Any]) -> Any:
         try:
             return klass(data)
         except SchemaError as e:
@@ -43,19 +34,28 @@ class Client(object):
         body = ApiErrorBody(data)
         raise ApiError(body)
 
-    def signin(self, email: str, password: str) -> Session:
-        """Create new session
+    def __init__(self, access_token: str, uuid: Optional[str] = None) -> None:
+        self.access_token = access_token  # type: str
+        self.uuid = uuid  # type: str
+        self.headers = {'Accept-Language': 'ja-JP,ja'}  # type: dict
 
-        Web API: http://api-docs.bocco.me/reference.html#post-sessions
-        """
-        data = {'apikey': self._api_key,
-                'email': email,
-                'password': password}
-        r = self._post('/sessions', data)
-        session = self._parse(r.json(), Session)
-        self._access_token = session['access_token']
-        self._uuid = session['uuid']
-        return session
+    def _post(self, path: str, data: Optional[Dict[str, str]]) -> requests.Response:
+        if data is None:
+            data = {}
+        if 'access_token' not in data:
+            data['access_token'] = self.access_token
+        return requests.post(BASE_URL + path,
+                             data=data,
+                             headers=self.headers)
+
+    def _get(self, path: str, params: Optional[Dict[Any, Any]] = None) -> requests.Response:
+        if params is None:
+            params = {}
+        if 'access_token' not in params:
+            params['access_token'] = self.access_token
+        return requests.get(BASE_URL + path,
+                            params=params,
+                            headers=self.headers)
 
     def get_rooms(self) -> List[Room]:
         """Get joined rooms
@@ -151,7 +151,7 @@ class Client(object):
 
         Web API: http://api-docs.bocco.me/reference.html#get-messagesuniqueidextname
         """
-        params = {'access_token': self._access_token}
+        params = {'access_token': self.access_token}
         r = requests.get(url,
                          params=params,
                          headers=self.headers,

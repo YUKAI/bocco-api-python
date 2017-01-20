@@ -16,8 +16,9 @@ $ pip install -r requirements.txt
 ## Example
 
 ```python
-api = bocco.api.Client('API KEY')
-api.signin('test@example.com', 'password')
+api = bocco.api.Client.signin('API KEY', 'test@example.com', 'pass')
+# or api = bocco.api.Client('ACCESS TOKEN')
+
 # Post a message to all rooms.
 for room in api.get_rooms()
     api.post_text_message(room['uuid'], 'hello')
@@ -34,13 +35,12 @@ Usage: boccotools.py [OPTIONS] COMMAND [ARGS]...
 
 Options:
   --config PATH
-  --api-key TEXT
-  --email TEXT
-  --password TEXT
-  --help           Show this message and exit.
+  --access-token TEXT
+  --help               Show this message and exit.
 
 Commands:
   messages  Show messages in the room.
   rooms     Show joined rooms.
   send      Send text message.
+  web       Run API client on web server.
 ```
