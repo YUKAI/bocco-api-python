@@ -42,12 +42,19 @@
           <div class="body" role="main">
             
   <h1>Source code for bocco.models</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">uuid</span> <span class="k">import</span> <span class="n">UUID</span>
+<span></span><span class="c1"># encoding: utf-8</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">uuid</span> <span class="k">import</span> <span class="n">UUID</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Any</span>
 <span class="kn">from</span> <span class="nn">enum</span> <span class="k">import</span> <span class="n">Enum</span>
 <span class="kn">from</span> <span class="nn">schema</span> <span class="k">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">And</span><span class="p">,</span> <span class="n">Or</span><span class="p">,</span> <span class="n">Use</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="kn">import</span> <span class="nn">arrow</span>
+
+
+<span class="k">if</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">:</span>
+    <span class="n">unicode</span> <span class="o">=</span> <span class="nb">str</span>
 
 
 <div class="viewcode-block" id="UserType"><a class="viewcode-back" href="../../bocco.html#bocco.models.UserType">[docs]</a><span class="k">class</span> <span class="nc">UserType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
@@ -70,7 +77,7 @@
     <span class="n">system_human_joined</span> <span class="o">=</span> <span class="s1">&#39;system.human_joined&#39;</span></div>
 
 
-<span class="n">URLSchema</span> <span class="o">=</span> <span class="n">And</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;http://&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">v</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;https://&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">v</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">URLSchema</span> <span class="o">=</span> <span class="n">And</span><span class="p">(</span><span class="n">unicode</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;http://&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">v</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;https://&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">v</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 
 
 <span class="n">UUIDSchema</span> <span class="o">=</span> <span class="n">Or</span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span> <span class="n">Use</span><span class="p">(</span><span class="n">UUID</span><span class="p">))</span>
@@ -84,11 +91,13 @@
     <span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="c1"># type: (dict) -&gt; dict</span>
         <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">is_list</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">l</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">is_list</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
+        <span class="c1"># type: (Any) -&gt; bool</span>
         <span class="k">if</span> <span class="n">l</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -98,7 +107,8 @@
                 <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="c1"># type: (dict) -&gt; None</span>
         <span class="n">cls</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># type: Dict[str, Any]</span>
 
@@ -115,31 +125,31 @@
 <span class="sd">    The instance is BOCCO or sensor or human user.</span>
 
 <span class="sd">    &gt;&gt;&gt; u = User({</span>
-<span class="sd">    ...     &#39;uuid&#39;: &#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;,</span>
-<span class="sd">    ...     &#39;user_type&#39;: &#39;bocco&#39;,</span>
-<span class="sd">    ...     &#39;nickname&#39;: &#39;TEST USER&#39;,</span>
-<span class="sd">    ...     &#39;seller&#39;: &#39;&#39;,</span>
-<span class="sd">    ...     &#39;address&#39;: &#39;00:11:22:33:44:55&#39;,</span>
-<span class="sd">    ...     &#39;icon&#39;: &#39;http://example.com/image.png&#39;</span>
+<span class="sd">    ...     &#39;uuid&#39;: u&#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;,</span>
+<span class="sd">    ...     &#39;user_type&#39;: u&#39;bocco&#39;,</span>
+<span class="sd">    ...     &#39;nickname&#39;: u&#39;ニックネーム&#39;,</span>
+<span class="sd">    ...     &#39;seller&#39;: u&#39;&#39;,</span>
+<span class="sd">    ...     &#39;address&#39;: u&#39;00:11:22:33:44:55&#39;,</span>
+<span class="sd">    ...     &#39;icon&#39;: u&#39;http://example.com/image.png&#39;</span>
 <span class="sd">    ... })</span>
 <span class="sd">    &gt;&gt;&gt; u[&#39;uuid&#39;]</span>
 <span class="sd">    UUID(&#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; u[&#39;user_type&#39;]</span>
-<span class="sd">    &lt;UserType.bocco: &#39;bocco&#39;&gt;</span>
-<span class="sd">    &gt;&gt;&gt; u[&#39;nickname&#39;]</span>
-<span class="sd">    &#39;TEST USER&#39;</span>
-<span class="sd">    &gt;&gt;&gt; u[&#39;seller&#39;]</span>
-<span class="sd">    &#39;&#39;</span>
-<span class="sd">    &gt;&gt;&gt; u[&#39;icon&#39;]</span>
-<span class="sd">    &#39;http://example.com/image.png&#39;</span>
+<span class="sd">    &gt;&gt;&gt; u[&#39;user_type&#39;] == UserType.bocco</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; u[&#39;nickname&#39;] == u&#39;ニックネーム&#39;</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; u[&#39;seller&#39;] == u&#39;&#39;</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; u[&#39;icon&#39;] == u&#39;http://example.com/image.png&#39;</span>
+<span class="sd">    True</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">({</span>
         <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="n">UUIDSchema</span><span class="p">,</span>
         <span class="s1">&#39;user_type&#39;</span><span class="p">:</span> <span class="n">Or</span><span class="p">(</span><span class="n">UserType</span><span class="p">,</span> <span class="n">Use</span><span class="p">(</span><span class="n">UserType</span><span class="p">)),</span>
-        <span class="s1">&#39;nickname&#39;</span><span class="p">:</span> <span class="n">And</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">120</span><span class="p">),</span>
-        <span class="s1">&#39;seller&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">Optional</span><span class="p">(</span><span class="s1">&#39;address&#39;</span><span class="p">):</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;nickname&#39;</span><span class="p">:</span> <span class="n">And</span><span class="p">(</span><span class="n">unicode</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">120</span><span class="p">),</span>
+        <span class="s1">&#39;seller&#39;</span><span class="p">:</span> <span class="n">unicode</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s1">&#39;address&#39;</span><span class="p">):</span> <span class="n">unicode</span><span class="p">,</span>
         <span class="n">Optional</span><span class="p">(</span><span class="s1">&#39;icon&#39;</span><span class="p">):</span> <span class="n">URLSchema</span><span class="p">,</span>
     <span class="p">},</span> <span class="n">ignore_extra_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
@@ -149,14 +159,14 @@
 
 <span class="sd">    &gt;&gt;&gt; u = RoomUser({</span>
 <span class="sd">    ...     &#39;read_id&#39;: 123,</span>
-<span class="sd">    ...     &#39;joined_at&#39;: &#39;2015-01-02&#39;,</span>
+<span class="sd">    ...     &#39;joined_at&#39;: u&#39;2015-01-02&#39;,</span>
 <span class="sd">    ...     &#39;user&#39;: {</span>
-<span class="sd">    ...         &#39;uuid&#39;: &#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;,</span>
-<span class="sd">    ...         &#39;user_type&#39;: &#39;bocco&#39;,</span>
-<span class="sd">    ...         &#39;nickname&#39;: &#39;TEST USER&#39;,</span>
-<span class="sd">    ...         &#39;seller&#39;: &#39;&#39;,</span>
-<span class="sd">    ...         &#39;address&#39;: &#39;00:11:22:33:44:55&#39;,</span>
-<span class="sd">    ...         &#39;icon&#39;: &#39;http://example.com/image.png&#39;</span>
+<span class="sd">    ...         &#39;uuid&#39;: u&#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;,</span>
+<span class="sd">    ...         &#39;user_type&#39;: u&#39;bocco&#39;,</span>
+<span class="sd">    ...         &#39;nickname&#39;: u&#39;TEST USER&#39;,</span>
+<span class="sd">    ...         &#39;seller&#39;: u&#39;&#39;,</span>
+<span class="sd">    ...         &#39;address&#39;: u&#39;00:11:22:33:44:55&#39;,</span>
+<span class="sd">    ...         &#39;icon&#39;: u&#39;http://example.com/image.png&#39;</span>
 <span class="sd">    ...     }</span>
 <span class="sd">    ... })</span>
 <span class="sd">    &gt;&gt;&gt; u[&#39;read_id&#39;]</span>
@@ -178,49 +188,49 @@
     <span class="sd">&quot;&quot;&quot;The room is only connected to a BOCCO</span>
 
 <span class="sd">    &gt;&gt;&gt; r = Room({</span>
-<span class="sd">    ...     &#39;uuid&#39;: &#39;3e6aceea-4db1-44a3-b2a9-4ccfccd843e1&#39;,</span>
-<span class="sd">    ...     &#39;name&#39;: &#39;TEST ROOM&#39;,</span>
-<span class="sd">    ...     &#39;updated_at&#39;: &#39;2011-02-03&#39;,</span>
+<span class="sd">    ...     &#39;uuid&#39;: u&#39;3e6aceea-4db1-44a3-b2a9-4ccfccd843e1&#39;,</span>
+<span class="sd">    ...     &#39;name&#39;: u&#39;テストルーム&#39;,</span>
+<span class="sd">    ...     &#39;updated_at&#39;: u&#39;2011-02-03&#39;,</span>
 <span class="sd">    ...     &#39;members&#39;: [</span>
 <span class="sd">    ...         {</span>
 <span class="sd">    ...             &#39;read_id&#39;: 123,</span>
-<span class="sd">    ...             &#39;joined_at&#39;: &#39;2010-01-02&#39;,</span>
+<span class="sd">    ...             &#39;joined_at&#39;: u&#39;2010-01-02&#39;,</span>
 <span class="sd">    ...             &#39;user&#39;: {</span>
-<span class="sd">    ...                 &#39;uuid&#39;: &#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;,</span>
-<span class="sd">    ...                 &#39;user_type&#39;: &#39;human&#39;,</span>
-<span class="sd">    ...                 &#39;nickname&#39;: &#39;TEST USER&#39;,</span>
-<span class="sd">    ...                 &#39;seller&#39;: &#39;&#39;,</span>
-<span class="sd">    ...                 &#39;address&#39;: &#39;00:11:22:33:44:55&#39;,</span>
-<span class="sd">    ...                 &#39;icon&#39;: &#39;http://example.com/image.png&#39;</span>
+<span class="sd">    ...                 &#39;uuid&#39;: &#39;u7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;,</span>
+<span class="sd">    ...                 &#39;user_type&#39;: u&#39;human&#39;,</span>
+<span class="sd">    ...                 &#39;nickname&#39;: u&#39;TEST USER&#39;,</span>
+<span class="sd">    ...                 &#39;seller&#39;: u&#39;&#39;,</span>
+<span class="sd">    ...                 &#39;address&#39;: u&#39;00:11:22:33:44:55&#39;,</span>
+<span class="sd">    ...                 &#39;icon&#39;: u&#39;http://example.com/image.png&#39;</span>
 <span class="sd">    ...             }</span>
 <span class="sd">    ...         }</span>
 <span class="sd">    ...     ],</span>
 <span class="sd">    ...     &#39;sensors&#39;: [</span>
 <span class="sd">    ...         {</span>
-<span class="sd">    ...             &#39;uuid&#39;: &#39;0af1c101-3b7d-40a8-9e63-bf03f2dda6c4&#39;,</span>
-<span class="sd">    ...             &#39;user_type&#39;: &#39;sensor_door&#39;,</span>
-<span class="sd">    ...             &#39;nickname&#39;: &#39;DOOR SENSOR&#39;,</span>
-<span class="sd">    ...             &#39;seller&#39;: &#39;&#39;,</span>
-<span class="sd">    ...             &#39;address&#39;: &#39;00:11:22:33:44:55&#39;,</span>
-<span class="sd">    ...             &#39;icon&#39;: &#39;http://example.com/image.png&#39;</span>
+<span class="sd">    ...             &#39;uuid&#39;: u&#39;0af1c101-3b7d-40a8-9e63-bf03f2dda6c4&#39;,</span>
+<span class="sd">    ...             &#39;user_type&#39;: u&#39;sensor_door&#39;,</span>
+<span class="sd">    ...             &#39;nickname&#39;: u&#39;DOOR SENSOR&#39;,</span>
+<span class="sd">    ...             &#39;seller&#39;: u&#39;&#39;,</span>
+<span class="sd">    ...             &#39;address&#39;: u&#39;00:11:22:33:44:55&#39;,</span>
+<span class="sd">    ...             &#39;icon&#39;: u&#39;http://example.com/image.png&#39;</span>
 <span class="sd">    ...         }</span>
 <span class="sd">    ...     ]</span>
 <span class="sd">    ... })</span>
 <span class="sd">    &gt;&gt;&gt; r[&#39;uuid&#39;]</span>
 <span class="sd">    UUID(&#39;3e6aceea-4db1-44a3-b2a9-4ccfccd843e1&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; r[&#39;name&#39;]</span>
-<span class="sd">    &#39;TEST ROOM&#39;</span>
+<span class="sd">    &gt;&gt;&gt; r[&#39;name&#39;] == u&#39;テストルーム&#39;</span>
+<span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; r[&#39;updated_at&#39;]</span>
 <span class="sd">    &lt;Arrow [2011-02-03T00:00:00+00:00]&gt;</span>
-<span class="sd">    &gt;&gt;&gt; r[&#39;members&#39;][0][&#39;user&#39;][&#39;nickname&#39;]</span>
-<span class="sd">    &#39;TEST USER&#39;</span>
-<span class="sd">    &gt;&gt;&gt; r[&#39;sensors&#39;][0][&#39;user_type&#39;]</span>
-<span class="sd">    &lt;UserType.sensor_door: &#39;sensor_door&#39;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; r[&#39;members&#39;][0][&#39;user&#39;][&#39;nickname&#39;] == &#39;TEST USER&#39;</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; r[&#39;sensors&#39;][0][&#39;user_type&#39;] == UserType.sensor_door</span>
+<span class="sd">    True</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">({</span>
         <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="n">UUIDSchema</span><span class="p">,</span>
-        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">And</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">120</span><span class="p">),</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">And</span><span class="p">(</span><span class="n">unicode</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">120</span><span class="p">),</span>
         <span class="s1">&#39;updated_at&#39;</span><span class="p">:</span> <span class="n">DateTimeSchema</span><span class="p">,</span>
         <span class="s1">&#39;members&#39;</span><span class="p">:</span> <span class="n">Or</span><span class="p">(</span>
             <span class="n">Use</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">l</span> <span class="ow">or</span> <span class="p">[]),</span>
@@ -236,17 +246,17 @@
     <span class="sd">&quot;&quot;&quot;Session</span>
 
 <span class="sd">    &gt;&gt;&gt; s = Session({</span>
-<span class="sd">    ...     &#39;access_token&#39;: &#39;Dummy Token&#39;,</span>
-<span class="sd">    ...     &#39;uuid&#39;: &#39;17023f65-065f-41e4-b648-cdd38076a7c9&#39;,</span>
+<span class="sd">    ...     &#39;access_token&#39;: u&#39;Dummy Token&#39;,</span>
+<span class="sd">    ...     &#39;uuid&#39;: u&#39;17023f65-065f-41e4-b648-cdd38076a7c9&#39;,</span>
 <span class="sd">    ... })</span>
-<span class="sd">    &gt;&gt;&gt; s[&#39;access_token&#39;]</span>
-<span class="sd">    &#39;Dummy Token&#39;</span>
+<span class="sd">    &gt;&gt;&gt; s[&#39;access_token&#39;] == u&#39;Dummy Token&#39;</span>
+<span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; s[&#39;uuid&#39;]</span>
 <span class="sd">    UUID(&#39;17023f65-065f-41e4-b648-cdd38076a7c9&#39;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">({</span>
-        <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="n">unicode</span><span class="p">,</span>
         <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="n">UUIDSchema</span><span class="p">,</span>
     <span class="p">},</span> <span class="n">ignore_extra_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
@@ -257,25 +267,27 @@
 <span class="sd">    &gt;&gt;&gt; m = Message({</span>
 <span class="sd">    ...     &#39;id&#39;: 123,</span>
 <span class="sd">    ...     &#39;dictated&#39;: True,</span>
-<span class="sd">    ...     &#39;unique_id&#39;: &#39;a8852948-fc6e-40d4-a384-e4c6a63b705e&#39;,</span>
-<span class="sd">    ...     &#39;media&#39;: &#39;text&#39;,</span>
-<span class="sd">    ...     &#39;audio&#39;: &#39;&#39;,</span>
-<span class="sd">    ...     &#39;message_type&#39;: &#39;normal&#39;,</span>
-<span class="sd">    ...     &#39;text&#39;: &#39;MESSAGE TEXT&#39;,</span>
-<span class="sd">    ...     &#39;image&#39;: &#39;&#39;,</span>
-<span class="sd">    ...     &#39;sender&#39;: &#39;0a0f6b39-ac63-4731-9c94-756ae80dd0b9&#39;,</span>
-<span class="sd">    ...     &#39;date&#39;: &#39;2016-03-02 11:00:59&#39;,</span>
+<span class="sd">    ...     &#39;unique_id&#39;: u&#39;a8852948-fc6e-40d4-a384-e4c6a63b705e&#39;,</span>
+<span class="sd">    ...     &#39;media&#39;: u&#39;text&#39;,</span>
+<span class="sd">    ...     &#39;audio&#39;: u&#39;&#39;,</span>
+<span class="sd">    ...     &#39;message_type&#39;: u&#39;normal&#39;,</span>
+<span class="sd">    ...     &#39;text&#39;: u&#39;メッセージです&#39;,</span>
+<span class="sd">    ...     &#39;image&#39;: u&#39;&#39;,</span>
+<span class="sd">    ...     &#39;sender&#39;: u&#39;0a0f6b39-ac63-4731-9c94-756ae80dd0b9&#39;,</span>
+<span class="sd">    ...     &#39;date&#39;: u&#39;2016-03-02 11:00:59&#39;,</span>
 <span class="sd">    ...     &#39;user&#39;: {</span>
-<span class="sd">    ...         &#39;uuid&#39;: &#39;0a0f6b39-ac63-4731-9c94-756ae80dd0b9&#39;,</span>
-<span class="sd">    ...         &#39;user_type&#39;: &#39;bocco&#39;,</span>
-<span class="sd">    ...         &#39;nickname&#39;: &#39;TEST USER&#39;,</span>
-<span class="sd">    ...         &#39;seller&#39;: &#39;&#39;,</span>
-<span class="sd">    ...         &#39;address&#39;: &#39;00:11:22:33:44:55&#39;,</span>
-<span class="sd">    ...         &#39;icon&#39;: &#39;http://example.com/image.png&#39;</span>
+<span class="sd">    ...         &#39;uuid&#39;: u&#39;0a0f6b39-ac63-4731-9c94-756ae80dd0b9&#39;,</span>
+<span class="sd">    ...         &#39;user_type&#39;: u&#39;bocco&#39;,</span>
+<span class="sd">    ...         &#39;nickname&#39;: u&#39;ニックネーム&#39;,</span>
+<span class="sd">    ...         &#39;seller&#39;: u&#39;&#39;,</span>
+<span class="sd">    ...         &#39;address&#39;: u&#39;00:11:22:33:44:55&#39;,</span>
+<span class="sd">    ...         &#39;icon&#39;: u&#39;http://example.com/image.png&#39;</span>
 <span class="sd">    ...     }</span>
 <span class="sd">    ... })</span>
 <span class="sd">    &gt;&gt;&gt; m[&#39;id&#39;]</span>
 <span class="sd">    123</span>
+<span class="sd">    &gt;&gt;&gt; m[&#39;text&#39;] == u&#39;メッセージです&#39;</span>
+<span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; m[&#39;dictated&#39;]</span>
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; m[&#39;user&#39;][&#39;uuid&#39;]</span>
@@ -289,7 +301,7 @@
         <span class="s1">&#39;media&#39;</span><span class="p">:</span> <span class="n">Or</span><span class="p">(</span><span class="n">MessageMedia</span><span class="p">,</span> <span class="n">Use</span><span class="p">(</span><span class="n">MessageMedia</span><span class="p">)),</span>
         <span class="s1">&#39;audio&#39;</span><span class="p">:</span> <span class="n">URLSchema</span><span class="p">,</span>
         <span class="s1">&#39;message_type&#39;</span><span class="p">:</span> <span class="n">Or</span><span class="p">(</span><span class="n">MessageType</span><span class="p">,</span> <span class="n">Use</span><span class="p">(</span><span class="n">MessageType</span><span class="p">)),</span>
-        <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="n">unicode</span><span class="p">,</span>
         <span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="n">URLSchema</span><span class="p">,</span>
         <span class="s1">&#39;sender&#39;</span><span class="p">:</span> <span class="n">UUIDSchema</span><span class="p">,</span>
         <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">DateTimeSchema</span><span class="p">,</span>
@@ -302,17 +314,17 @@
 
 <span class="sd">    &gt;&gt;&gt; e = ApiErrorBody({</span>
 <span class="sd">    ...     &#39;code&#39;: 401,</span>
-<span class="sd">    ...     &#39;message&#39;: &#39;ERROR MESSAGE&#39;</span>
+<span class="sd">    ...     &#39;message&#39;: u&#39;ERROR MESSAGE&#39;</span>
 <span class="sd">    ... })</span>
 <span class="sd">    &gt;&gt;&gt; e[&#39;code&#39;]</span>
 <span class="sd">    401</span>
-<span class="sd">    &gt;&gt;&gt; e[&#39;message&#39;]</span>
-<span class="sd">    &#39;ERROR MESSAGE&#39;</span>
+<span class="sd">    &gt;&gt;&gt; e[&#39;message&#39;] == u&#39;ERROR MESSAGE&#39;</span>
+<span class="sd">    True</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">({</span>
         <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">unicode</span><span class="p">,</span>
     <span class="p">},</span> <span class="n">ignore_extra_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
