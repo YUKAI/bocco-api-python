@@ -1,3 +1,4 @@
+# encoding: utf-8
 """
 BOCCO API python library
 
@@ -8,4 +9,5 @@ BOCCO API python library
 See http://api-docs.bocco.me for web API details.
 
 """
+from __future__ import absolute_import
 from . import api, models, cli

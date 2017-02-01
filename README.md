@@ -1,6 +1,6 @@
 # bocco-api-python
 
-Python 3 系で動作します。
+Python 2, 3 系で動作します。
 
 API ドキュメント: https://yukai.github.io/bocco-api-python/
 

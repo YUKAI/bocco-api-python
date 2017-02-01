@@ -1,3 +1,6 @@
+# encoding: utf-8
+from __future__ import absolute_import
+import sys
 import uuid
 
 from typing import Any, Dict, List, Optional, Type, Tuple
@@ -5,6 +8,11 @@ import requests
 from schema import SchemaError
 
 from .models import ApiErrorBody, Session, Room, Message, MessageMedia
+from io import open
+
+
+if (3, 0) <= sys.version_info:
+    unicode = str
 
 BASE_URL = 'https://api.bocco.me/alpha'
 
@@ -13,7 +21,8 @@ class Client(object):
     """BOCCO API Client"""
 
     @classmethod
-    def signin(cls, api_key: str, email: str, password: str):
+    def signin(cls, api_key, email, password):
+        # type: (str, str, str) -> Client
         """Create client with new session
 
         Web API: http://api-docs.bocco.me/reference.html#post-sessions
@@ -22,11 +31,12 @@ class Client(object):
                 'email': email,
                 'password': password}
         r = requests.post(BASE_URL + '/sessions', data=data)
-        session = cls._parse(r.json(), Session)
-        return Client(session['access_token'], session['uuid'])
+        session = Client._parse(r.json(), Session)
+        return Client(session['access_token'])
 
     @classmethod
-    def _parse(cls, data: Dict[str, Any], klass: Type[Any]) -> Any:
+    def _parse(cls, data, klass):
+        # type: (Dict[str, Any], Type[Any]) -> Any
         try:
             return klass(data)
         except SchemaError as e:
@@ -34,12 +44,13 @@ class Client(object):
         body = ApiErrorBody(data)
         raise ApiError(body)
 
-    def __init__(self, access_token: str, uuid: Optional[str] = None) -> None:
+    def __init__(self, access_token):
+        # type: (str) -> None
         self.access_token = access_token  # type: str
-        self.uuid = uuid  # type: str
         self.headers = {'Accept-Language': 'ja-JP,ja'}  # type: dict
 
-    def _post(self, path: str, data: Optional[Dict[str, str]]) -> requests.Response:
+    def _post(self, path, data):
+        # type: (str, Optional[Dict[str, Any]]) -> requests.Response
         if data is None:
             data = {}
         if 'access_token' not in data:
@@ -48,7 +59,8 @@ class Client(object):
                              data=data,
                              headers=self.headers)
 
-    def _get(self, path: str, params: Optional[Dict[Any, Any]] = None) -> requests.Response:
+    def _get(self, path, params = None):
+        # type: (str, Optional[Dict[str, Any]]) -> requests.Response
         if params is None:
             params = {}
         if 'access_token' not in params:
@@ -57,7 +69,8 @@ class Client(object):
                             params=params,
                             headers=self.headers)
 
-    def get_rooms(self) -> List[Room]:
+    def get_rooms(self):
+        # type: () -> List[Room]
         """Get joined rooms
 
         Web API: http://api-docs.bocco.me/reference.html#get-roomsjoined
@@ -76,10 +89,11 @@ class Client(object):
         return rooms
 
     def get_messages(self,
-                     room_uuid: uuid.UUID,
-                     newer_than: Optional[int] = None,
-                     older_than: Optional[int] = None,
-                     read: bool = True) -> List[Message]:
+                     room_uuid,
+                     newer_than = None,
+                     older_than = None,
+                     read = True):
+        # type: (uuid.UUID, Optional[int], Optional[int], bool) -> List[Message]
         """Get messages
 
         Web API: http://api-docs.bocco.me/reference.html#get-roomsroomidmessages
@@ -98,9 +112,10 @@ class Client(object):
         return messages
 
     def subscribe(self,
-                  room_uuid: uuid.UUID,
-                  newer_than: Optional[int] = None,
-                  read: bool = True) -> List[Message]:
+                  room_uuid,
+                  newer_than = None,
+                  read = True):
+        # type: (uuid.UUID, Optional[int], bool) -> List[Message]
         """Subscribe messages
 
         Web API: http://api-docs.bocco.me/reference.html#get-roomsroomidsubscribe
@@ -114,22 +129,24 @@ class Client(object):
             return []
         messages = []
         for event in data:
-            if event['event'] == 'message':
+            if event['event'] == u'message':
                 messages.append(Message(event['body']))
             # TODO handle event['event'] == 'member'
         return messages
 
-    def _post_message(self, room_uuid: uuid.UUID, data: Dict[str, str]) -> Message:
+    def _post_message(self, room_uuid, data):
+        # type: (uuid.UUID, Dict[str, str]) -> Message
         data.setdefault('text', '')
         data.setdefault('audio', '')
         data.setdefault('image', '')
-        data.setdefault('unique_id', str(uuid.uuid4()))
+        data.setdefault('unique_id', unicode(uuid.uuid4()))
         assert type(room_uuid) == uuid.UUID
         assert len(data['text']) < 10000
         r = self._post('/rooms/{0}/messages'.format(room_uuid), data=data)
-        return self._parse(r.json(), Message)
+        return Client._parse(r.json(), Message)
 
-    def post_text_message(self, room_uuid: uuid.UUID, text: str) -> Message:
+    def post_text_message(self, room_uuid, text):
+        # type: (uuid.UUID, str) -> Message
         """Post text message
 
         Web API: http://api-docs.bocco.me/reference.html#post-roomsroomidmessages
@@ -138,15 +155,16 @@ class Client(object):
                 'media': MessageMedia.text.value}
         return self._post_message(room_uuid, data)
 
-    def post_audio_message(self, room_uuid: uuid.UUID, audio: str) -> Message:
+    def post_audio_message(self, room_uuid, audio):
         # TODO: implement
         pass
 
-    def post_image_message(self, room_uuid: uuid.UUID, image: str) -> Message:
+    def post_image_message(self, room_uuid, image):
         # TODO: implement
         pass
 
-    def download(self, url: str, dest: str) -> requests.Response:
+    def download(self, url, dest):
+        # type: (str, str) -> requests.Response
         """Download assets
 
         Web API: http://api-docs.bocco.me/reference.html#get-messagesuniqueidextname
@@ -169,8 +187,9 @@ class ApiError(IOError):
     Web API: http://api-docs.bocco.me/reference.html#section-31
     """
 
-    def __init__(self, body: ApiErrorBody) -> None:
+    def __init__(self, body):
+        # type: (ApiErrorBody) -> None
         self.body = body  # type: ApiErrorBody
 
     def __str__(self):
-        return u'<ApiError {0}: {1}>'.format(self.body['code'], self.body['message'])
+        return '<ApiError {0}: {1}>'.format(self.body['code'], self.body['message'])
