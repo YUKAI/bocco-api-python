@@ -3,11 +3,14 @@ from __future__ import absolute_import
 import sys
 from uuid import UUID
 
-from typing import Any
+try:
+    from typing import Any
+except:
+    pass
+
 from enum import Enum
 from schema import Schema, And, Or, Use, Optional
 import arrow
-
 
 if (3, 0) <= sys.version_info:
     unicode = str
