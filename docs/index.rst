@@ -9,7 +9,7 @@ Web API の詳細は http://api-docs.bocco.me を参照してください。
 
 
 API リファレンス
-===========
+===================
 
 .. toctree::
    :maxdepth: 4
