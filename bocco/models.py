@@ -17,6 +17,7 @@ if (3, 0) <= sys.version_info:
 
 
 class UserType(Enum):
+    """ユーザ種別"""
     human = 'human'
     bocco = 'bocco'
     sensor_door = 'sensor_door'
@@ -24,6 +25,7 @@ class UserType(Enum):
 
 
 class MessageMedia(Enum):
+    """メッセージのメディア"""
     text = 'text'
     audio = 'audio'
     image = 'image'
@@ -31,6 +33,7 @@ class MessageMedia(Enum):
 
 
 class MessageType(Enum):
+    """メッセージの種別"""
     normal = 'normal'
     system_sensor_joined = 'system.sensor_joined'
     system_human_joined = 'system.human_joined'
@@ -79,9 +82,9 @@ class _Model(object):
 
 
 class User(_Model):
-    """User model
+    """BOCCO ユーザ
 
-    The instance is BOCCO or sensor or human user.
+    BOCCO 本体またはアプリユーザの情報。
 
     >>> u = User({
     ...     'uuid': u'7b44ddd8-d1b0-4666-a11d-4dac68068ebd',
@@ -114,7 +117,7 @@ class User(_Model):
 
 
 class RoomUser(_Model):
-    """User on a room
+    """部屋と紐付いたユーザ情報
 
     >>> u = RoomUser({
     ...     'read_id': 123,
@@ -144,7 +147,7 @@ class RoomUser(_Model):
 
 
 class Room(_Model):
-    """The room is only connected to a BOCCO
+    """部屋情報
 
     >>> r = Room({
     ...     'uuid': u'3e6aceea-4db1-44a3-b2a9-4ccfccd843e1',
@@ -202,7 +205,7 @@ class Room(_Model):
 
 
 class Session(_Model):
-    """Session
+    """API クライアントのセッション情報
 
     >>> s = Session({
     ...     'access_token': u'Dummy Token',
@@ -221,7 +224,7 @@ class Session(_Model):
 
 
 class Message(_Model):
-    """Message that sent to a room
+    """部屋へ送信されたメッセージ
 
     >>> m = Message({
     ...     'id': 123,
@@ -269,7 +272,10 @@ class Message(_Model):
 
 
 class ApiErrorBody(_Model):
-    """Response body for BOCCO API error
+    """エラーレスポンス
+
+    エラーコードの詳細は以下を参照
+    http://api-docs.bocco.me/reference.html#section-31
 
     >>> e = ApiErrorBody({
     ...     'code': 401,

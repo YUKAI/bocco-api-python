@@ -23,7 +23,7 @@ def main():
 @click.pass_context
 def cli(ctx, config, access_token):
     # type: (click.Context, str, str) -> None
-    """BOCCO API http://api-docs.bocco.me/ ."""
+    """BOCCO API http://api-docs.bocco.me/ を CLI で操作するツール"""
     debug = False
     downloads = None
     if config:
@@ -43,7 +43,7 @@ def cli(ctx, config, access_token):
 @click.pass_context
 def rooms(ctx, verbose):
     # type: (click.Context, bool) -> None
-    """Show joined rooms."""
+    """部屋一覧を表示"""
     api = ctx.obj['api']
     template = u'{index}. {r[name]}\n\t{r[uuid]}'
     if verbose:
@@ -81,7 +81,7 @@ def messages(ctx,
              limit,
              verbose):
     # type: (click.Context, str, int, int, int, bool) -> None
-    """Show messages in the room."""
+    """指定した部屋のメッセージを表示"""
     api = ctx.obj['api']
     messages = api.get_messages(uuid.UUID(room_uuid),
                                 newer_than=newer_than,
@@ -106,9 +106,9 @@ def messages(ctx,
 @click.pass_context
 def send(ctx, room_uuid, text):
     # type: (click.Context, str, str) -> None
-    """Send text message."""
+    """テキストメッセージを送信."""
     api = ctx.obj['api']
-    click.echo(u'Sending text message...')
+    click.echo(u'メッセージ送信中...')
     api.post_text_message(uuid.UUID(room_uuid), text)
 
 
@@ -116,7 +116,7 @@ def send(ctx, room_uuid, text):
 @click.pass_context
 def web(ctx):
     # type: (click.Context) -> None
-    """Run API client on web server."""
+    """Web サーバ上で API クライアントを起動"""
     api = ctx.obj['api']
     debug = ctx.obj['debug']
     downloads = ctx.obj['downloads']
