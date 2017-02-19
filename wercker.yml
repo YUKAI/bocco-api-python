@@ -32,7 +32,7 @@ build:
         code: |
           apt-get update
           apt-cache search linux-headers
-          apt-get install -y --no-install-recommends linux-headers-$(uname -r) gcc
+          apt-get install -y --no-install-recommends linux-headers-amd64 gcc
           rm -rf /var/lib/apt/lists/*
           pip install cryptography
           apt-get purge -y --auto-remove gcc
