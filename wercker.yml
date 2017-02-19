@@ -25,17 +25,17 @@ build:
   # Read more about steps on our dev center:
   # http://devcenter.wercker.com/docs/steps/index.html
   steps:
-    - script:
-       # Unable to execute 'gcc': No such file or directory #60
-       # https://github.com/docker-library/python/issues/60
-        name: setup libraries
-        code: |
-          apt-get update
-          apt-cache search linux-headers
-          apt-get install -y --no-install-recommends linux-headers-amd64 gcc
-          rm -rf /var/lib/apt/lists/*
-          pip install cryptography
-          apt-get purge -y --auto-remove gcc
+    #- script:
+    #    # Unable to execute 'gcc': No such file or directory #60
+    #    # https://github.com/docker-library/python/issues/60
+    #    name: setup libraries
+    #    code: |
+    #      apt-get update
+    #      apt-cache search linux-headers
+    #      apt-get install -y --no-install-recommends linux-headers-amd64 gcc
+    #      rm -rf /var/lib/apt/lists/*
+    #      pip install cryptography
+    #      apt-get purge -y --auto-remove gcc
 
     # A step that sets up the python virtual environment
     #- virtualenv:
@@ -48,8 +48,8 @@ build:
     #     python_location: /usr/bin/python3.2
 
     # A step that executes `pip install` command.
-    - pip-install:
-        packages_list: "mypy"
+    - pip-install
+    #    packages_list: "mypy"
 
     # # This pip-install clears the local wheel cache
     # - pip-install:
@@ -66,8 +66,8 @@ build:
     - script:
         name: test
         code: |
-          mypy --silent-import bocco bin
-          mypy --silent-import --py2 bocco bin
+          #mypy --silent-import bocco bin
+          #mypy --silent-import --py2 bocco bin
           python bocco/models.py
 
 #deploy:
