@@ -29,6 +29,7 @@ build:
     - virtualenv:
         name: setup virtual environment
         install_wheel: false # Enable wheel to speed up builds (experimental)
+        python_location: /usr/bin/python3.2
 
     # # Use this virtualenv step for python 3.2
     # - virtualenv
