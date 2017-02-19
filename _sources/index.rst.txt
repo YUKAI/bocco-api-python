@@ -2,9 +2,14 @@
 bocco-api-python
 ================
 :GitHub:    https://github.com/YUKAI/bocco-api-python
+:Copyright: YUKAI Engineering Inc.
+:Lisence:   MIT, see LICENSE for more details.
 
-References
-===========
+Web API の詳細は http://api-docs.bocco.me を参照してください。
+
+
+API リファレンス
+===================
 
 .. toctree::
    :maxdepth: 4
@@ -13,7 +18,7 @@ References
    bocco
 
 
-Indices and tables
+目次・検索
 ==================
 
 * :ref:`genindex`
