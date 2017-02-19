@@ -175,7 +175,9 @@
 <dt id="bocco.models.ApiErrorBody">
 <em class="property">class </em><code class="descclassname">bocco.models.</code><code class="descname">ApiErrorBody</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bocco/models.html#ApiErrorBody"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.models.ApiErrorBody" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">bocco.models._Model</span></code></p>
-<p>Response body for BOCCO API error</p>
+<p>エラーレスポンス</p>
+<p>エラーコードの詳細は以下を参照
+<a class="reference external" href="http://api-docs.bocco.me/reference.html#section-31">http://api-docs.bocco.me/reference.html#section-31</a></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">ApiErrorBody</span><span class="p">({</span>
 <span class="gp">... </span>    <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">401</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;ERROR MESSAGE&#39;</span>
@@ -197,7 +199,7 @@
 <dt id="bocco.models.Message">
 <em class="property">class </em><code class="descclassname">bocco.models.</code><code class="descname">Message</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bocco/models.html#Message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.models.Message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">bocco.models._Model</span></code></p>
-<p>Message that sent to a room</p>
+<p>部屋へ送信されたメッセージ</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Message</span><span class="p">({</span>
 <span class="gp">... </span>    <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s1">&#39;dictated&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
@@ -239,6 +241,7 @@
 <dt id="bocco.models.MessageMedia">
 <em class="property">class </em><code class="descclassname">bocco.models.</code><code class="descname">MessageMedia</code><a class="reference internal" href="_modules/bocco/models.html#MessageMedia"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.models.MessageMedia" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.Enum</span></code></p>
+<p>メッセージのメディア</p>
 <dl class="attribute">
 <dt id="bocco.models.MessageMedia.audio">
 <code class="descname">audio</code><em class="property"> = 'audio'</em><a class="headerlink" href="#bocco.models.MessageMedia.audio" title="Permalink to this definition">¶</a></dt>
@@ -265,6 +268,7 @@
 <dt id="bocco.models.MessageType">
 <em class="property">class </em><code class="descclassname">bocco.models.</code><code class="descname">MessageType</code><a class="reference internal" href="_modules/bocco/models.html#MessageType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.models.MessageType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.Enum</span></code></p>
+<p>メッセージの種別</p>
 <dl class="attribute">
 <dt id="bocco.models.MessageType.normal">
 <code class="descname">normal</code><em class="property"> = 'normal'</em><a class="headerlink" href="#bocco.models.MessageType.normal" title="Permalink to this definition">¶</a></dt>
@@ -286,7 +290,7 @@
 <dt id="bocco.models.Room">
 <em class="property">class </em><code class="descclassname">bocco.models.</code><code class="descname">Room</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bocco/models.html#Room"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.models.Room" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">bocco.models._Model</span></code></p>
-<p>The room is only connected to a BOCCO</p>
+<p>部屋情報</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">Room</span><span class="p">({</span>
 <span class="gp">... </span>    <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;3e6aceea-4db1-44a3-b2a9-4ccfccd843e1&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;テストルーム&#39;</span><span class="p">,</span>
@@ -339,7 +343,7 @@
 <dt id="bocco.models.RoomUser">
 <em class="property">class </em><code class="descclassname">bocco.models.</code><code class="descname">RoomUser</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bocco/models.html#RoomUser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.models.RoomUser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">bocco.models._Model</span></code></p>
-<p>User on a room</p>
+<p>部屋と紐付いたユーザ情報</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">RoomUser</span><span class="p">({</span>
 <span class="gp">... </span>    <span class="s1">&#39;read_id&#39;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s1">&#39;joined_at&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;2015-01-02&#39;</span><span class="p">,</span>
@@ -371,6 +375,7 @@
 <dt id="bocco.models.Session">
 <em class="property">class </em><code class="descclassname">bocco.models.</code><code class="descname">Session</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bocco/models.html#Session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.models.Session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">bocco.models._Model</span></code></p>
+<p>API クライアントのセッション情報</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">Session</span><span class="p">({</span>
 <span class="gp">... </span>    <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Dummy Token&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;17023f65-065f-41e4-b648-cdd38076a7c9&#39;</span><span class="p">,</span>
@@ -392,8 +397,8 @@
 <dt id="bocco.models.User">
 <em class="property">class </em><code class="descclassname">bocco.models.</code><code class="descname">User</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bocco/models.html#User"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.models.User" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">bocco.models._Model</span></code></p>
-<p>User model</p>
-<p>The instance is BOCCO or sensor or human user.</p>
+<p>BOCCO ユーザ</p>
+<p>BOCCO 本体またはアプリユーザの情報。</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">User</span><span class="p">({</span>
 <span class="gp">... </span>    <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s1">&#39;user_type&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;bocco&#39;</span><span class="p">,</span>
@@ -416,7 +421,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.User.schema">
-<code class="descname">schema</code><em class="property"> = Schema({Optional('address'): &lt;type 'unicode'&gt;, Optional('icon'): And(&lt;type 'unicode'&gt;, &lt;function &lt;lambda&gt;&gt;), 'user_type': Or(&lt;enum 'UserType'&gt;, Use(&lt;enum 'UserType'&gt;)), 'seller': &lt;type 'unicode'&gt;, 'nickname': And(&lt;type 'unicode'&gt;, &lt;function &lt;lambda&gt;&gt;), 'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;))})</em><a class="headerlink" href="#bocco.models.User.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'user_type': Or(&lt;enum 'UserType'&gt;, Use(&lt;enum 'UserType'&gt;)), 'seller': &lt;type 'unicode'&gt;, Optional('address'): &lt;type 'unicode'&gt;, Optional('icon'): And(&lt;type 'unicode'&gt;, &lt;function &lt;lambda&gt;&gt;), 'nickname': And(&lt;type 'unicode'&gt;, &lt;function &lt;lambda&gt;&gt;)})</em><a class="headerlink" href="#bocco.models.User.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -425,6 +430,7 @@
 <dt id="bocco.models.UserType">
 <em class="property">class </em><code class="descclassname">bocco.models.</code><code class="descname">UserType</code><a class="reference internal" href="_modules/bocco/models.html#UserType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.models.UserType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.Enum</span></code></p>
+<p>ユーザ種別</p>
 <dl class="attribute">
 <dt id="bocco.models.UserType.bocco">
 <code class="descname">bocco</code><em class="property"> = 'bocco'</em><a class="headerlink" href="#bocco.models.UserType.bocco" title="Permalink to this definition">¶</a></dt>
