@@ -30,9 +30,8 @@ build:
        # https://github.com/docker-library/python/issues/60
         name: setup libraries
         code: |
-          apk add linux-headers
           apt-get update
-          apt-get install -y --no-install-recommends gcc
+          apt-get install -y --no-install-recommends linux-headers gcc
           rm -rf /var/lib/apt/lists/*
           pip install cryptography
           apt-get purge -y --auto-remove gcc
