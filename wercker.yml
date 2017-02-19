@@ -25,6 +25,17 @@ build:
   # Read more about steps on our dev center:
   # http://devcenter.wercker.com/docs/steps/index.html
   steps:
+    - script:
+       # Unable to execute 'gcc': No such file or directory #60
+       # https://github.com/docker-library/python/issues/60
+        name: setup libraries
+        code: |
+          apt-get update
+          apt-get install -y --no-install-recommends gcc and-build-dependencies
+          rm -rf /var/lib/apt/lists/*
+          pip install cryptography
+          apt-get purge -y --auto-remove gcc and-build-dependencies
+
     # A step that sets up the python virtual environment
     #- virtualenv:
     #    name: setup virtual environment
