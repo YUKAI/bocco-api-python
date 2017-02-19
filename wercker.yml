@@ -30,6 +30,7 @@ build:
        # https://github.com/docker-library/python/issues/60
         name: setup libraries
         code: |
+          apk add linux-headers
           apt-get update
           apt-get install -y --no-install-recommends gcc
           rm -rf /var/lib/apt/lists/*
