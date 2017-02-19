@@ -31,10 +31,10 @@ build:
         name: setup libraries
         code: |
           apt-get update
-          apt-get install -y --no-install-recommends gcc and-build-dependencies
+          apt-get install -y --no-install-recommends gcc
           rm -rf /var/lib/apt/lists/*
           pip install cryptography
-          apt-get purge -y --auto-remove gcc and-build-dependencies
+          apt-get purge -y --auto-remove gcc
 
     # A step that sets up the python virtual environment
     #- virtualenv:
