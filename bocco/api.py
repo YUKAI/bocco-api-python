@@ -3,7 +3,11 @@ from __future__ import absolute_import
 import sys
 import uuid
 
-from typing import Any, Dict, List, Optional, Type, Tuple
+try:
+    from typing import Any, Dict, List, Optional, Type, Tuple
+except:
+    pass
+
 import requests
 from schema import SchemaError
 
