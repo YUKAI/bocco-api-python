@@ -1,8 +1,10 @@
 # bocco-api-python
 
+[![wercker status](https://app.wercker.com/status/4c4b21fefec1c211cd3961f72d1b9078/s/master "wercker status")](https://app.wercker.com/project/byKey/4c4b21fefec1c211cd3961f72d1b9078)
+
 Python 2, 3 系で動作します。
 
-API ドキュメント: https://yukai.github.io/bocco-api-python/
+ドキュメント: https://yukai.github.io/bocco-api-python/
 
 ## Setup
 
