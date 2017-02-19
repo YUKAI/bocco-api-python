@@ -31,6 +31,7 @@ build:
         name: setup libraries
         code: |
           apt-get update
+          apt-cache search linux-headers
           apt-get install -y --no-install-recommends linux-headers-$(uname -r) gcc
           rm -rf /var/lib/apt/lists/*
           pip install cryptography
