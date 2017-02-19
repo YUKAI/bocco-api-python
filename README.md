@@ -6,7 +6,7 @@ Python 2, 3 系で動作します。
 
 ドキュメント: https://yukai.github.io/bocco-api-python/
 
-## Setup
+## セットアップ
 
 ```
 $ git clone https://github.com/YUKAI/bocco-api-python.git
@@ -15,11 +15,11 @@ $ pip install -r requirements.txt
 ```
 
 
-## Example
+## サンプル
 
 ```python
-api = bocco.api.Client.signin('API KEY', 'test@example.com', 'pass')
-# or api = bocco.api.Client('ACCESS TOKEN')
+api = bocco.api.Client('ACCESS TOKEN')
+# or api = bocco.api.Client.signin('API KEY', 'test@example.com', 'pass')
 
 # Post a message to all rooms.
 for room in api.get_rooms()
@@ -27,7 +27,7 @@ for room in api.get_rooms()
 ```
 
 
-## Command line tool
+## コマンドラインツール
 
 ```
 $ python bin/boccotools.py 

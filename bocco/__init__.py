@@ -1,12 +1,12 @@
 # encoding: utf-8
 """
-BOCCO API python library
+BOCCO API python ライブラリ
 
 :GitHub:    https://github.com/YUKAI/bocco-api-python
 :Copyright: YUKAI Engineering Inc.
 :Lisence:   MIT, see LICENSE for more details.
 
-See http://api-docs.bocco.me for web API details.
+Web API の詳細は http://api-docs.bocco.me を参照してください。
 
 """
 from __future__ import absolute_import

@@ -22,12 +22,19 @@ BASE_URL = 'https://api.bocco.me/alpha'
 
 
 class Client(object):
-    """BOCCO API Client"""
+    """BOCCO API クライアント"""
 
     @classmethod
     def signin(cls, api_key, email, password):
         # type: (str, str, str) -> Client
-        """Create client with new session
+        """新しいセッションでクライアントを作成する
+
+        .. code-block:: python
+
+           api = bocco.api.Client.signin('API KEY', 'test@example.com', 'pass')
+           print(api.access_token)
+
+        内部的には http://api-docs.bocco.me/get_access_token.html と同じ処理を行っています。
 
         Web API: http://api-docs.bocco.me/reference.html#post-sessions
         """
@@ -75,7 +82,7 @@ class Client(object):
 
     def get_rooms(self):
         # type: () -> List[Room]
-        """Get joined rooms
+        """自分が入っている部屋一覧を取得
 
         Web API: http://api-docs.bocco.me/reference.html#get-roomsjoined
         """
@@ -98,7 +105,11 @@ class Client(object):
                      older_than = None,
                      read = True):
         # type: (uuid.UUID, Optional[int], Optional[int], bool) -> List[Message]
-        """Get messages
+        """メッセージ一覧を取得
+
+        .. note::
+
+           このAPIにアクセスするためには、追加の権限が必要です。BOCCOサポートにお問い合わせください。
 
         Web API: http://api-docs.bocco.me/reference.html#get-roomsroomidmessages
         """
@@ -120,7 +131,15 @@ class Client(object):
                   newer_than = None,
                   read = True):
         # type: (uuid.UUID, Optional[int], bool) -> List[Message]
-        """Subscribe messages
+        """イベントの取得
+
+        この API はロングポーリングでの利用を想定しています。
+        `newer_than` パラメータより新しい ID のメッセージが来た場合に、レスポンスが返ります。
+        来なかった場合はタイムアウトとなります。
+
+        .. note::
+
+           このAPIにアクセスするためには、追加の権限が必要です。BOCCOサポートにお問い合わせください。
 
         Web API: http://api-docs.bocco.me/reference.html#get-roomsroomidsubscribe
         """
@@ -151,7 +170,9 @@ class Client(object):
 
     def post_text_message(self, room_uuid, text):
         # type: (uuid.UUID, str) -> Message
-        """Post text message
+        """テキストメッセージの送信
+
+        現在 python ライブラリではテキストメッセージのみサポートしています。
 
         Web API: http://api-docs.bocco.me/reference.html#post-roomsroomidmessages
         """
@@ -160,16 +181,26 @@ class Client(object):
         return self._post_message(room_uuid, data)
 
     def post_audio_message(self, room_uuid, audio):
-        # TODO: implement
+        """音声メッセージの送信
+
+        .. note::
+
+           未実装
+        """
         pass
 
     def post_image_message(self, room_uuid, image):
-        # TODO: implement
+        """画像メッセージの送信
+
+        .. note::
+
+           未実装
+        """
         pass
 
     def download(self, url, dest):
         # type: (str, str) -> requests.Response
-        """Download assets
+        """ファイルをダウンロードする
 
         Web API: http://api-docs.bocco.me/reference.html#get-messagesuniqueidextname
         """
@@ -186,7 +217,7 @@ class Client(object):
 
 
 class ApiError(IOError):
-    """API error response
+    """API エラー
 
     Web API: http://api-docs.bocco.me/reference.html#section-31
     """
