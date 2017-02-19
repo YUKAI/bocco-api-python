@@ -31,7 +31,7 @@ build:
         name: setup libraries
         code: |
           apt-get update
-          apt-get install -y --no-install-recommends linux-headers gcc
+          apt-get install -y --no-install-recommends linux-headers-$(uname -r) gcc
           rm -rf /var/lib/apt/lists/*
           pip install cryptography
           apt-get purge -y --auto-remove gcc
