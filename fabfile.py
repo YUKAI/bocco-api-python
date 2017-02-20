@@ -18,8 +18,11 @@ def test():
 
 
 @task
-def upload(server='test', version=None):
+def prepare_for_release():
+    local('python setup.py sdist')
+
+@task
+def release(server='test', version=None):
     if not version:
         version = prompt('Input version')
-    local('python setup.py sdist')
     local('twine upload -r {} dist/bocco-{}.tar.gz'.format(server, version))

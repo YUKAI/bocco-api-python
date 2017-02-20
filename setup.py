@@ -13,7 +13,7 @@ requires = [str(i.req) for i in requirements_txt]
 
 setup(
     name='bocco',
-    version='0.1',
+    version='0.1.1',
     description='BOCCO API Client',
     long_description=long_description,
     url='https://github.com/YUKAI/bocco-api-python',
