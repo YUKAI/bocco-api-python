@@ -13,7 +13,11 @@ bocco-api-python
 セットアップ
 ============
 
-::
+pip の場合::
+
+    $ pip install bocco
+
+setup.py の場合::
 
     $ git clone https://github.com/YUKAI/bocco-api-python.git
     $ cd bocco-api-python
