@@ -8,12 +8,9 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
-requirements_txt = parse_requirements(path.join(here, 'requirements.txt'), session='hack')
-requires = [str(i.req) for i in requirements_txt]
-
 setup(
     name='bocco',
-    version='0.1.1',
+    version='0.1.2',
     description='BOCCO API Client',
     long_description=long_description,
     url='https://github.com/YUKAI/bocco-api-python',
@@ -22,5 +19,12 @@ setup(
     packages=['bocco'],
     keywords='bocco',
     #packages=find_packages(exclude=['contrib', 'docs', 'tests']),
-    install_requires=requires,
+    install_requires=[
+        'arrow>=0.10',
+        'click>=6.6',
+        'enum34>=1.1.6',
+        'Flask>=0.11.1',
+        'requests>=2.12.3',
+        'schema>=0.6.5',
+    ],
 )
