@@ -3,17 +3,10 @@ box: python:3.4-slim
 build:
 
   steps:
-    - pip-install
-
-    - script:
-        name: echo python information
-        code: |
-          echo "python version $(python --version) running"
-          echo "pip version $(pip --version) running"
-
     - script:
         name: test
         code: |
+          python setup.py install
           #mypy --silent-import bocco bin
           #mypy --silent-import --py2 bocco bin
           python bocco/models.py
