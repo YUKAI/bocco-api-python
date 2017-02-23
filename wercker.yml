@@ -7,7 +7,5 @@ build:
         name: test
         code: |
           python setup.py install
-          #mypy --silent-import bocco bin
-          #mypy --silent-import --py2 bocco bin
           python bocco/models.py
 
