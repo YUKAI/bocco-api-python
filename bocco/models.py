@@ -22,6 +22,7 @@ class UserType(Enum):
     bocco = 'bocco'
     sensor_door = 'sensor_door'
     sensor_lock = 'sensor_lock'
+    unknown = 'unknown'
 
 
 class MessageMedia(Enum):
@@ -30,6 +31,7 @@ class MessageMedia(Enum):
     audio = 'audio'
     image = 'image'
     stamp = 'stamp'
+    unknown = 'unknown'
 
 
 class MessageType(Enum):
@@ -37,6 +39,7 @@ class MessageType(Enum):
     normal = 'normal'
     system_sensor_joined = 'system.sensor_joined'
     system_human_joined = 'system.human_joined'
+    unknown = 'unknown'
 
 
 URLSchema = And(unicode, lambda v: v.startswith('http://') or v.startswith('https://') or v == '')
@@ -108,7 +111,7 @@ class User(_Model):
 
     schema = Schema({
         'uuid': UUIDSchema,
-        'user_type': Or(UserType, Use(UserType)),
+        'user_type': Or(UserType, Use(UserType), Use(lambda v: UserType.unknown)),
         'nickname': And(unicode, lambda v: 0 <= len(v) < 120),
         'seller': unicode,
         Optional('address'): unicode,
@@ -260,9 +263,9 @@ class Message(_Model):
         'id': int,
         'dictated': bool,
         'unique_id': UUIDSchema,
-        'media': Or(MessageMedia, Use(MessageMedia)),
+        'media': Or(MessageMedia, Use(MessageMedia), Use(lambda v: MessageMedia.unknown)),
         'audio': URLSchema,
-        'message_type': Or(MessageType, Use(MessageType)),
+        'message_type': Or(MessageType, Use(MessageType), Use(lambda v: MessageType.unknown)),
         'text': unicode,
         'image': URLSchema,
         'sender': UUIDSchema,

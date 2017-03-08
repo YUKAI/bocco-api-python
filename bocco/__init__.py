@@ -11,3 +11,5 @@ Web API の詳細は http://api-docs.bocco.me を参照してください。
 """
 from __future__ import absolute_import
 from . import api, models, cli
+
+VERSION = '0.1.3'
