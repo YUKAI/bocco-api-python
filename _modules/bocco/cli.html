@@ -89,9 +89,9 @@
     <span class="c1"># type: (click.Context, bool) -&gt; None</span>
     <span class="sd">&quot;&quot;&quot;部屋一覧を表示&quot;&quot;&quot;</span>
     <span class="n">api</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;api&#39;</span><span class="p">]</span>
-    <span class="n">template</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="si">{index}</span><span class="s1">. </span><span class="si">{r[name]}</span><span class="se">\n\t</span><span class="si">{r[uuid]}</span><span class="s1">&#39;</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="s1">u&#39;</span><span class="si">{index}</span><span class="s1">. </span><span class="si">{r[name]}</span><span class="se">\n\t</span><span class="si">{r[uuid]}</span><span class="s1">&#39;</span>
     <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-        <span class="n">template</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#39;&#39;</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="s1">u&#39;&#39;&#39;</span>
 <span class="si">{index}</span><span class="s1">. </span><span class="si">{r[name]}</span><span class="s1"></span>
 <span class="se">\t</span><span class="s1">uuid: </span><span class="si">{r[uuid]}</span><span class="s1"></span>
 <span class="se">\t</span><span class="s1">members(</span><span class="si">{members_count}</span><span class="s1">): </span><span class="si">{members}</span><span class="s1"></span>
@@ -106,9 +106,9 @@
                 <span class="n">index</span><span class="o">=</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
                 <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span>
                 <span class="n">members_count</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">member_names</span><span class="p">),</span>
-                <span class="n">members</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">member_names</span><span class="p">),</span>
+                <span class="n">members</span><span class="o">=</span><span class="s1">u&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">member_names</span><span class="p">),</span>
                 <span class="n">sensors_count</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">sensor_names</span><span class="p">),</span>
-                <span class="n">sensors</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sensor_names</span><span class="p">)))</span>
+                <span class="n">sensors</span><span class="o">=</span><span class="s1">u&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sensor_names</span><span class="p">)))</span>
 
 
 <span class="nd">@cli</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
@@ -130,9 +130,9 @@
     <span class="n">messages</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_messages</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">(</span><span class="n">room_uuid</span><span class="p">),</span>
                                 <span class="n">newer_than</span><span class="o">=</span><span class="n">newer_than</span><span class="p">,</span>
                                 <span class="n">older_than</span><span class="o">=</span><span class="n">older_than</span><span class="p">)</span>
-    <span class="n">template</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="si">{m[date]}</span><span class="s1"> </span><span class="si">{m[user][nickname]}</span><span class="s1"> </span><span class="si">{m[text]}</span><span class="s1">&#39;</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="s1">u&#39;</span><span class="si">{m[date]}</span><span class="s1"> </span><span class="si">{m[user][nickname]}</span><span class="s1"> </span><span class="si">{m[text]}</span><span class="s1">&#39;</span>
     <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-        <span class="n">template</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#39;&#39;</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="s1">u&#39;&#39;&#39;</span>
 <span class="si">{m[date]}</span><span class="s1"> </span><span class="si">{m[user][nickname]}</span><span class="s1"> </span><span class="si">{m[text]}</span><span class="s1"></span>
 <span class="se">\t</span><span class="s1">id: </span><span class="si">{m[id]}</span><span class="s1"></span>
 <span class="se">\t</span><span class="s1">unique_id: </span><span class="si">{m[unique_id]}</span><span class="s1"></span>
@@ -152,7 +152,7 @@
     <span class="c1"># type: (click.Context, str, str) -&gt; None</span>
     <span class="sd">&quot;&quot;&quot;テキストメッセージを送信.&quot;&quot;&quot;</span>
     <span class="n">api</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;api&#39;</span><span class="p">]</span>
-    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;メッセージ送信中...&#39;</span><span class="p">)</span>
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s1">u&#39;メッセージ送信中...&#39;</span><span class="p">)</span>
     <span class="n">api</span><span class="o">.</span><span class="n">post_text_message</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">(</span><span class="n">room_uuid</span><span class="p">),</span> <span class="n">text</span><span class="p">)</span>
 
 
@@ -202,7 +202,7 @@
       &copy;2016, Author.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
     </div>

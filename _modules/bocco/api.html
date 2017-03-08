@@ -69,7 +69,7 @@
     <span class="sd">&quot;&quot;&quot;BOCCO API クライアント&quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="Client.signin"><a class="viewcode-back" href="../../bocco.html#bocco.api.Client.signin">[docs]</a>    <span class="k">def</span> <span class="nf">signin</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">api_key</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<div class="viewcode-block" id="Client.signin"><a class="viewcode-back" href="../../bocco.html#bocco.api.Client.signin">[docs]</a>    <span class="k">def</span> <span class="nf">signin</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">api_key</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
         <span class="c1"># type: (str, str, str) -&gt; Client</span>
         <span class="sd">&quot;&quot;&quot;新しいセッションでクライアントを作成する</span>
 
@@ -90,7 +90,7 @@
         <span class="k">return</span> <span class="n">Client</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;access_token&#39;</span><span class="p">])</span></div>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_parse</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">klass</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_parse</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">klass</span><span class="p">):</span>
         <span class="c1"># type: (Dict[str, Any], Type[Any]) -&gt; Any</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">klass</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -196,7 +196,7 @@
             <span class="k">return</span> <span class="p">[]</span>
         <span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;event&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="sa">u</span><span class="s1">&#39;message&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;event&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">u&#39;message&#39;</span><span class="p">:</span>
                 <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Message</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]))</span>
             <span class="c1"># TODO handle event[&#39;event&#39;] == &#39;member&#39;</span>
         <span class="k">return</span> <span class="n">messages</span></div>
@@ -305,7 +305,7 @@
       &copy;2016, Author.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
     </div>

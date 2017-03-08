@@ -69,7 +69,7 @@
 <dl class="exception">
 <dt id="bocco.api.ApiError">
 <em class="property">exception </em><code class="descclassname">bocco.api.</code><code class="descname">ApiError</code><span class="sig-paren">(</span><em>body</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bocco/api.html#ApiError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bocco.api.ApiError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.IOError</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">OSError</span></code></p>
 <p>API エラー</p>
 <p>Web API: <a class="reference external" href="http://api-docs.bocco.me/reference.html#section-31">http://api-docs.bocco.me/reference.html#section-31</a></p>
 </dd></dl>
@@ -180,17 +180,17 @@
 <a class="reference external" href="http://api-docs.bocco.me/reference.html#section-31">http://api-docs.bocco.me/reference.html#section-31</a></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">ApiErrorBody</span><span class="p">({</span>
 <span class="gp">... </span>    <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">401</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;ERROR MESSAGE&#39;</span>
+<span class="gp">... </span>    <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">u&#39;ERROR MESSAGE&#39;</span>
 <span class="gp">... </span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">]</span>
 <span class="go">401</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="sa">u</span><span class="s1">&#39;ERROR MESSAGE&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">u&#39;ERROR MESSAGE&#39;</span>
 <span class="go">True</span>
 </pre></div>
 </div>
 <dl class="attribute">
 <dt id="bocco.models.ApiErrorBody.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'message': &lt;type 'unicode'&gt;, 'code': &lt;type 'int'&gt;})</em><a class="headerlink" href="#bocco.models.ApiErrorBody.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'code': &lt;class 'int'&gt;, 'message': &lt;class 'str'&gt;})</em><a class="headerlink" href="#bocco.models.ApiErrorBody.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -203,26 +203,26 @@
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Message</span><span class="p">({</span>
 <span class="gp">... </span>    <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s1">&#39;dictated&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;unique_id&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;a8852948-fc6e-40d4-a384-e4c6a63b705e&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;media&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;text&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;audio&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;message_type&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;メッセージです&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;sender&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;0a0f6b39-ac63-4731-9c94-756ae80dd0b9&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;2016-03-02 11:00:59&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;unique_id&#39;</span><span class="p">:</span> <span class="s1">u&#39;a8852948-fc6e-40d4-a384-e4c6a63b705e&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;media&#39;</span><span class="p">:</span> <span class="s1">u&#39;text&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;audio&#39;</span><span class="p">:</span> <span class="s1">u&#39;&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;message_type&#39;</span><span class="p">:</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="s1">u&#39;メッセージです&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="s1">u&#39;&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;sender&#39;</span><span class="p">:</span> <span class="s1">u&#39;0a0f6b39-ac63-4731-9c94-756ae80dd0b9&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="s1">u&#39;2016-03-02 11:00:59&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="p">{</span>
-<span class="gp">... </span>        <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;0a0f6b39-ac63-4731-9c94-756ae80dd0b9&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;user_type&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;bocco&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;nickname&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;ニックネーム&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;seller&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;00:11:22:33:44:55&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;icon&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;http://example.com/image.png&#39;</span>
+<span class="gp">... </span>        <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">u&#39;0a0f6b39-ac63-4731-9c94-756ae80dd0b9&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;user_type&#39;</span><span class="p">:</span> <span class="s1">u&#39;bocco&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;nickname&#39;</span><span class="p">:</span> <span class="s1">u&#39;ニックネーム&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;seller&#39;</span><span class="p">:</span> <span class="s1">u&#39;&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="s1">u&#39;00:11:22:33:44:55&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;icon&#39;</span><span class="p">:</span> <span class="s1">u&#39;http://example.com/image.png&#39;</span>
 <span class="gp">... </span>    <span class="p">}</span>
 <span class="gp">... </span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
 <span class="go">123</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="sa">u</span><span class="s1">&#39;メッセージです&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">u&#39;メッセージです&#39;</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;dictated&#39;</span><span class="p">]</span>
 <span class="go">True</span>
@@ -232,7 +232,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.Message.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'text': &lt;type 'unicode'&gt;, 'image': And(&lt;type 'unicode'&gt;, &lt;function &lt;lambda&gt;&gt;), 'user': Or(&lt;class 'bocco.models.User'&gt;, Use(&lt;class 'bocco.models.User'&gt;)), 'date': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'dictated': &lt;type 'bool'&gt;, 'id': &lt;type 'int'&gt;, 'sender': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'media': Or(&lt;enum 'MessageMedia'&gt;, Use(&lt;enum 'MessageMedia'&gt;)), 'audio': And(&lt;type 'unicode'&gt;, &lt;function &lt;lambda&gt;&gt;), 'message_type': Or(&lt;enum 'MessageType'&gt;, Use(&lt;enum 'MessageType'&gt;)), 'unique_id': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;))})</em><a class="headerlink" href="#bocco.models.Message.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'unique_id': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'message_type': Or(&lt;enum 'MessageType'&gt;, Use(&lt;enum 'MessageType'&gt;), Use(&lt;function Message.&lt;lambda&gt;&gt;)), 'text': &lt;class 'str'&gt;, 'sender': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'audio': And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;), 'date': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'dictated': &lt;class 'bool'&gt;, 'id': &lt;class 'int'&gt;, 'media': Or(&lt;enum 'MessageMedia'&gt;, Use(&lt;enum 'MessageMedia'&gt;), Use(&lt;function Message.&lt;lambda&gt;&gt;)), 'user': Or(&lt;class 'bocco.models.User'&gt;, Use(&lt;class 'bocco.models.User'&gt;)), 'image': And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;)})</em><a class="headerlink" href="#bocco.models.Message.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -262,6 +262,11 @@
 <code class="descname">text</code><em class="property"> = 'text'</em><a class="headerlink" href="#bocco.models.MessageMedia.text" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="attribute">
+<dt id="bocco.models.MessageMedia.unknown">
+<code class="descname">unknown</code><em class="property"> = 'unknown'</em><a class="headerlink" href="#bocco.models.MessageMedia.unknown" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -284,6 +289,11 @@
 <code class="descname">system_sensor_joined</code><em class="property"> = 'system.sensor_joined'</em><a class="headerlink" href="#bocco.models.MessageType.system_sensor_joined" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="attribute">
+<dt id="bocco.models.MessageType.unknown">
+<code class="descname">unknown</code><em class="property"> = 'unknown'</em><a class="headerlink" href="#bocco.models.MessageType.unknown" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -292,37 +302,37 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">bocco.models._Model</span></code></p>
 <p>部屋情報</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">Room</span><span class="p">({</span>
-<span class="gp">... </span>    <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;3e6aceea-4db1-44a3-b2a9-4ccfccd843e1&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;テストルーム&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;updated_at&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;2011-02-03&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">u&#39;3e6aceea-4db1-44a3-b2a9-4ccfccd843e1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">u&#39;テストルーム&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;updated_at&#39;</span><span class="p">:</span> <span class="s1">u&#39;2011-02-03&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s1">&#39;members&#39;</span><span class="p">:</span> <span class="p">[</span>
 <span class="gp">... </span>        <span class="p">{</span>
 <span class="gp">... </span>            <span class="s1">&#39;read_id&#39;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
-<span class="gp">... </span>            <span class="s1">&#39;joined_at&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;2010-01-02&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;joined_at&#39;</span><span class="p">:</span> <span class="s1">u&#39;2010-01-02&#39;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="p">{</span>
 <span class="gp">... </span>                <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;u7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s1">&#39;user_type&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;human&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s1">&#39;nickname&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;TEST USER&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s1">&#39;seller&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;00:11:22:33:44:55&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s1">&#39;icon&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;http://example.com/image.png&#39;</span>
+<span class="gp">... </span>                <span class="s1">&#39;user_type&#39;</span><span class="p">:</span> <span class="s1">u&#39;human&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;nickname&#39;</span><span class="p">:</span> <span class="s1">u&#39;TEST USER&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;seller&#39;</span><span class="p">:</span> <span class="s1">u&#39;&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="s1">u&#39;00:11:22:33:44:55&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;icon&#39;</span><span class="p">:</span> <span class="s1">u&#39;http://example.com/image.png&#39;</span>
 <span class="gp">... </span>            <span class="p">}</span>
 <span class="gp">... </span>        <span class="p">}</span>
 <span class="gp">... </span>    <span class="p">],</span>
 <span class="gp">... </span>    <span class="s1">&#39;sensors&#39;</span><span class="p">:</span> <span class="p">[</span>
 <span class="gp">... </span>        <span class="p">{</span>
-<span class="gp">... </span>            <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;0af1c101-3b7d-40a8-9e63-bf03f2dda6c4&#39;</span><span class="p">,</span>
-<span class="gp">... </span>            <span class="s1">&#39;user_type&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;sensor_door&#39;</span><span class="p">,</span>
-<span class="gp">... </span>            <span class="s1">&#39;nickname&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;DOOR SENSOR&#39;</span><span class="p">,</span>
-<span class="gp">... </span>            <span class="s1">&#39;seller&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-<span class="gp">... </span>            <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;00:11:22:33:44:55&#39;</span><span class="p">,</span>
-<span class="gp">... </span>            <span class="s1">&#39;icon&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;http://example.com/image.png&#39;</span>
+<span class="gp">... </span>            <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">u&#39;0af1c101-3b7d-40a8-9e63-bf03f2dda6c4&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;user_type&#39;</span><span class="p">:</span> <span class="s1">u&#39;sensor_door&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;nickname&#39;</span><span class="p">:</span> <span class="s1">u&#39;DOOR SENSOR&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;seller&#39;</span><span class="p">:</span> <span class="s1">u&#39;&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="s1">u&#39;00:11:22:33:44:55&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;icon&#39;</span><span class="p">:</span> <span class="s1">u&#39;http://example.com/image.png&#39;</span>
 <span class="gp">... </span>        <span class="p">}</span>
 <span class="gp">... </span>    <span class="p">]</span>
 <span class="gp">... </span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span>
 <span class="go">UUID(&#39;3e6aceea-4db1-44a3-b2a9-4ccfccd843e1&#39;)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="sa">u</span><span class="s1">&#39;テストルーム&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">u&#39;テストルーム&#39;</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;updated_at&#39;</span><span class="p">]</span>
 <span class="go">&lt;Arrow [2011-02-03T00:00:00+00:00]&gt;</span>
@@ -334,7 +344,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.Room.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'updated_at': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'sensors': Or(&lt;function &lt;lambda&gt;&gt;, Use(&lt;function &lt;lambda&gt;&gt;)), 'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'members': Or(Use(&lt;function &lt;lambda&gt;&gt;), &lt;function &lt;lambda&gt;&gt;, Use(&lt;function &lt;lambda&gt;&gt;)), 'name': And(&lt;type 'unicode'&gt;, &lt;function &lt;lambda&gt;&gt;)})</em><a class="headerlink" href="#bocco.models.Room.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'updated_at': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'sensors': Or(&lt;function Room.&lt;lambda&gt;&gt;, Use(&lt;function Room.&lt;lambda&gt;&gt;)), 'name': And(&lt;class 'str'&gt;, &lt;function Room.&lt;lambda&gt;&gt;), 'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'members': Or(Use(&lt;function Room.&lt;lambda&gt;&gt;), &lt;function Room.&lt;lambda&gt;&gt;, Use(&lt;function Room.&lt;lambda&gt;&gt;))})</em><a class="headerlink" href="#bocco.models.Room.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -346,14 +356,14 @@
 <p>部屋と紐付いたユーザ情報</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">RoomUser</span><span class="p">({</span>
 <span class="gp">... </span>    <span class="s1">&#39;read_id&#39;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;joined_at&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;2015-01-02&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;joined_at&#39;</span><span class="p">:</span> <span class="s1">u&#39;2015-01-02&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="p">{</span>
-<span class="gp">... </span>        <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;user_type&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;bocco&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;nickname&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;TEST USER&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;seller&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;00:11:22:33:44:55&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;icon&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;http://example.com/image.png&#39;</span>
+<span class="gp">... </span>        <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">u&#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;user_type&#39;</span><span class="p">:</span> <span class="s1">u&#39;bocco&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;nickname&#39;</span><span class="p">:</span> <span class="s1">u&#39;TEST USER&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;seller&#39;</span><span class="p">:</span> <span class="s1">u&#39;&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="s1">u&#39;00:11:22:33:44:55&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;icon&#39;</span><span class="p">:</span> <span class="s1">u&#39;http://example.com/image.png&#39;</span>
 <span class="gp">... </span>    <span class="p">}</span>
 <span class="gp">... </span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;read_id&#39;</span><span class="p">]</span>
@@ -366,7 +376,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.RoomUser.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'read_id': &lt;type 'int'&gt;, 'joined_at': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'user': Or(&lt;class 'bocco.models.User'&gt;, Use(&lt;class 'bocco.models.User'&gt;))})</em><a class="headerlink" href="#bocco.models.RoomUser.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'read_id': &lt;class 'int'&gt;, 'joined_at': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'user': Or(&lt;class 'bocco.models.User'&gt;, Use(&lt;class 'bocco.models.User'&gt;))})</em><a class="headerlink" href="#bocco.models.RoomUser.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -377,10 +387,10 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">bocco.models._Model</span></code></p>
 <p>API クライアントのセッション情報</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">Session</span><span class="p">({</span>
-<span class="gp">... </span>    <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Dummy Token&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;17023f65-065f-41e4-b648-cdd38076a7c9&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">u&#39;Dummy Token&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">u&#39;17023f65-065f-41e4-b648-cdd38076a7c9&#39;</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;access_token&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="sa">u</span><span class="s1">&#39;Dummy Token&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;access_token&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">u&#39;Dummy Token&#39;</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span>
 <span class="go">UUID(&#39;17023f65-065f-41e4-b648-cdd38076a7c9&#39;)</span>
@@ -388,7 +398,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.Session.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'access_token': &lt;type 'unicode'&gt;, 'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;))})</em><a class="headerlink" href="#bocco.models.Session.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'access_token': &lt;class 'str'&gt;, 'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;))})</em><a class="headerlink" href="#bocco.models.Session.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -400,28 +410,28 @@
 <p>BOCCO ユーザ</p>
 <p>BOCCO 本体またはアプリユーザの情報。</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">User</span><span class="p">({</span>
-<span class="gp">... </span>    <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;user_type&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;bocco&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;nickname&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;ニックネーム&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;seller&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;00:11:22:33:44:55&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;icon&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;http://example.com/image.png&#39;</span>
+<span class="gp">... </span>    <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">u&#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;user_type&#39;</span><span class="p">:</span> <span class="s1">u&#39;bocco&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;nickname&#39;</span><span class="p">:</span> <span class="s1">u&#39;ニックネーム&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;seller&#39;</span><span class="p">:</span> <span class="s1">u&#39;&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="s1">u&#39;00:11:22:33:44:55&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;icon&#39;</span><span class="p">:</span> <span class="s1">u&#39;http://example.com/image.png&#39;</span>
 <span class="gp">... </span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span>
 <span class="go">UUID(&#39;7b44ddd8-d1b0-4666-a11d-4dac68068ebd&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;user_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">UserType</span><span class="o">.</span><span class="n">bocco</span>
 <span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;nickname&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="sa">u</span><span class="s1">&#39;ニックネーム&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;nickname&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">u&#39;ニックネーム&#39;</span>
 <span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;seller&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="sa">u</span><span class="s1">&#39;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;seller&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">u&#39;&#39;</span>
 <span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;icon&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="sa">u</span><span class="s1">&#39;http://example.com/image.png&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="s1">&#39;icon&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">u&#39;http://example.com/image.png&#39;</span>
 <span class="go">True</span>
 </pre></div>
 </div>
 <dl class="attribute">
 <dt id="bocco.models.User.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'user_type': Or(&lt;enum 'UserType'&gt;, Use(&lt;enum 'UserType'&gt;)), 'seller': &lt;type 'unicode'&gt;, Optional('address'): &lt;type 'unicode'&gt;, Optional('icon'): And(&lt;type 'unicode'&gt;, &lt;function &lt;lambda&gt;&gt;), 'nickname': And(&lt;type 'unicode'&gt;, &lt;function &lt;lambda&gt;&gt;)})</em><a class="headerlink" href="#bocco.models.User.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({Optional('address'): &lt;class 'str'&gt;, 'seller': &lt;class 'str'&gt;, 'nickname': And(&lt;class 'str'&gt;, &lt;function User.&lt;lambda&gt;&gt;), 'user_type': Or(&lt;enum 'UserType'&gt;, Use(&lt;enum 'UserType'&gt;), Use(&lt;function User.&lt;lambda&gt;&gt;)), Optional('icon'): And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;), 'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;))})</em><a class="headerlink" href="#bocco.models.User.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -449,6 +459,11 @@
 <dl class="attribute">
 <dt id="bocco.models.UserType.sensor_lock">
 <code class="descname">sensor_lock</code><em class="property"> = 'sensor_lock'</em><a class="headerlink" href="#bocco.models.UserType.sensor_lock" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="bocco.models.UserType.unknown">
+<code class="descname">unknown</code><em class="property"> = 'unknown'</em><a class="headerlink" href="#bocco.models.UserType.unknown" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -546,7 +561,7 @@
       &copy;2016, Author.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

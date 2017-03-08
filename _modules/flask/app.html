@@ -385,7 +385,7 @@
                  <span class="n">static_folder</span><span class="o">=</span><span class="s1">&#39;static&#39;</span><span class="p">,</span> <span class="n">template_folder</span><span class="o">=</span><span class="s1">&#39;templates&#39;</span><span class="p">,</span>
                  <span class="n">instance_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">instance_relative_config</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">root_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="n">_PackageBoundObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">import_name</span><span class="p">,</span>
+        <span class="n">_PackageBoundObject</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">import_name</span><span class="p">,</span>
                                      <span class="n">template_folder</span><span class="o">=</span><span class="n">template_folder</span><span class="p">,</span>
                                      <span class="n">root_path</span><span class="o">=</span><span class="n">root_path</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">static_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -942,10 +942,10 @@
 <span class="sd">           Added `**kwargs` to support passing additional keyword arguments to</span>
 <span class="sd">           the constructor of :attr:`test_client_class`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_client_class</span>
-        <span class="k">if</span> <span class="bp">cls</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">flask.testing</span> <span class="k">import</span> <span class="n">FlaskClient</span> <span class="k">as</span> <span class="bp">cls</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">response_class</span><span class="p">,</span> <span class="n">use_cookies</span><span class="o">=</span><span class="n">use_cookies</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_client_class</span>
+        <span class="k">if</span> <span class="n">cls</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">flask.testing</span> <span class="k">import</span> <span class="n">FlaskClient</span> <span class="k">as</span> <span class="n">cls</span>
+        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">response_class</span><span class="p">,</span> <span class="n">use_cookies</span><span class="o">=</span><span class="n">use_cookies</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">open_session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Creates or opens a new session.  Default implementation stores all</span>
@@ -1273,7 +1273,7 @@
 <span class="sd">        :param name: the optional name of the filter, otherwise the</span>
 <span class="sd">                     function name will be used.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">jinja_env</span><span class="o">.</span><span class="n">filters</span><span class="p">[</span><span class="n">name</span> <span class="ow">or</span> <span class="n">f</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jinja_env</span><span class="o">.</span><span class="n">filters</span><span class="p">[</span><span class="n">name</span> <span class="ow">or</span> <span class="n">f</span><span class="o">.</span><span class="n">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span>
 
     <span class="nd">@setupmethod</span>
     <span class="k">def</span> <span class="nf">template_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1310,7 +1310,7 @@
 <span class="sd">        :param name: the optional name of the test, otherwise the</span>
 <span class="sd">                     function name will be used.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">jinja_env</span><span class="o">.</span><span class="n">tests</span><span class="p">[</span><span class="n">name</span> <span class="ow">or</span> <span class="n">f</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jinja_env</span><span class="o">.</span><span class="n">tests</span><span class="p">[</span><span class="n">name</span> <span class="ow">or</span> <span class="n">f</span><span class="o">.</span><span class="n">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span>
 
     <span class="nd">@setupmethod</span>
     <span class="k">def</span> <span class="nf">template_global</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1342,7 +1342,7 @@
 <span class="sd">        :param name: the optional name of the global function, otherwise the</span>
 <span class="sd">                     function name will be used.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">jinja_env</span><span class="o">.</span><span class="n">globals</span><span class="p">[</span><span class="n">name</span> <span class="ow">or</span> <span class="n">f</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jinja_env</span><span class="o">.</span><span class="n">globals</span><span class="p">[</span><span class="n">name</span> <span class="ow">or</span> <span class="n">f</span><span class="o">.</span><span class="n">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span>
 
     <span class="nd">@setupmethod</span>
     <span class="k">def</span> <span class="nf">before_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
@@ -1496,23 +1496,23 @@
         <span class="k">def</span> <span class="nf">find_handler</span><span class="p">(</span><span class="n">handler_map</span><span class="p">):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">handler_map</span><span class="p">:</span>
                 <span class="k">return</span>
-            <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">exc_class</span><span class="o">.</span><span class="vm">__mro__</span><span class="p">)</span>
+            <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">exc_class</span><span class="o">.</span><span class="n">__mro__</span><span class="p">)</span>
             <span class="c1"># Protect from geniuses who might create circular references in</span>
             <span class="c1"># __mro__</span>
             <span class="n">done</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
             <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
-                <span class="bp">cls</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
-                <span class="k">if</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">done</span><span class="p">:</span>
+                <span class="n">cls</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">cls</span> <span class="ow">in</span> <span class="n">done</span><span class="p">:</span>
                     <span class="k">continue</span>
-                <span class="n">done</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
-                <span class="n">handler</span> <span class="o">=</span> <span class="n">handler_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+                <span class="n">done</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cls</span><span class="p">)</span>
+                <span class="n">handler</span> <span class="o">=</span> <span class="n">handler_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cls</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">handler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="c1"># cache for next time exc_class is raised</span>
                     <span class="n">handler_map</span><span class="p">[</span><span class="n">exc_class</span><span class="p">]</span> <span class="o">=</span> <span class="n">handler</span>
                     <span class="k">return</span> <span class="n">handler</span>
 
-                <span class="n">queue</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__mro__</span><span class="p">)</span>
+                <span class="n">queue</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">__mro__</span><span class="p">)</span>
 
         <span class="c1"># try blueprint handlers</span>
         <span class="n">handler</span> <span class="o">=</span> <span class="n">find_handler</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">error_handler_spec</span>
@@ -2045,7 +2045,7 @@
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;&lt;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%r</span><span class="s1">&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
         <span class="p">)</span>
 </pre></div>
@@ -2081,7 +2081,7 @@
       &copy;2016, Author.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
     </div>
