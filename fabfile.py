@@ -22,7 +22,7 @@ def prepare_for_release():
     local('python setup.py sdist')
 
 @task
-def release(server='test', version=None):
+def release(server='test', version=None):  # server=(test|pypi)
     if not version:
         version = prompt('Input version')
     local('twine upload -r {} dist/bocco-{}.tar.gz'.format(server, version))
