@@ -48,7 +48,7 @@
 <span class="kn">from</span> <span class="nn">uuid</span> <span class="k">import</span> <span class="n">UUID</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Any</span>
+    <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="k">pass</span>
 
@@ -214,6 +214,28 @@
 <span class="sd">    ...             }</span>
 <span class="sd">    ...         }</span>
 <span class="sd">    ...     ],</span>
+<span class="sd">    ...     &#39;messages&#39;: [</span>
+<span class="sd">    ...         {</span>
+<span class="sd">    ...             &#39;id&#39;: 24686,</span>
+<span class="sd">    ...             &#39;unique_id&#39;: u&#39;1DB34B93-0DFA-4150-AEF5-ffffffffffff&#39;,</span>
+<span class="sd">    ...             &#39;date&#39;: u&#39;2015-07-31T21:47:46+09:00&#39;,</span>
+<span class="sd">    ...             &#39;media&#39;: u&#39;text&#39;,</span>
+<span class="sd">    ...             &#39;message_type&#39;: u&#39;normal&#39;,</span>
+<span class="sd">    ...             &#39;user&#39;: {</span>
+<span class="sd">    ...                 &#39;uuid&#39;: u&#39;cffbf787-dd20-4157-8279-ffffffffffff&#39;,</span>
+<span class="sd">    ...                 &#39;user_type&#39;: u&#39;human&#39;,</span>
+<span class="sd">    ...                 &#39;nickname&#39;: u&#39;mash&#39;,</span>
+<span class="sd">    ...                 &#39;icon&#39;: u&#39;http://example.com/1/users/cffbf787-dd20-4157-8279-ffffffffffff/d4187679-bd07-49f8-94c9-000000000000.png&#39;,</span>
+<span class="sd">    ...                 &#39;seller&#39;: u&#39;&#39;</span>
+<span class="sd">    ...             },</span>
+<span class="sd">    ...             &#39;dictated&#39;: False,</span>
+<span class="sd">    ...             &#39;text&#39;: u&#39;hoge&#39;,</span>
+<span class="sd">    ...             &#39;audio&#39;: u&#39;http://example.com/1/messages/24686.ogg&#39;,</span>
+<span class="sd">    ...             &#39;image&#39;: u&#39;&#39;,</span>
+<span class="sd">    ...             &#39;sender&#39;: u&#39;cffbf787-dd20-4157-8279-ffffffffffff&#39;,</span>
+<span class="sd">    ...             &#39;detail&#39;: None</span>
+<span class="sd">    ...         }</span>
+<span class="sd">    ...     ],</span>
 <span class="sd">    ...     &#39;sensors&#39;: [</span>
 <span class="sd">    ...         {</span>
 <span class="sd">    ...             &#39;uuid&#39;: u&#39;0af1c101-3b7d-40a8-9e63-bf03f2dda6c4&#39;,</span>
@@ -223,7 +245,7 @@
 <span class="sd">    ...             &#39;address&#39;: u&#39;00:11:22:33:44:55&#39;,</span>
 <span class="sd">    ...             &#39;icon&#39;: u&#39;http://example.com/image.png&#39;</span>
 <span class="sd">    ...         }</span>
-<span class="sd">    ...     ]</span>
+<span class="sd">    ...     ],</span>
 <span class="sd">    ... })</span>
 <span class="sd">    &gt;&gt;&gt; r[&#39;uuid&#39;]</span>
 <span class="sd">    UUID(&#39;3e6aceea-4db1-44a3-b2a9-4ccfccd843e1&#39;)</span>
@@ -234,6 +256,8 @@
 <span class="sd">    &gt;&gt;&gt; r[&#39;members&#39;][0][&#39;user&#39;][&#39;nickname&#39;] == &#39;TEST USER&#39;</span>
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; r[&#39;sensors&#39;][0][&#39;user_type&#39;] == UserType.sensor_door</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; r[&#39;messages&#39;][0][&#39;id&#39;] == 24686</span>
 <span class="sd">    True</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -248,6 +272,9 @@
         <span class="s1">&#39;sensors&#39;</span><span class="p">:</span> <span class="n">Or</span><span class="p">(</span>
             <span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">User</span><span class="o">.</span><span class="n">is_list</span><span class="p">(</span><span class="n">l</span><span class="p">),</span>
             <span class="n">Use</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="p">[</span><span class="n">User</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">l</span><span class="p">])),</span>
+        <span class="s1">&#39;messages&#39;</span><span class="p">:</span> <span class="n">Or</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">Message</span><span class="o">.</span><span class="n">is_list</span><span class="p">(</span><span class="n">l</span><span class="p">),</span>
+            <span class="n">Use</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="p">[</span><span class="n">Message</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">l</span><span class="p">])),</span>
     <span class="p">},</span> <span class="n">ignore_extra_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 

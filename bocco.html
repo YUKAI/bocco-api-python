@@ -190,7 +190,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.ApiErrorBody.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'code': &lt;class 'int'&gt;, 'message': &lt;class 'str'&gt;})</em><a class="headerlink" href="#bocco.models.ApiErrorBody.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'message': &lt;class 'str'&gt;, 'code': &lt;class 'int'&gt;})</em><a class="headerlink" href="#bocco.models.ApiErrorBody.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -232,7 +232,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.Message.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'unique_id': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'message_type': Or(&lt;enum 'MessageType'&gt;, Use(&lt;enum 'MessageType'&gt;), Use(&lt;function Message.&lt;lambda&gt;&gt;)), 'text': &lt;class 'str'&gt;, 'sender': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'audio': And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;), 'date': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'dictated': &lt;class 'bool'&gt;, 'id': &lt;class 'int'&gt;, 'media': Or(&lt;enum 'MessageMedia'&gt;, Use(&lt;enum 'MessageMedia'&gt;), Use(&lt;function Message.&lt;lambda&gt;&gt;)), 'user': Or(&lt;class 'bocco.models.User'&gt;, Use(&lt;class 'bocco.models.User'&gt;)), 'image': And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;)})</em><a class="headerlink" href="#bocco.models.Message.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'id': &lt;class 'int'&gt;, 'message_type': Or(&lt;enum 'MessageType'&gt;, Use(&lt;enum 'MessageType'&gt;), Use(&lt;function Message.&lt;lambda&gt;&gt;)), 'audio': And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;), 'date': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'image': And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;), 'text': &lt;class 'str'&gt;, 'sender': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'media': Or(&lt;enum 'MessageMedia'&gt;, Use(&lt;enum 'MessageMedia'&gt;), Use(&lt;function Message.&lt;lambda&gt;&gt;)), 'user': Or(&lt;class 'bocco.models.User'&gt;, Use(&lt;class 'bocco.models.User'&gt;)), 'unique_id': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'dictated': &lt;class 'bool'&gt;})</em><a class="headerlink" href="#bocco.models.Message.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -319,6 +319,28 @@
 <span class="gp">... </span>            <span class="p">}</span>
 <span class="gp">... </span>        <span class="p">}</span>
 <span class="gp">... </span>    <span class="p">],</span>
+<span class="gp">... </span>    <span class="s1">&#39;messages&#39;</span><span class="p">:</span> <span class="p">[</span>
+<span class="gp">... </span>        <span class="p">{</span>
+<span class="gp">... </span>            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">24686</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;unique_id&#39;</span><span class="p">:</span> <span class="s1">u&#39;1DB34B93-0DFA-4150-AEF5-ffffffffffff&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="s1">u&#39;2015-07-31T21:47:46+09:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;media&#39;</span><span class="p">:</span> <span class="s1">u&#39;text&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;message_type&#39;</span><span class="p">:</span> <span class="s1">u&#39;normal&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>                <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">u&#39;cffbf787-dd20-4157-8279-ffffffffffff&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;user_type&#39;</span><span class="p">:</span> <span class="s1">u&#39;human&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;nickname&#39;</span><span class="p">:</span> <span class="s1">u&#39;mash&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;icon&#39;</span><span class="p">:</span> <span class="s1">u&#39;http://example.com/1/users/cffbf787-dd20-4157-8279-ffffffffffff/d4187679-bd07-49f8-94c9-000000000000.png&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;seller&#39;</span><span class="p">:</span> <span class="s1">u&#39;&#39;</span>
+<span class="gp">... </span>            <span class="p">},</span>
+<span class="gp">... </span>            <span class="s1">&#39;dictated&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="s1">u&#39;hoge&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;audio&#39;</span><span class="p">:</span> <span class="s1">u&#39;http://example.com/1/messages/24686.ogg&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="s1">u&#39;&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;sender&#39;</span><span class="p">:</span> <span class="s1">u&#39;cffbf787-dd20-4157-8279-ffffffffffff&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;detail&#39;</span><span class="p">:</span> <span class="kc">None</span>
+<span class="gp">... </span>        <span class="p">}</span>
+<span class="gp">... </span>    <span class="p">],</span>
 <span class="gp">... </span>    <span class="s1">&#39;sensors&#39;</span><span class="p">:</span> <span class="p">[</span>
 <span class="gp">... </span>        <span class="p">{</span>
 <span class="gp">... </span>            <span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">u&#39;0af1c101-3b7d-40a8-9e63-bf03f2dda6c4&#39;</span><span class="p">,</span>
@@ -328,7 +350,7 @@
 <span class="gp">... </span>            <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="s1">u&#39;00:11:22:33:44:55&#39;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s1">&#39;icon&#39;</span><span class="p">:</span> <span class="s1">u&#39;http://example.com/image.png&#39;</span>
 <span class="gp">... </span>        <span class="p">}</span>
-<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">... </span>    <span class="p">],</span>
 <span class="gp">... </span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span>
 <span class="go">UUID(&#39;3e6aceea-4db1-44a3-b2a9-4ccfccd843e1&#39;)</span>
@@ -340,11 +362,13 @@
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;sensors&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;user_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">UserType</span><span class="o">.</span><span class="n">sensor_door</span>
 <span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;messages&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">24686</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 <dl class="attribute">
 <dt id="bocco.models.Room.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'updated_at': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'sensors': Or(&lt;function Room.&lt;lambda&gt;&gt;, Use(&lt;function Room.&lt;lambda&gt;&gt;)), 'name': And(&lt;class 'str'&gt;, &lt;function Room.&lt;lambda&gt;&gt;), 'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'members': Or(Use(&lt;function Room.&lt;lambda&gt;&gt;), &lt;function Room.&lt;lambda&gt;&gt;, Use(&lt;function Room.&lt;lambda&gt;&gt;))})</em><a class="headerlink" href="#bocco.models.Room.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'updated_at': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'messages': Or(&lt;function Room.&lt;lambda&gt;&gt;, Use(&lt;function Room.&lt;lambda&gt;&gt;)), 'members': Or(Use(&lt;function Room.&lt;lambda&gt;&gt;), &lt;function Room.&lt;lambda&gt;&gt;, Use(&lt;function Room.&lt;lambda&gt;&gt;)), 'sensors': Or(&lt;function Room.&lt;lambda&gt;&gt;, Use(&lt;function Room.&lt;lambda&gt;&gt;)), 'name': And(&lt;class 'str'&gt;, &lt;function Room.&lt;lambda&gt;&gt;)})</em><a class="headerlink" href="#bocco.models.Room.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -376,7 +400,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.RoomUser.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'read_id': &lt;class 'int'&gt;, 'joined_at': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'user': Or(&lt;class 'bocco.models.User'&gt;, Use(&lt;class 'bocco.models.User'&gt;))})</em><a class="headerlink" href="#bocco.models.RoomUser.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'joined_at': Or(&lt;class 'arrow.arrow.Arrow'&gt;, Use(&lt;function get&gt;)), 'read_id': &lt;class 'int'&gt;, 'user': Or(&lt;class 'bocco.models.User'&gt;, Use(&lt;class 'bocco.models.User'&gt;))})</em><a class="headerlink" href="#bocco.models.RoomUser.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -398,7 +422,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.Session.schema">
-<code class="descname">schema</code><em class="property"> = Schema({'access_token': &lt;class 'str'&gt;, 'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;))})</em><a class="headerlink" href="#bocco.models.Session.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'access_token': &lt;class 'str'&gt;})</em><a class="headerlink" href="#bocco.models.Session.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -431,7 +455,7 @@
 </div>
 <dl class="attribute">
 <dt id="bocco.models.User.schema">
-<code class="descname">schema</code><em class="property"> = Schema({Optional('address'): &lt;class 'str'&gt;, 'seller': &lt;class 'str'&gt;, 'nickname': And(&lt;class 'str'&gt;, &lt;function User.&lt;lambda&gt;&gt;), 'user_type': Or(&lt;enum 'UserType'&gt;, Use(&lt;enum 'UserType'&gt;), Use(&lt;function User.&lt;lambda&gt;&gt;)), Optional('icon'): And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;), 'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;))})</em><a class="headerlink" href="#bocco.models.User.schema" title="Permalink to this definition">¶</a></dt>
+<code class="descname">schema</code><em class="property"> = Schema({'uuid': Or(&lt;class 'uuid.UUID'&gt;, Use(&lt;class 'uuid.UUID'&gt;)), 'nickname': And(&lt;class 'str'&gt;, &lt;function User.&lt;lambda&gt;&gt;), Optional('address'): &lt;class 'str'&gt;, 'user_type': Or(&lt;enum 'UserType'&gt;, Use(&lt;enum 'UserType'&gt;), Use(&lt;function User.&lt;lambda&gt;&gt;)), Optional('icon'): And(&lt;class 'str'&gt;, &lt;function &lt;lambda&gt;&gt;), 'seller': &lt;class 'str'&gt;})</em><a class="headerlink" href="#bocco.models.User.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
