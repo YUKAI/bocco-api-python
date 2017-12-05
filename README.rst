@@ -5,7 +5,7 @@ bocco-api-python
 .. image:: https://app.wercker.com/status/4c4b21fefec1c211cd3961f72d1b9078/s/master
    :target: https://app.wercker.com/project/byKey/4c4b21fefec1c211cd3961f72d1b9078
 
-コミュニケーションロボット BOCCO を操作するための `BOCCO API <api-docs.bocco.me>`_
+コミュニケーションロボット BOCCO を操作するための `BOCCO API <http://api-docs.bocco.me>`_
 を Python から操作するためのライブラリです。
 
 ドキュメント: https://yukai.github.io/bocco-api-python/
