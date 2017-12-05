@@ -92,10 +92,9 @@ class Client(object):
             return []
         rooms = []
         for room_data in data:
-            if room_data['sensors'] is None:
-                room_data['sensors'] = []
-            if room_data['members'] is None:
-                room_data['members'] = []
+            for key in ['sensors', 'members', 'messages']:
+                if room_data[key] is None:
+                    room_data[key] = []
             rooms.append(Room(room_data))
         return rooms
 

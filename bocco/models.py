@@ -170,6 +170,28 @@ class Room(_Model):
     ...             }
     ...         }
     ...     ],
+    ...     'messages': [
+    ...         {
+    ...             'id': 24686,
+    ...             'unique_id': u'1DB34B93-0DFA-4150-AEF5-ffffffffffff',
+    ...             'date': u'2015-07-31T21:47:46+09:00',
+    ...             'media': u'text',
+    ...             'message_type': u'normal',
+    ...             'user': {
+    ...                 'uuid': u'cffbf787-dd20-4157-8279-ffffffffffff',
+    ...                 'user_type': u'human',
+    ...                 'nickname': u'mash',
+    ...                 'icon': u'http://example.com/1/users/cffbf787-dd20-4157-8279-ffffffffffff/d4187679-bd07-49f8-94c9-000000000000.png',
+    ...                 'seller': u''
+    ...             },
+    ...             'dictated': False,
+    ...             'text': u'hoge',
+    ...             'audio': u'http://example.com/1/messages/24686.ogg',
+    ...             'image': u'',
+    ...             'sender': u'cffbf787-dd20-4157-8279-ffffffffffff',
+    ...             'detail': None
+    ...         }
+    ...     ],
     ...     'sensors': [
     ...         {
     ...             'uuid': u'0af1c101-3b7d-40a8-9e63-bf03f2dda6c4',
@@ -179,7 +201,7 @@ class Room(_Model):
     ...             'address': u'00:11:22:33:44:55',
     ...             'icon': u'http://example.com/image.png'
     ...         }
-    ...     ]
+    ...     ],
     ... })
     >>> r['uuid']
     UUID('3e6aceea-4db1-44a3-b2a9-4ccfccd843e1')
@@ -190,6 +212,8 @@ class Room(_Model):
     >>> r['members'][0]['user']['nickname'] == 'TEST USER'
     True
     >>> r['sensors'][0]['user_type'] == UserType.sensor_door
+    True
+    >>> r['messages'][0]['id'] == 24686
     True
     """
 
@@ -204,6 +228,9 @@ class Room(_Model):
         'sensors': Or(
             lambda l: User.is_list(l),
             Use(lambda l: [User(i) for i in l])),
+        'messages': Or(
+            lambda l: Message.is_list(l),
+            Use(lambda l: [Message(i) for i in l])),
     }, ignore_extra_keys=True)
 
 
