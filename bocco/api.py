@@ -41,7 +41,7 @@ class Client(object):
         data = {'apikey': api_key,
                 'email': email,
                 'password': password}
-        r = requests.post(BASE_URL + '/sessions', data=data)
+        r = requests.post(BASE_URL + '/sessions', data=data)  # type: ignore
         session = Client._parse(r.json(), Session)
         return Client(session['access_token'])
 
@@ -66,7 +66,7 @@ class Client(object):
             data = {}
         if 'access_token' not in data:
             data['access_token'] = self.access_token
-        return requests.post(BASE_URL + path,
+        return requests.post(BASE_URL + path,  # type: ignore
                              data=data,
                              headers=self.headers)
 

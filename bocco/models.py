@@ -4,7 +4,7 @@ import sys
 from uuid import UUID
 
 try:
-    from typing import Any
+    from typing import Any, Dict
 except:
     pass
 

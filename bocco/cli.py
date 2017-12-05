@@ -62,7 +62,7 @@ def rooms(ctx, verbose):
         last_message_id = 0
         if 0 < len(r['messages']):
             last_message_id = r['messages'][0]['id']
-        click.echo(template.format(
+        click.echo(template.format(  # type: ignore
                 index=i + 1,
                 r=r,
                 members_count=len(member_names),
@@ -102,7 +102,7 @@ def messages(ctx,
 \tdictated: {m[dictated]}
 '''.strip()
     for m in messages[-limit:]:
-        click.echo(template.format(m=m))
+        click.echo(template.format(m=m))  # type: ignore
 
 
 @cli.command()
@@ -113,7 +113,7 @@ def send(ctx, room_uuid, text):
     # type: (click.Context, str, str) -> None
     """テキストメッセージを送信."""
     api = ctx.obj['api']
-    click.echo(u'メッセージ送信中...')
+    click.echo(u'メッセージ送信中...')  # type: ignore
     api.post_text_message(uuid.UUID(room_uuid), text)
 
 
