@@ -49,21 +49,26 @@ def rooms(ctx, verbose):
     if verbose:
         template = u'''
 {index}. {r[name]}
-\tuuid: {r[uuid]}
-\tmembers({members_count}): {members}
-\tsensors({sensors_count}): {sensors}
-\tupdated_at: {r[updated_at]}
+\tUUID: {r[uuid]}
+\tMembers({members_count}): {members}
+\tSensors({sensors_count}): {sensors}
+\tLast message: {last_message_id}
+\tUpdated at: {r[updated_at]}
 '''.strip()
 
     for i, r in enumerate(api.get_rooms()):
         member_names = [m['user']['nickname'] for m in r['members']]
         sensor_names = [s['nickname'] for s in r['sensors']]
-        click.echo(template.format(
+        last_message_id = 0
+        if 0 < len(r['messages']):
+            last_message_id = r['messages'][0]['id']
+        click.echo(template.format(  # type: ignore
                 index=i + 1,
                 r=r,
                 members_count=len(member_names),
                 members=u', '.join(member_names),
                 sensors_count=len(sensor_names),
+                last_message_id=last_message_id,
                 sensors=u', '.join(sensor_names)))
 
 
@@ -97,7 +102,7 @@ def messages(ctx,
 \tdictated: {m[dictated]}
 '''.strip()
     for m in messages[-limit:]:
-        click.echo(template.format(m=m))
+        click.echo(template.format(m=m))  # type: ignore
 
 
 @cli.command()
@@ -108,7 +113,7 @@ def send(ctx, room_uuid, text):
     # type: (click.Context, str, str) -> None
     """テキストメッセージを送信."""
     api = ctx.obj['api']
-    click.echo(u'メッセージ送信中...')
+    click.echo(u'メッセージ送信中...')  # type: ignore
     api.post_text_message(uuid.UUID(room_uuid), text)
 
 

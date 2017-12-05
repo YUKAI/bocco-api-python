@@ -12,8 +12,8 @@ def build_docs():
 
 @task
 def test():
-    local('mypy --silent-import bocco bin')
-    local('mypy --silent-import --py2 bocco bin')
+    local('mypy --ignore-missing-imports bocco bin')
+    local('mypy --ignore-missing-imports --py2 bocco bin')
     local('python bocco/models.py')
 
 

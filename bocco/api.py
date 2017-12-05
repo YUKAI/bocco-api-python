@@ -41,7 +41,7 @@ class Client(object):
         data = {'apikey': api_key,
                 'email': email,
                 'password': password}
-        r = requests.post(BASE_URL + '/sessions', data=data)
+        r = requests.post(BASE_URL + '/sessions', data=data)  # type: ignore
         session = Client._parse(r.json(), Session)
         return Client(session['access_token'])
 
@@ -66,7 +66,7 @@ class Client(object):
             data = {}
         if 'access_token' not in data:
             data['access_token'] = self.access_token
-        return requests.post(BASE_URL + path,
+        return requests.post(BASE_URL + path,  # type: ignore
                              data=data,
                              headers=self.headers)
 
@@ -92,10 +92,9 @@ class Client(object):
             return []
         rooms = []
         for room_data in data:
-            if room_data['sensors'] is None:
-                room_data['sensors'] = []
-            if room_data['members'] is None:
-                room_data['members'] = []
+            for key in ['sensors', 'members', 'messages']:
+                if room_data[key] is None:
+                    room_data[key] = []
             rooms.append(Room(room_data))
         return rooms
 
